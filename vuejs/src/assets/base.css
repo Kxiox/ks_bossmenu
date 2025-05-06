@@ -1,86 +1,218 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+    --vt-c-white: #ffffff;
+    --vt-c-white-soft: #f8f8f8;
+    --vt-c-white-mute: #f2f2f2;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+    --vt-c-black: #181818;
+    --vt-c-black-soft: #222222;
+    --vt-c-black-mute: #282828;
 
-  --vt-c-indigo: #2c3e50;
+    --vt-c-indigo: #2c3e50;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+    --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+    --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+    --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+    --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
 
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+    --vt-c-text-light-1: var(--vt-c-indigo);
+    --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+    --vt-c-text-dark-1: var(--vt-c-white);
+    --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+    --kxiox-blue-100: #0d6efd;
+    --kxiox-blue-200: #0d6efd;
+    --kxiox-blue-300: #0d6efd;
+    --kxiox-blue-400: #0d6efd;
+    --kxiox-blue-500: #0d6efd;
+    --kxiox-blue-600: #0a58ca;
+    --kxiox-blue-700: #084298;
+    --kxiox-blue-800: #052c65;
+    --kxiox-blue-900: #031633;
+
+    --kxiox-indigo-100: #e0cffc;
+    --kxiox-indigo-200: #c29ffa;
+    --kxiox-indigo-300: #a370f7;
+    --kxiox-indigo-400: #8540f5;
+    --kxiox-indigo-500: #6610f2;
+    --kxiox-indigo-600: #520dc2;
+    --kxiox-indigo-700: #3d0a91;
+    --kxiox-indigo-800: #290661;
+    --kxiox-indigo-900: #140330;
+
+    --kxiox-purple-100: #e2d9f3;
+    --kxiox-purple-200: #c5b3e6;
+    --kxiox-purple-300: #a98eda;
+    --kxiox-purple-400: #8c68cd;
+    --kxiox-purple-500: #6f42c1;
+    --kxiox-purple-600: #59359a;
+    --kxiox-purple-700: #432874;
+    --kxiox-purple-800: #2c1a4d;
+    --kxiox-purple-900: #160d27;
+
+    --kxiox-pink-100: #f7d6e6;
+    --kxiox-pink-200: #efadce;
+    --kxiox-pink-300: #e685b5;
+    --kxiox-pink-400: #de5c9d;
+    --kxiox-pink-500: #d63384;
+    --kxiox-pink-600: #ab296a;
+    --kxiox-pink-700: #801f4f;
+    --kxiox-pink-800: #561435;
+    --kxiox-pink-900: #2b0a1a;
+
+    --kxiox-red-100: #f8d7da;
+    --kxiox-red-200: #f1aeb5;
+    --kxiox-red-300: #ea868f;
+    --kxiox-red-400: #e35d6a;
+    --kxiox-red-500: #dc3545;
+    --kxiox-red-600: #b02a37;
+    --kxiox-red-700: #842029;
+    --kxiox-red-800: #58151c;
+    --kxiox-red-900: #2c0b0e;
+
+    --kxiox-orange-100: #ffe5d0;
+    --kxiox-orange-200: #fecba1;
+    --kxiox-orange-300: #feb272;
+    --kxiox-orange-400: #fd9843;
+    --kxiox-orange-500: #fd7e14;
+    --kxiox-orange-600: #ca6510;
+    --kxiox-orange-700: #984c0c;
+    --kxiox-orange-800: #653208;
+    --kxiox-orange-900: #331904;
+
+    --kxiox-yellow-100: #fff3cd;
+    --kxiox-yellow-200: #ffe69c;
+    --kxiox-yellow-300: #ffda6a;
+    --kxiox-yellow-400: #ffcd39;
+    --kxiox-yellow-500: #ffc107;
+    --kxiox-yellow-600: #cc9a06;
+    --kxiox-yellow-700: #997404;
+    --kxiox-yellow-800: #664d03;
+    --kxiox-yellow-900: #332701;
+
+    --kxiox-green-100: #d1e7dd;
+    --kxiox-green-200: #a3cfbb;
+    --kxiox-green-300: #75b798;
+    --kxiox-green-400: #479f76;
+    --kxiox-green-500: #198754;
+    --kxiox-green-600: #146c43;
+    --kxiox-green-700: #0f5132;
+    --kxiox-green-800: #0a3622;
+    --kxiox-green-900: #051b11;
+
+    --kxiox-teal-100: #d2f4ea;
+    --kxiox-teal-200: #a6e9d5;
+    --kxiox-teal-300: #79dfc1;
+    --kxiox-teal-400: #4dd4ac;
+    --kxiox-teal-500: #20c997;
+    --kxiox-teal-600: #1aa179;
+    --kxiox-teal-700: #13795b;
+    --kxiox-teal-800: #0d503c;
+    --kxiox-teal-900: #06281e;
+
+    --kxiox-cyan-100: #cff4fc;
+    --kxiox-cyan-200: #9eeaf9;
+    --kxiox-cyan-300: #6edff6;
+    --kxiox-cyan-400: #3dd5f3;
+    --kxiox-cyan-500: #0dcaf0;
+    --kxiox-cyan-600: #0aa2c0;
+    --kxiox-cyan-700: #087990;
+    --kxiox-cyan-800: #055160;
+    --kxiox-cyan-900: #032830;
+
+    --kxiox-light-100: #e6e6e6;
+    --kxiox-light-200: #d9d9d9;
+    --kxiox-light-300: #cccccc;
+    --kxiox-light-400: #c0c0c0;
+    --kxiox-light-500: #b3b3b3;
+    --kxiox-light-600: #a6a6a6;
+    --kxiox-light-700: #999999;
+    --kxiox-light-800: #8d8d8d;
+    --kxiox-light-900: #808080;
+
+    --kxiox-dark-100: #303030;
+    --kxiox-dark-200: #2b2b2b;
+    --kxiox-dark-300: #262626;
+    --kxiox-dark-400: #222222;
+    --kxiox-dark-500: #1d1d1d;
+    --kxiox-dark-600: #181818;
+    --kxiox-dark-700: #131313;
+    --kxiox-dark-800: #0e0e0e;
+    --kxiox-dark-900: #0a0a0a;
+
+    --color-default: var(--kxiox-blue-500);
+
+    --color-100: var(--kxiox-blue-100);
+    --color-200: var(--kxiox-blue-200);
+    --color-300: var(--kxiox-blue-300);
+    --color-400: var(--kxiox-blue-400);
+    --color-500: var(--color-default);
+    --color-600: var(--kxiox-blue-600);
+    --color-700: var(--kxiox-blue-700);
+    --color-800: var(--kxiox-blue-800);
+    --color-900: var(--kxiox-blue-900);
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+    --color-background: var(--vt-c-white);
+    --color-background-soft: var(--vt-c-white-soft);
+    --color-background-mute: var(--vt-c-white-mute);
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+    --color-border: var(--vt-c-divider-light-2);
+    --color-border-hover: var(--vt-c-divider-light-1);
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+    --color-heading: var(--vt-c-text-light-1);
+    --color-text: var(--vt-c-text-light-1);
 
-  --section-gap: 160px;
+    --section-gap: 160px;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+    :root {
+        --color-background: var(--vt-c-black);
+        --color-background-soft: var(--vt-c-black-soft);
+        --color-background-mute: var(--vt-c-black-mute);
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
+        --color-border: var(--vt-c-divider-dark-2);
+        --color-border-hover: var(--vt-c-divider-dark-1);
 
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
+        --color-heading: var(--vt-c-text-dark-1);
+        --color-text: var(--vt-c-text-dark-2);
+    }
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
 }
 
 body {
-  min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    color: var(--color-text);
+    background: var(--color-background);
+    transition:
+        color 0.5s,
+        background-color 0.5s;
+    line-height: 1.6;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        'Fira Sans',
+        'Droid Sans',
+        'Helvetica Neue',
+        sans-serif;
+    font-size: 15px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

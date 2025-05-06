@@ -33,3 +33,31 @@ a,
     padding: 0 2rem;
   }
 }
+
+@media screen and (width: 1920px) and (height: 1080px) {
+  html { font-size: 16px; }
+}
+
+@media screen and (width: 2560px) and (height: 1440px) {
+  html { font-size: 21.35px; }
+}
+
+@media screen and (width: 3840px) and (height: 2160px) {
+  html { font-size: 32px; }
+}
+
+@media screen and (width: 7680px) and (height: 4320px) {
+  html { font-size: 64px; }
+}
+
+@media screen and (width: 1280px) and (height: 720px) {
+  html { font-size: 10.7px; }
+}
+
+@media screen and (width: 854px) and (height: 480px) {
+  html { font-size: 7.15px; }
+}
+
+@media screen and (width: 640px) and (height: 360px) {
+  html { font-size: 5.35px; }
+}

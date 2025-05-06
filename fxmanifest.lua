@@ -2,8 +2,8 @@ fx_version 'cerulean'
 game 'gta5'
 
 author 'Kxiox Scripts'
-description 'Insurance System V2'
-version '1.0.0'
+description 'Bossmenu for ESX'
+version 'Beta 1.0'
 
 client_scripts {
     'client/*.lua'
