@@ -8,6 +8,8 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 import { createApp } from 'vue'
 import App from './App.vue'
 
+import { Bar } from 'vue-chartjs'
+
 const app = createApp(App).use(bootstrap)
 
 app.mount('#app')

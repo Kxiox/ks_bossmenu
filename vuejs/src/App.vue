@@ -1,6 +1,8 @@
 <script setup>
   import HomeComponent from './components/HomeComponent.vue';
   import EmployeesComponent from './components/EmployeesComponent.vue';
+  import SalariesComponent from './components/SalariesComponent.vue';
+  import AccountComponent from './components/AccountComponent.vue';
 </script>
 
 <template>
@@ -63,15 +65,24 @@
           <EmployeesComponent></EmployeesComponent>
 
         </div>
-        <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab"
-          tabindex="0">...</div>
-        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"
-          tabindex="0">...</div>
-        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"
-          tabindex="0">...</div>
+        <div class="tab-pane fade" id="v-pills-salaries" role="tabpanel" aria-labelledby="v-pills-salaries-tab"
+          tabindex="0">
+        
+          <SalariesComponent></SalariesComponent>
+
+        </div>
+        <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab"
+          tabindex="0">
+        
+          <AccountComponent></AccountComponent>
+
+        </div>
       </div>
     </div>
-  </div>
+
+    <button type="button" class="btn btn-sm btn-danger closebtn"><i class="bi bi-x-lg"></i></button>
+    
+    </div>
 </template>
 
 <script>
@@ -202,6 +213,13 @@
         height: 100%;
         padding: 20px;
         padding-left: 0;
+    }
+
+    .closebtn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: white;
     }
   }
 </style>

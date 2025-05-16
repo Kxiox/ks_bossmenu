@@ -58,16 +58,16 @@
         </div>
         <h4 class="mt-3">Last actions <button class="btn" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">See all</button></h4>
 
-        <table class="table table-blue table-striped table-hover">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col" style="font-weight: bold; color: #007bff;">Action</th>
-                    <th scope="col" style="font-weight: bold; color: #007bff;">Employee</th>
-                    <th scope="col" style="font-weight: bold; color: #007bff;">Time</th>
+                    <th style="font-weight: bold;">Action</th>
+                    <th style="font-weight: bold;">Employee</th>
+                    <th style="font-weight: bold;">Time</th>
                 </tr>
             </thead>
 
-            <tbody class="table-group-divider">
+            <tbody class="table-group-divider" style="color: #fff;">
                 <tr>
                     <td>Started work</td>
                     <td>John Doe</td>
@@ -129,136 +129,6 @@
     
             &:hover {
                 background-color: var(--color-600);
-            }
-        }
-    
-        .btn-indigo {
-            background-color: $indigo-500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: $indigo-600;
-            }
-        }
-    
-        .btn-purple {
-            background-color: $purple-500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: $purple-600;
-            }
-        }
-    
-        .btn-pink {
-            background-color: $pink-500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: $pink-600;
-            }
-        }
-    
-        .btn-red {
-            background-color: $red-500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: $red-600;
-            }
-        }
-    
-        .btn-orange {
-            background-color: $orange-500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: $orange-600;
-            }
-        }
-    
-        .btn-yellow {
-            background-color: $yellow-500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: $yellow-600;
-            }
-        }
-    
-        .btn-green {
-            background-color: $green-500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: $green-600;
-            }
-        }
-    
-        .btn-teal {
-            background-color: $teal-500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: $teal-600;
-            }
-        }
-    
-        .btn-cyan {
-            background-color: $cyan-500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: $cyan-600;
-            }
-        }
-    
-        .btn-gray {
-            background-color: $gray-500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: $gray-600;
             }
         }
 </style>
