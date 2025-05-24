@@ -56,7 +56,18 @@
                 </div>
             </div>
         </div>
-        <h4 class="mt-3">Last actions <button class="btn" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">See all</button></h4>
+
+        <!-- In HomeComponent.vue -->
+        <h4 class="mt-3">
+        Last actions
+            <button
+                class="btn btn-primary"
+                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;"
+                @click="$emit('see-all')"
+            >
+                See all
+            </button>
+        </h4>
 
         <table class="table table-striped table-hover">
             <thead>
@@ -119,16 +130,20 @@
         
     }
 
-        .btn {
-            background-color: var(--color-500);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-    
-            &:hover {
-                background-color: var(--color-600);
-            }
+    .btn-primary {
+        background-color: var(--color-500);
+        border: none !important;
+        box-shadow: none !important;
+
+        &:hover {
+            background-color: var(--color-600);
         }
+
+        &:active {
+            background-color: var(--color-700) !important;
+            color: #fff !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+    }
 </style>

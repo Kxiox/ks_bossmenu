@@ -25,73 +25,73 @@
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
                 <tr>
                     <td>John Doe</td>
                     <td>Manager</td>
                     <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-blue" @click="">Promote</button><button class="btn btn-sm btn-blue" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
             </tbody>
         </table>
@@ -123,17 +123,21 @@
             gap: 10px;
         }
 
-        .btn-blue {
+        .btn-primary {
             background-color: var(--color-500);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
+            border: none !important;
+            box-shadow: none !important;
 
             &:hover {
                 background-color: var(--color-600);
             }
-        }        
+
+            &:active {
+                background-color: var(--color-700) !important;
+                color: #fff !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+        }
     }
 </style>

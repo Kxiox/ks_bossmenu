@@ -1,47 +1,103 @@
 <template>
-    <h1 class="text-start">Account</h1>
+    <div class="account-container">
+        <h1 class="text-start">Account</h1>
+        <hr />
 
-    <hr>
+        <div class="info-section">
+            <h4>Balance <span class="badge text-bg-primary">100.000$</span></h4>
 
-    <div class="container text-center">
-        <div class="row">
-            <div class="col">Firmenkontostand</div>
-            <div class="col">col</div>
-            <div class="col">col</div>
-            <div class="col">col</div>
-        </div>
-        <div class="row">
-            <div class="col-8 barchart"><BarChart /></div>
-            <div class="col-4">col-4</div>
-        </div>
-    </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-text">.00</span>
 
-    <!-- <div class="row">
-        <div class="col">
-            <div class="stats-section">
-                <div class="container">
-                    <div class="row g-0">
-                        <div class="col-6 col-md-1">
-                            <i class="bi bi-bank" style="font-size: 225%;"></i>
-                        </div>
+                <button class="btn btn-primary" @click="deposit">Einzahlen</button>
+                <button class="btn btn-primary" @click="withdraw">Auszahlen</button>
+            </div>
+            <h4 class="mt-3">Last transactions <button class="btn btn-primary"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">See
+                    all</button></h4>
 
-                        <div class="col-sm-6 col-md-8">
-                            <h5>Account:</h5>
-                            <h6>4.331.344.333€</h6>
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th style="font-weight: bold;">ID</th>
+                            <th style="font-weight: bold;">Action</th>
+                            <th style="font-weight: bold;">Name</th>
+                            <th style="font-weight: bold;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <!-- <tr v-for="transaction in transactions" :key="transaction.id">
+                        <td>{{ transaction.id }}</td>
+                        <td>{{ transaction.action }}</td>
+                        <td>{{ transaction.name }}</td>
+                        <td>{{ transaction.amount }}</td>
+                    </tr> -->
+
+                        <tr>
+                            <td>1</td>
+                            <td>Einzahlung</td>
+                            <td>John Doe</td>
+                            <td>$1000</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Einzahlung</td>
+                            <td>John Doe</td>
+                            <td>$1000</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Einzahlung</td>
+                            <td>John Doe</td>
+                            <td>$1000</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Einzahlung</td>
+                            <td>John Doe</td>
+                            <td>$1000</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Einzahlung</td>
+                            <td>John Doe</td>
+                            <td>$1000</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div> -->
+    </div>
 </template>
 
-<script>
-    import BarChart from '@/components/BarChart.vue';
+<script setup>
+    import { ref } from 'vue'
 
-    export default {
-        name: 'App',
-        components: { BarChart }
+    const balance = ref(5000)
+    const amount = ref(0)
+    const history = ref([
+        'Einzahlung: 1000 $',
+        'Auszahlung: 500 $',
+        'Einzahlung: 200 $'
+    ])
+
+    function deposit() {
+        if (amount.value > 0) {
+            balance.value += amount.value
+            history.value.unshift(`Einzahlung: ${amount.value} $`)
+            amount.value = 0
+        }
+    }
+
+    function withdraw() {
+        if (amount.value > 0 && amount.value <= balance.value) {
+            balance.value -= amount.value
+            history.value.unshift(`Auszahlung: ${amount.value} $`)
+            amount.value = 0
+        }
     }
 </script>
 
@@ -54,9 +110,17 @@
         text-align: center;
     }
 
+    .info-section {
+        flex: 1;
+        color: var(--color-200);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
     .stats-section,
     .additional-info {
-        // background-color: #ffffff10;
+        background-color: #ffffff10;
         border-radius: 1rem;
         padding: 1rem;
         color: var(--color-500);
@@ -67,11 +131,69 @@
         
     }
 
-    .barchart {
-        width: 70%;
-        height: 70%;
-        background-color: var(--color-800);
-        padding: 1rem;
-        border-radius: 0.5rem;
+    .btn-primary {
+        background-color: var(--color-500);
+        border: none !important;
+        box-shadow: none !important;
+
+        &:hover {
+            background-color: var(--color-600);
+        }
+
+        &:active {
+            background-color: var(--color-700) !important;
+            color: #fff !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
     }
+
+    .text-bg-primary {
+        background-color: var(--color-500) !important;
+        color: #fff !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-400);
+        border-radius: 10px;
+    }
+
+    table {
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background-color: var(--color-500);
+            border: none !important;
+            box-shadow: none !important;
+
+            &:hover {
+                background-color: var(--color-600);
+            }
+
+            &:active {
+                background-color: var(--color-700) !important;
+                color: #fff !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+        }
+    }
+
+    input {
+        background-color: #eb000010;
+        color: var(--color-200);
+        border: 1px solid var(--color-400);
+        border-radius: 5px;
+        padding: 0.5rem;
+        width: 100%;
+    }
+
 </style>
