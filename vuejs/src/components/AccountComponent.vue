@@ -28,7 +28,7 @@
                             <th style="font-weight: bold;">Amount</th>
                         </tr>
                     </thead>
-                    <tbody class="table-group-divider">
+                    <tbody class="table-group-divider" style="color: #fff;">
                         <!-- <tr v-for="transaction in transactions" :key="transaction.id">
                         <td>{{ transaction.id }}</td>
                         <td>{{ transaction.action }}</td>
@@ -161,30 +161,6 @@
     ::-webkit-scrollbar-thumb {
         background: var(--color-400);
         border-radius: 10px;
-    }
-
-    table {
-        .buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background-color: var(--color-500);
-            border: none !important;
-            box-shadow: none !important;
-
-            &:hover {
-                background-color: var(--color-600);
-            }
-
-            &:active {
-                background-color: var(--color-700) !important;
-                color: #fff !important;
-                border: none !important;
-                box-shadow: none !important;
-            }
-        }
     }
 
     input {

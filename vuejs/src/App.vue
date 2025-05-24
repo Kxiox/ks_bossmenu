@@ -1,8 +1,34 @@
 <script setup>
-  import HomeComponent from './components/HomeComponent.vue';
-  import EmployeesComponent from './components/EmployeesComponent.vue';
-  import SalariesComponent from './components/SalariesComponent.vue';
-  import AccountComponent from './components/AccountComponent.vue';
+  import { ref } from 'vue'
+  import HomeComponent from './components/HomeComponent.vue'
+  import ActionsComponent from './components/ActionsComponent.vue'
+  import EmployeesComponent from './components/EmployeesComponent.vue'
+  import SalariesComponent from './components/SalariesComponent.vue'
+  import AccountComponent from './components/AccountComponent.vue'
+
+  const showAllActions = ref(false)
+  const fadeHome = ref(true)
+  const fadeActions = ref(false)
+
+  function showActions() {
+    fadeHome.value = false
+    setTimeout(() => {
+      showAllActions.value = true
+      // WICHTIG: Erst nach dem Rendern das Fade-In triggern!
+      setTimeout(() => {
+        fadeActions.value = true
+      }, 10)
+    }, 150) // match Bootstrap's fade duration
+  }
+  function showHome() {
+    fadeActions.value = false
+    setTimeout(() => {
+      showAllActions.value = false
+      setTimeout(() => {
+        fadeHome.value = true
+      }, 10)
+    }, 150)
+  }
 </script>
 
 <template>
@@ -55,9 +81,12 @@
       <div class="tab-content" id="v-pills-tabContent">
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
           tabindex="0">
-
-          <HomeComponent></HomeComponent>
-
+          <div v-if="!showAllActions" :class="['fade', { show: fadeHome }]">
+            <HomeComponent @see-all="showActions" />
+          </div>
+          <div v-else :class="['fade', { show: fadeActions }]">
+            <ActionsComponent @back="showHome" />
+          </div>
         </div>
         <div class="tab-pane fade" id="v-pills-employees" role="tabpanel" aria-labelledby="v-pills-employees-tab"
           tabindex="0">

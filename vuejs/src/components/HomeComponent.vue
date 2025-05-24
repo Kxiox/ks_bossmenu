@@ -57,7 +57,6 @@
             </div>
         </div>
 
-        <!-- In HomeComponent.vue -->
         <h4 class="mt-3">
         Last actions
             <button
