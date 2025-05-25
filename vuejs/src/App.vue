@@ -5,6 +5,7 @@
   import EmployeesComponent from './components/EmployeesComponent.vue'
   import SalariesComponent from './components/SalariesComponent.vue'
   import AccountComponent from './components/AccountComponent.vue'
+  import TransactionsComponent from './components/TransactionsComponent.vue'
 
   const showAllActions = ref(false)
   const fadeHome = ref(true)
@@ -20,12 +21,38 @@
       }, 10)
     }, 150) // match Bootstrap's fade duration
   }
+
   function showHome() {
     fadeActions.value = false
     setTimeout(() => {
       showAllActions.value = false
       setTimeout(() => {
         fadeHome.value = true
+      }, 10)
+    }, 150)
+  }
+
+  const showAllTransactions = ref(false)
+  const fadeAccount = ref(true)
+  const fadeTransactions = ref(false)
+
+  function showTransactions() {
+    fadeAccount.value = false
+    setTimeout(() => {
+      showAllTransactions.value = true
+      // WICHTIG: Erst nach dem Rendern das Fade-In triggern!
+      setTimeout(() => {
+        fadeTransactions.value = true
+      }, 10)
+    }, 150) // match Bootstrap's fade duration
+  }
+  
+  function showAccount() {
+    fadeTransactions.value = false
+    setTimeout(() => {
+      showAllTransactions.value = false
+      setTimeout(() => {
+        fadeAccount.value = true
       }, 10)
     }, 150)
   }
@@ -82,10 +109,10 @@
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
           tabindex="0">
           <div v-if="!showAllActions" :class="['fade', { show: fadeHome }]">
-            <HomeComponent @see-all="showActions" />
+            <HomeComponent @see-all-actions="showActions" />
           </div>
           <div v-else :class="['fade', { show: fadeActions }]">
-            <ActionsComponent @back="showHome" />
+            <ActionsComponent @back-to-home="showHome" />
           </div>
         </div>
         <div class="tab-pane fade" id="v-pills-employees" role="tabpanel" aria-labelledby="v-pills-employees-tab"
@@ -103,8 +130,13 @@
         <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab"
           tabindex="0">
         
-          <AccountComponent></AccountComponent>
+          <div v-if="!showAllTransactions" :class="['fade', { show: fadeAccount }]">
+            <AccountComponent @see-all-transactions="showTransactions" />
+          </div>
 
+          <div v-else :class="['fade', { show: fadeTransactions }]">
+            <TransactionsComponent @back-to-account="showAccount" />
+          </div>
         </div>
       </div>
     </div>

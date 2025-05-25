@@ -14,17 +14,20 @@
                 <button class="btn btn-primary" @click="deposit">Einzahlen</button>
                 <button class="btn btn-primary" @click="withdraw">Auszahlen</button>
             </div>
-            <h4 class="mt-3">Last transactions <button class="btn btn-primary"
-                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">See
-                    all</button></h4>
+
+            <h4 class="mt-3">Last transactions
+                <button class="btn btn-primary" @click="$emit('see-all-transactions')"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">See all
+                </button>
+            </h4>
 
             <div>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th style="font-weight: bold;">ID</th>
+                            <th style="font-weight: bold;">#</th>
                             <th style="font-weight: bold;">Action</th>
-                            <th style="font-weight: bold;">Name</th>
+                            <th style="font-weight: bold;">Employee</th>
                             <th style="font-weight: bold;">Amount</th>
                         </tr>
                     </thead>

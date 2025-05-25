@@ -58,12 +58,10 @@
         </div>
 
         <h4 class="mt-3">
-        Last actions
-            <button
-                class="btn btn-primary"
+            Last actions
+            <button class="btn btn-primary"
                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;"
-                @click="$emit('see-all')"
-            >
+                @click="$emit('see-all-actions')">
                 See all
             </button>
         </h4>
@@ -71,6 +69,7 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
+                    <th style="font-weight: bold;">#</th>
                     <th style="font-weight: bold;">Action</th>
                     <th style="font-weight: bold;">Employee</th>
                     <th style="font-weight: bold;">Time</th>
@@ -79,22 +78,30 @@
 
             <tbody class="table-group-divider" style="color: #fff;">
                 <tr>
+                    <td>1</td>
                     <td>Started work</td>
                     <td>John Doe</td>
                     <td>10:00 AM | May 03 2025</td>
                 </tr>
                 <tr>
+                    <td>2</td>
                     <td>Finished work</td>
                     <td>Jane Smith</td>
                     <td>5:00 PM | May 02 2025</td>
                 </tr>
                 <tr>
+                    <td>3</td>
+                    <td>Received salary</td>
+                    <td>Bob Johnson</td>
+                    <td>3:00 PM | May 02 2025</td>
+                </tr>
+                <tr>
+                    <td>4</td>
                     <td>Received salary</td>
                     <td>Bob Johnson</td>
                     <td>3:00 PM | May 02 2025</td>
                 </tr>
             </tbody>
-
         </table>
     </div>
 </template>
