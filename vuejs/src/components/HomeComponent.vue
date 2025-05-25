@@ -1,3 +1,22 @@
+<script setup>
+    defineProps({
+        employees: {
+            type: Number,
+            default: 0
+        },
+
+        onDuty: {
+            type: Number,
+            default: 0
+        },
+
+        account: {
+            type: String,
+            default: '0'
+        }
+    });
+</script>
+
 <template>
     <h1 class="text-start">Home</h1>
 
@@ -16,7 +35,7 @@
 
                             <div class="col-sm-6 col-md-8">
                                 <h5>Employees:</h5>
-                                <h6>100</h6>
+                                <h6 id="employeesamount">{{ employees }}</h6>
                             </div>
                         </div>
                     </div>
@@ -32,7 +51,7 @@
                             </div>
                             <div class="col-sm-6 col-md-8">
                                 <h5>On Duty:</h5>
-                                <h6>20</h6>
+                                <h6 id="onDuty">{{ onDuty }}</h6>
                             </div>
                         </div>
                     </div>
@@ -49,7 +68,7 @@
 
                             <div class="col-sm-6 col-md-8">
                                 <h5>Account:</h5>
-                                <h6>4.331.344.333€</h6>
+                                <h6 id="account">{{ account }}</h6>
                             </div>
                         </div>
                     </div>

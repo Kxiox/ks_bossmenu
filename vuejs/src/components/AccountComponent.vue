@@ -1,10 +1,46 @@
+<script setup>
+    import { ref } from 'vue'
+
+    const balance = ref(5000)
+    const amount = ref(0)
+    const history = ref([
+        'Einzahlung: 1000 $',
+        'Auszahlung: 500 $',
+        'Einzahlung: 200 $'
+    ])
+
+    function deposit() {
+        if (amount.value > 0) {
+            balance.value += amount.value
+            history.value.unshift(`Einzahlung: ${amount.value} $`)
+            amount.value = 0
+        }
+    }
+
+    function withdraw() {
+        if (amount.value > 0 && amount.value <= balance.value) {
+            balance.value -= amount.value
+            history.value.unshift(`Auszahlung: ${amount.value} $`)
+            amount.value = 0
+        }
+    }
+
+    defineProps({
+        account: {
+            type: String,
+            default: '0'
+        }
+    })
+</script>
+
+
 <template>
     <div class="account-container">
         <h1 class="text-start">Account</h1>
         <hr />
 
         <div class="info-section">
-            <h4>Balance <span class="badge text-bg-primary">100.000$</span></h4>
+            <h4>Balance <span class="badge text-bg-primary">{{ account }}</span></h4>
 
             <div class="input-group mb-3">
                 <span class="input-group-text">$</span>
@@ -75,34 +111,6 @@
         </div>
     </div>
 </template>
-
-<script setup>
-    import { ref } from 'vue'
-
-    const balance = ref(5000)
-    const amount = ref(0)
-    const history = ref([
-        'Einzahlung: 1000 $',
-        'Auszahlung: 500 $',
-        'Einzahlung: 200 $'
-    ])
-
-    function deposit() {
-        if (amount.value > 0) {
-            balance.value += amount.value
-            history.value.unshift(`Einzahlung: ${amount.value} $`)
-            amount.value = 0
-        }
-    }
-
-    function withdraw() {
-        if (amount.value > 0 && amount.value <= balance.value) {
-            balance.value -= amount.value
-            history.value.unshift(`Auszahlung: ${amount.value} $`)
-            amount.value = 0
-        }
-    }
-</script>
 
 <style scoped lang="scss">
     @use 'bootstrap/scss/bootstrap' as *;

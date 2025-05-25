@@ -1,11 +1,15 @@
 <script setup>
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import HomeComponent from './components/HomeComponent.vue'
   import ActionsComponent from './components/ActionsComponent.vue'
   import EmployeesComponent from './components/EmployeesComponent.vue'
   import SalariesComponent from './components/SalariesComponent.vue'
   import AccountComponent from './components/AccountComponent.vue'
   import TransactionsComponent from './components/TransactionsComponent.vue'
+
+  const employeesAmount = ref(0)
+  const onDuty = ref(0)
+  const account = ref('0$')
 
   const showAllActions = ref(false)
   const fadeHome = ref(true)
@@ -15,11 +19,10 @@
     fadeHome.value = false
     setTimeout(() => {
       showAllActions.value = true
-      // WICHTIG: Erst nach dem Rendern das Fade-In triggern!
       setTimeout(() => {
         fadeActions.value = true
       }, 10)
-    }, 150) // match Bootstrap's fade duration
+    }, 150)
   }
 
   function showHome() {
@@ -40,13 +43,12 @@
     fadeAccount.value = false
     setTimeout(() => {
       showAllTransactions.value = true
-      // WICHTIG: Erst nach dem Rendern das Fade-In triggern!
       setTimeout(() => {
         fadeTransactions.value = true
       }, 10)
-    }, 150) // match Bootstrap's fade duration
+    }, 150)
   }
-  
+
   function showAccount() {
     fadeTransactions.value = false
     setTimeout(() => {
@@ -56,7 +58,68 @@
       }, 10)
     }, 150)
   }
+
+  function changeColorMode(color) {
+    document.documentElement.style.setProperty('--color-default', `var(--kxiox-${color}-500)`);
+    document.documentElement.style.setProperty('--color-100', `var(--kxiox-${color}-100)`);
+    document.documentElement.style.setProperty('--color-200', `var(--kxiox-${color}-200)`);
+    document.documentElement.style.setProperty('--color-300', `var(--kxiox-${color}-300)`);
+    document.documentElement.style.setProperty('--color-400', `var(--kxiox-${color}-400)`);
+    document.documentElement.style.setProperty('--color-500', `var(--kxiox-${color}-500)`);
+    document.documentElement.style.setProperty('--color-600', `var(--kxiox-${color}-600)`);
+    document.documentElement.style.setProperty('--color-700', `var(--kxiox-${color}-700)`);
+    document.documentElement.style.setProperty('--color-800', `var(--kxiox-${color}-800)`);
+    document.documentElement.style.setProperty('--color-900', `var(--kxiox-${color}-900)`);
+  }
+
+  function openNUI() {
+    const root = document.querySelector(':root');
+    root.style.opacity = 0;
+    root.style.display = 'block';
+    setTimeout(() => {
+      root.style.transition = 'opacity 0.15s';
+      root.style.opacity = 1;
+    }, 150);
+  }
+
+  function closeNUI() {
+    const root = document.querySelector(':root');
+    root.style.transition = 'opacity 0.15s';
+    root.style.opacity = 0;
+    setTimeout(() => {
+      root.style.display = 'none';
+      fetch(`https://${GetParentResourceName()}/closeNUI`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+          message: 'close'
+        })
+      })
+    }, 150);
+  }
+
+  onMounted(() => {
+    window.addEventListener('message', (event) => {
+      if (event.data.action === 'openNUI') {
+        openNUI()
+      } else if (event.data.action === 'setStats') {
+        employeesAmount.value = event.data.employeesamount
+        onDuty.value = event.data.ondutyamount
+        account.value = event.data.account + event.data.currency
+        
+        changeColorMode(event.data.color)
+        const logo = document.querySelector('.logo');
+        if (logo && event.data.logo) {
+          logo.src = event.data.logo;
+        }
+        
+      }
+    })
+  })
 </script>
+
 
 <template>
   <div class="dropdown">
@@ -109,7 +172,7 @@
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
           tabindex="0">
           <div v-if="!showAllActions" :class="['fade', { show: fadeHome }]">
-            <HomeComponent @see-all-actions="showActions" />
+            <HomeComponent :employees="employeesAmount" :onDuty="onDuty" :account="account" @see-all-actions="showActions" />
           </div>
           <div v-else :class="['fade', { show: fadeActions }]">
             <ActionsComponent @back-to-home="showHome" />
@@ -131,7 +194,7 @@
           tabindex="0">
         
           <div v-if="!showAllTransactions" :class="['fade', { show: fadeAccount }]">
-            <AccountComponent @see-all-transactions="showTransactions" />
+            <AccountComponent :account="account" @see-all-transactions="showTransactions" />
           </div>
 
           <div v-else :class="['fade', { show: fadeTransactions }]">
@@ -141,56 +204,10 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-sm btn-danger closebtn"><i class="bi bi-x-lg"></i></button>
+    <button type="button" class="btn btn-sm btn-danger closebtn" @click="closeNUI()"><i class="bi bi-x-lg"></i></button>
     
     </div>
 </template>
-
-<script>
-   export default {
-    data() {
-      return {
-        message: 'Waiting for message from FiveM client...'
-      }
-    },
-    mounted() {
-      window.addEventListener('message', (event) => {
-        if (event.data.action === 'showMessage') {
-          this.message = event.data.message
-          console.log(this.message)
-        }
-      })
-    },
-    methods: {
-      sendMessage() {
-        fetch(`https://${GetParentResourceName()}/exampleCallback`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: JSON.stringify({
-            message: 'Hello from Vue.js!'
-          })
-        }).then(response => response.json())
-          .then(data => {
-            console.log('Response from FiveM client:', data)
-          })
-      },
-      changeColorMode(color) {
-        document.documentElement.style.setProperty('--color-default', `var(--kxiox-${color}-500)`);
-        document.documentElement.style.setProperty('--color-100', `var(--kxiox-${color}-100)`);
-        document.documentElement.style.setProperty('--color-200', `var(--kxiox-${color}-200)`);
-        document.documentElement.style.setProperty('--color-300', `var(--kxiox-${color}-300)`);
-        document.documentElement.style.setProperty('--color-400', `var(--kxiox-${color}-400)`);
-        document.documentElement.style.setProperty('--color-500', `var(--kxiox-${color}-500)`);
-        document.documentElement.style.setProperty('--color-600', `var(--kxiox-${color}-600)`);
-        document.documentElement.style.setProperty('--color-700', `var(--kxiox-${color}-700)`);
-        document.documentElement.style.setProperty('--color-800', `var(--kxiox-${color}-800)`);
-        document.documentElement.style.setProperty('--color-900', `var(--kxiox-${color}-900)`);
-      }
-    }
-   }
-</script>
 
 <style scoped lang="scss">
   @use 'bootstrap/scss/bootstrap' as *;
@@ -239,7 +256,7 @@
       padding: 20px;
 
       .logo {
-        width: 30%;
+        width: 50%;
         height: auto;
         margin-top: 20px;
         margin-left: auto;
