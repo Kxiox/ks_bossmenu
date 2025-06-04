@@ -1,3 +1,12 @@
+<script setup>
+    defineProps({
+        transactions: {
+            type: Array,
+            default: () => []
+        }
+    });
+</script>
+
 <template>
     <div style="display: flex; align-items: center; gap: 1rem;">
         <a href="#" @click.prevent="$emit('back-to-account')" class="back-btn"><i class="bi bi-arrow-left"></i></a>
@@ -18,155 +27,11 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Einzahlung</td>
-                    <td>John Doe</td>
-                    <td>$1000</td>
+                <tr v-for="(transaction, i) in [...transactions].sort((a, b) => b.id - a.id)" :key="i">
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.action }}</td>
+                    <td>{{ transaction.employee }}</td>
+                    <td>{{ transaction.amount }}</td>
                 </tr>
             </tbody>
         </table>

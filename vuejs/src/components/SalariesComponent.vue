@@ -1,3 +1,18 @@
+<script setup>
+    const emit = defineEmits(['open-salary-modal'])
+
+    defineProps({
+        saleries: {
+            type: Array,
+            default: () => []
+        }
+    });
+
+    function openSalaryModal(salary) {
+        emit('open-salary-modal', salary)
+    }
+</script>
+
 <template>
     <h1 class="text-start">Salaries</h1>
 
@@ -14,84 +29,13 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                            <!-- <tr v-for="employee in employees" :key="employee.id">
-                <td>{{ employee.id }}</td>
-                <td>{{ employee.name }}</td>
-                <td>{{ employee.position }}</td>
-                <td>{{ employee.salary }}</td>
-                <td><button @click="editEmployee(employee.id)">Edit</button></td>
-            </tr> -->
-                <tr>
-                    <td>11</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Change</button></td>
+                <tr v-for="(salary, i) in [...saleries].sort((a, b) => b.grade - a.grade)" :key="i">
+                    <td>{{ salary.grade }}</td>
+                    <td>{{ salary.grade_label }}</td>
+                    <td>{{ salary.salary }}</td>
+                    <td class="buttons">
+                        <button class="btn btn-sm btn-primary" @click="openSalaryModal(salary)">Change</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

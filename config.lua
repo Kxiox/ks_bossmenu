@@ -1,10 +1,12 @@
 Config = {}
 
-Config.Debug = false
+Config.Debug = false -- set to true to enable debug messages in console
 
-Config.Locale = GetConvar('esx:locale', 'en')
+Config.Locale = GetConvar('esx:locale', 'en') -- en, de or create your own locale file in locales
 
-Config.Currency = '$'
+Config.Currency = '$' -- currency symbol, e.g. $, €, £ etc.
+
+Config.Timestamp = 'us' -- us or de
 
 Config.Jobs = {
     ['police'] = {

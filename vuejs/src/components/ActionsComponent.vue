@@ -1,3 +1,12 @@
+<script setup>
+    defineProps({
+        actions: {
+            type: Array,
+            default: () => []
+        }
+    });
+</script>
+
 <template>
     <div style="display: flex; align-items: center; gap: 1rem;">
         <a href="#" @click.prevent="$emit('back-to-home')" class="back-btn"><i class="bi bi-arrow-left"></i></a>
@@ -18,115 +27,12 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr>
-                    <td>1</td>
-                    <td>Started work</td>
-                    <td>John Doe</td>
-                    <td>10:00 AM | May 03 2025</td>
+                <tr v-for="(action, i) in [...actions].sort((a, b) => b.id - a.id)" :key="i">
+                    <td>{{ action.id }}</td>
+                    <td>{{ action.action }}</td>
+                    <td>{{ action.employee }}</td>
+                    <td>{{ new Date(action.time * 1000).toLocaleString('en-US', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) }}</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Finished work</td>
-                    <td>Jane Smith</td>
-                    <td>5:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Received salary</td>
-                    <td>Bob Johnson</td>
-                    <td>3:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Started work</td>
-                    <td>John Doe</td>
-                    <td>10:00 AM | May 03 2025</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Finished work</td>
-                    <td>Jane Smith</td>
-                    <td>5:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Received salary</td>
-                    <td>Bob Johnson</td>
-                    <td>3:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Started work</td>
-                    <td>John Doe</td>
-                    <td>10:00 AM | May 03 2025</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Finished work</td>
-                    <td>Jane Smith</td>
-                    <td>5:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>Received salary</td>
-                    <td>Bob Johnson</td>
-                    <td>3:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>Started work</td>
-                    <td>John Doe</td>
-                    <td>10:00 AM | May 03 2025</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td>Finished work</td>
-                    <td>Jane Smith</td>
-                    <td>5:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td>Received salary</td>
-                    <td>Bob Johnson</td>
-                    <td>3:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>13</td>
-                    <td>Started work</td>
-                    <td>John Doe</td>
-                    <td>10:00 AM | May 03 2025</td>
-                </tr>
-                <tr>
-                    <td>14</td>
-                    <td>Finished work</td>
-                    <td>Jane Smith</td>
-                    <td>5:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>15</td>
-                    <td>Received salary</td>
-                    <td>Bob Johnson</td>
-                    <td>3:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>16</td>
-                    <td>Started work</td>
-                    <td>John Doe</td>
-                    <td>10:00 AM | May 03 2025</td>
-                </tr>
-                <tr>
-                    <td>17</td>
-                    <td>Finished work</td>
-                    <td>Jane Smith</td>
-                    <td>5:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>18</td>
-                    <td>Received salary</td>
-                    <td>Bob Johnson</td>
-                    <td>3:00 PM | May 02 2025</td>
-                </tr>
-                <!-- Weitere Aktionen -->
             </tbody>
         </table>
     </div>

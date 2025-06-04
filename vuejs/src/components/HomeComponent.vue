@@ -13,6 +13,11 @@
         account: {
             type: String,
             default: '0'
+        },
+
+        actions: {
+            type: Array,
+            default: () => []
         }
     });
 </script>
@@ -88,37 +93,18 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th style="font-weight: bold;">#</th>
-                    <th style="font-weight: bold;">Action</th>
-                    <th style="font-weight: bold;">Employee</th>
-                    <th style="font-weight: bold;">Time</th>
+                    <th><b>#</b></th>
+                    <th><b>Action</b></th>
+                    <th><b>Employee</b></th>
+                    <th><b>Time</b></th>
                 </tr>
             </thead>
-
-            <tbody class="table-group-divider" style="color: #fff;">
-                <tr>
-                    <td>1</td>
-                    <td>Started work</td>
-                    <td>John Doe</td>
-                    <td>10:00 AM | May 03 2025</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Finished work</td>
-                    <td>Jane Smith</td>
-                    <td>5:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Received salary</td>
-                    <td>Bob Johnson</td>
-                    <td>3:00 PM | May 02 2025</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Received salary</td>
-                    <td>Bob Johnson</td>
-                    <td>3:00 PM | May 02 2025</td>
+            <tbody class="table-group-divider">
+                <tr v-for="(action, i) in actions.slice().sort((a, b) => b.id - a.id).slice(0, 4)" :key="i">
+                    <td>{{ action.id }}</td>
+                    <td>{{ action.action }}</td>
+                    <td>{{ action.employee }}</td>
+                    <td>{{ new Date(action.time * 1000).toLocaleString('en-US', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) }}</td>
                 </tr>
             </tbody>
         </table>
@@ -170,5 +156,9 @@
             border: none !important;
             box-shadow: none !important;
         }
+    }
+
+    tbody {
+        color: #fff;
     }
 </style>

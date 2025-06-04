@@ -1,9 +1,24 @@
+<script setup>
+    defineProps({
+        employees: {
+            type: Array,
+            default: () => []
+        }
+    })
+
+    function addEmployee() {
+
+    }
+</script>
+
 <template>
     <h1 class="text-start">Employees</h1>
 
     <hr>
 
-    <div style="overflow-x: auto; overflow-y: auto; max-height: 41vh; max-width: 100%; min-width: 100%;">
+    <button class="btn btn-primary mb-3 w-100" data-bs-toggle="modal" data-bs-target="#employeeModal"><i class="bi bi-person-plus-fill"></i> Add Employee</button>
+
+    <div style="overflow-x: auto; overflow-y: auto; max-height: 36vh; max-width: 100%; min-width: 100%;">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -14,88 +29,16 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                            <!-- <tr v-for="employee in employees" :key="employee.id">
-                <td>{{ employee.id }}</td>
-                <td>{{ employee.name }}</td>
-                <td>{{ employee.position }}</td>
-                <td>{{ employee.salary }}</td>
-                <td><button @click="editEmployee(employee.id)">Edit</button></td>
-            </tr> -->
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Manager</td>
-                    <td>$5000</td>
+                <tr v-for="(employee, i) in [...employees].sort((a, b) => b.jobgradenr - a.jobgradenr)" :key="i">
+                    <td>{{ employee.firstname }} {{ employee.lastname }}</td>
+                    <td>{{ employee.jobgrade }}</td>
+                    <td>{{ employee.salary }}</td>
                     <td class="buttons"><button class="btn btn-sm btn-primary" @click="">Promote</button><button class="btn btn-sm btn-primary" @click="">Demote</button><button class="btn btn-sm btn-danger" @click="">Fire</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
+
 </template>
 
 <style scoped lang="scss">
@@ -122,22 +65,22 @@
             display: flex;
             gap: 10px;
         }
+    }
 
-        .btn-primary {
-            background-color: var(--color-500);
+    .btn-primary {
+        background-color: var(--color-500);
+        border: none !important;
+        box-shadow: none !important;
+
+        &:hover {
+            background-color: var(--color-600);
+        }
+
+        &:active {
+            background-color: var(--color-700) !important;
+            color: #fff !important;
             border: none !important;
             box-shadow: none !important;
-
-            &:hover {
-                background-color: var(--color-600);
-            }
-
-            &:active {
-                background-color: var(--color-700) !important;
-                color: #fff !important;
-                border: none !important;
-                box-shadow: none !important;
-            }
         }
     }
 </style>

@@ -1,19 +1,29 @@
 <script setup>
   import { ref, onMounted } from 'vue'
+  import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
   import HomeComponent from './components/HomeComponent.vue'
   import ActionsComponent from './components/ActionsComponent.vue'
   import EmployeesComponent from './components/EmployeesComponent.vue'
   import SalariesComponent from './components/SalariesComponent.vue'
   import AccountComponent from './components/AccountComponent.vue'
   import TransactionsComponent from './components/TransactionsComponent.vue'
+  import ModalsComponent from './components/ModalsComponent.vue'
+  import NotifiesComponent from './components/NotifiesComponent.vue'
 
   const employeesAmount = ref(0)
   const onDuty = ref(0)
   const account = ref('0$')
+  const currency = ref(null)
+  const employeesList = ref([])
+  const saleriesList = ref([])
+  const actionsList = ref([])
+  const transactionsList = ref([])
+  const selectedSalary = ref(null) // <-- hinzufügen
 
   const showAllActions = ref(false)
   const fadeHome = ref(true)
   const fadeActions = ref(false)
+  const notifiesRef = ref(null)
 
   function showActions() {
     fadeHome.value = false
@@ -100,11 +110,18 @@
     }, 150);
   }
 
+  function handleOpenSalaryModal(salary) {
+    selectedSalary.value = salary
+    // Modal öffnen (Bootstrap)
+    const modal = new bootstrap.Modal(document.getElementById('salaryModal'))
+    modal.show()
+  }
+
   onMounted(() => {
     window.addEventListener('message', (event) => {
       if (event.data.action === 'openNUI') {
         openNUI()
-      } else if (event.data.action === 'setStats') {
+      } else if (event.data.action === 'getStats') {
         employeesAmount.value = event.data.employeesamount
         onDuty.value = event.data.ondutyamount
         account.value = event.data.account + event.data.currency
@@ -115,6 +132,21 @@
           logo.src = event.data.logo;
         }
         
+      } else if (event.data.action === 'getEmployeesList') {
+        employeesList.value = event.data.employees
+      
+      } else if (event.data.action === 'getSalaries') {
+        saleriesList.value = event.data.salaries
+
+      } else if (event.data.action === 'getActions') {
+        actionsList.value = event.data.actions
+
+      } else if (event.data.action === 'getTransactions') {
+        transactionsList.value = event.data.transactions
+      
+      } else if (event.data.action === 'getCurrency') {
+        currency.value = event.data.currency
+
       }
     })
   })
@@ -122,6 +154,14 @@
 
 
 <template>
+  <ModalsComponent
+    :currency="currency"
+    :notifiesRef="notifiesRef"
+    :selectedSalary="selectedSalary"
+  />
+
+  <NotifiesComponent :currency="currency" ref="notifiesRef"/>
+
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       Color mode
@@ -140,6 +180,10 @@
       <li><a class="dropdown-item" href="#" @click="changeColorMode('light')">Light</a></li>
       <li><a class="dropdown-item" href="#" @click="changeColorMode('dark')">Dark</a></li>
     </ul>
+  </div>
+
+  <div class="alert alert-success" role="alert">
+    A simple success alert—check it out!
   </div>
 
   <div class="dashboard">
@@ -172,41 +216,46 @@
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
           tabindex="0">
           <div v-if="!showAllActions" :class="['fade', { show: fadeHome }]">
-            <HomeComponent :employees="employeesAmount" :onDuty="onDuty" :account="account" @see-all-actions="showActions" />
+            <HomeComponent :actions="actionsList" :employees="employeesAmount" :onDuty="onDuty" :account="account"
+              @see-all-actions="showActions" />
           </div>
           <div v-else :class="['fade', { show: fadeActions }]">
-            <ActionsComponent @back-to-home="showHome" />
+            <ActionsComponent :actions="actionsList" @back-to-home="showHome" />
           </div>
         </div>
         <div class="tab-pane fade" id="v-pills-employees" role="tabpanel" aria-labelledby="v-pills-employees-tab"
           tabindex="0">
 
-          <EmployeesComponent></EmployeesComponent>
+          <EmployeesComponent :employees="employeesList"></EmployeesComponent>
 
         </div>
         <div class="tab-pane fade" id="v-pills-salaries" role="tabpanel" aria-labelledby="v-pills-salaries-tab"
           tabindex="0">
-        
-          <SalariesComponent></SalariesComponent>
+
+          <SalariesComponent
+            :saleries="saleriesList"
+            @open-salary-modal="handleOpenSalaryModal"
+          />
 
         </div>
         <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab"
           tabindex="0">
-        
+
           <div v-if="!showAllTransactions" :class="['fade', { show: fadeAccount }]">
-            <AccountComponent :account="account" @see-all-transactions="showTransactions" />
+            <AccountComponent :currency="currency" :transactions="transactionsList" :account="account"
+              @see-all-transactions="showTransactions" />
           </div>
 
           <div v-else :class="['fade', { show: fadeTransactions }]">
-            <TransactionsComponent @back-to-account="showAccount" />
+            <TransactionsComponent :transactions="transactionsList" @back-to-account="showAccount" />
           </div>
         </div>
       </div>
     </div>
 
     <button type="button" class="btn btn-sm btn-danger closebtn" @click="closeNUI()"><i class="bi bi-x-lg"></i></button>
-    
-    </div>
+
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -258,7 +307,7 @@
       .logo {
         width: 50%;
         height: auto;
-        margin-top: 20px;
+        margin-top: 1rem;
         margin-left: auto;
         margin-right: auto;
       }
@@ -271,7 +320,7 @@
         border-radius: 5px;
         font-weight: bold;
         text-align: left;
-        padding-left: 20px;
+        // padding-left: 20px;
 
         &:hover {
           background-color: var(--color-800);

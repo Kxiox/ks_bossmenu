@@ -11,9 +11,17 @@
 
     function deposit() {
         if (amount.value > 0) {
-            balance.value += amount.value
-            history.value.unshift(`Einzahlung: ${amount.value} $`)
-            amount.value = 0
+            fetch(`https://${GetParentResourceName()}/deposit`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    amount: amount.value
+                })
+            })
+        } else {
+            props.notifiesRef?.triggerAlert('warning', 'Please enter a valid amount!');
         }
     }
 
@@ -29,6 +37,16 @@
         account: {
             type: String,
             default: '0'
+        },
+
+        transactions: {
+            type: Array,
+            default: () => []
+        },
+
+        currency: {
+            type: String,
+            default: null
         }
     })
 </script>
@@ -43,8 +61,16 @@
             <h4>Balance <span class="badge text-bg-primary">{{ account }}</span></h4>
 
             <div class="input-group mb-3">
-                <span class="input-group-text">$</span>
-                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-text">
+                    <i v-if="currency === '$'" class="bi bi-currency-dollar"></i>
+                    <i v-else-if="currency === '€'" class="bi bi-currency-euro"></i>
+                    <i v-else-if="currency === '£'" class="bi bi-currency-pound"></i>
+                    <i v-else-if="currency === '¥'" class="bi bi-currency-yen"></i>
+                    <i v-else-if="currency === '₹'" class="bi bi-currency-rupee"></i>
+                    <i v-else class="bi bi-cash"></i>
+                    <span v-else>{{ currency }}</span>
+                </span>
+                <input type="number" class="form-control" placeholder="Amount" aria-label="Amount" min="1">
                 <span class="input-group-text">.00</span>
 
                 <button class="btn btn-primary" @click="deposit">Einzahlen</button>
@@ -67,43 +93,13 @@
                             <th style="font-weight: bold;">Amount</th>
                         </tr>
                     </thead>
-                    <tbody class="table-group-divider" style="color: #fff;">
-                        <!-- <tr v-for="transaction in transactions" :key="transaction.id">
-                        <td>{{ transaction.id }}</td>
-                        <td>{{ transaction.action }}</td>
-                        <td>{{ transaction.name }}</td>
-                        <td>{{ transaction.amount }}</td>
-                    </tr> -->
-
-                        <tr>
-                            <td>1</td>
-                            <td>Einzahlung</td>
-                            <td>John Doe</td>
-                            <td>$1000</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Einzahlung</td>
-                            <td>John Doe</td>
-                            <td>$1000</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Einzahlung</td>
-                            <td>John Doe</td>
-                            <td>$1000</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Einzahlung</td>
-                            <td>John Doe</td>
-                            <td>$1000</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Einzahlung</td>
-                            <td>John Doe</td>
-                            <td>$1000</td>
+                    <tbody style="color: #fff;" class="table-group-divider">
+                        <tr v-for="(transaction, i) in [...transactions].sort((a, b) => b.id - a.id).slice(0, 5)"
+                            :key="i">
+                            <td>{{ transaction.id }}</td>
+                            <td>{{ transaction.action }}</td>
+                            <td>{{ transaction.employee }}</td>
+                            <td>{{ transaction.amount }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -173,14 +169,4 @@
         background: var(--color-400);
         border-radius: 10px;
     }
-
-    input {
-        background-color: #eb000010;
-        color: var(--color-200);
-        border: 1px solid var(--color-400);
-        border-radius: 5px;
-        padding: 0.5rem;
-        width: 100%;
-    }
-
 </style>
