@@ -315,7 +315,75 @@ ESX.RegisterServerCallback('ks_bossmenu:changeSalary', function(source, cb, data
 end)
 
 ESX.RegisterServerCallback('ks_bossmenu:depositMoney', function(source, cb, data)
-    
+    print(data.amount)
+    local amount = tonumber(data.amount)
+
+    if IsPlayerAllowed(source) and amount and amount > 0 then
+        local xPlayer = ESX.GetPlayerFromId(source)
+        local societyAccount = 'society_' .. xPlayer.getJob().name
+        local playerMoney = xPlayer.getAccount('money').money
+
+        if playerMoney and playerMoney < amount then
+            cb('not_enough_money')
+            return
+        end
+
+        if societyMoney and societyMoney.money < amount then
+            cb('not_enough_money')
+            return
+        end
+
+        MySQL.update('UPDATE addon_account_data SET money = money + ? WHERE account_name = ?', {
+            amount, societyAccount
+        }, function(affectedRows)
+            if affectedRows > 0 then
+                xPlayer.removeAccountMoney('money', amount)
+                addTransaction(source, {
+                    action = 'deposit',
+                    amount = amount,
+                })
+                cb('success')
+            else
+                cb('unknown_error')
+            end
+        end)
+    else
+        cb('error')
+    end
+end)
+
+ESX.RegisterServerCallback('ks_bossmenu:withdrawMoney', function(source, cb, data)
+    local amount = tonumber(data.amount)
+
+    if IsPlayerAllowed(source) and amount and amount > 0 then
+        local xPlayer = ESX.GetPlayerFromId(source)
+        local societyAccount = 'society_' .. xPlayer.getJob().name
+        local societyMoney = MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
+            societyAccount
+        })
+
+        if societyMoney and societyMoney.money < amount then
+            cb('not_enough_money')
+            return
+        end
+
+        MySQL.update('UPDATE addon_account_data SET money = money - ? WHERE account_name = ?', {
+            amount, societyAccount
+        }, function(affectedRows)
+            if affectedRows > 0 then
+                xPlayer.addAccountMoney('money', amount)
+                addTransaction(source, {
+                    action = 'withdraw',
+                    amount = amount,
+                })
+                cb('success')
+            else
+                cb('unknown_error')
+            end
+        end)
+    else
+        cb('error')
+    end
 end)
 
 function getSalary(grade, jobName)

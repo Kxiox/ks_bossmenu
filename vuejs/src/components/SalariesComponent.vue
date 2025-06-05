@@ -14,7 +14,7 @@
 </script>
 
 <template>
-    <h1 class="text-start">Salaries</h1>
+    <h1 class="text-start">{{ $t('pages.salaries') }}</h1>
 
     <hr>
 
@@ -22,10 +22,10 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th style="font-weight: bold;">ID</th>
-                    <th style="font-weight: bold;">Name</th>
-                    <th style="font-weight: bold;">Salary</th>
-                    <th style="font-weight: bold;">Actions</th>
+                    <th style="font-weight: bold;">#</th>
+                    <th style="font-weight: bold;">{{ $t('salaries.table_name') }}</th>
+                    <th style="font-weight: bold;">{{ $t('salaries.table_salary') }}</th>
+                    <th style="font-weight: bold;">{{ $t('salaries.table_actions') }}</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -34,7 +34,7 @@
                     <td>{{ salary.grade_label }}</td>
                     <td>{{ salary.salary }}</td>
                     <td class="buttons">
-                        <button class="btn btn-sm btn-primary" @click="openSalaryModal(salary)">Change</button>
+                        <button class="btn btn-sm btn-primary" @click="openSalaryModal(salary)">{{ $t('buttons.change') }}</button>
                     </td>
                 </tr>
             </tbody>

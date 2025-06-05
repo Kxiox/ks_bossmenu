@@ -23,12 +23,12 @@
 </script>
 
 <template>
-    <h1 class="text-start">Home</h1>
+    <h1 class="text-start">{{ $t('pages.home') }}</h1>
 
     <hr>
 
     <div class="info-section">
-        <h4>Stats</h4>
+        <h4>{{ $t('home.stats') }}</h4>
         <div class="row">
             <div class="col">
                 <div class="stats-section">
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="col-sm-6 col-md-8">
-                                <h5>Employees:</h5>
+                                <h5>{{ $t('home.employees') }}:</h5>
                                 <h6 id="employeesamount">{{ employees }}</h6>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                                 <i class="bi bi-person-check" style="font-size: 225%;"></i>
                             </div>
                             <div class="col-sm-6 col-md-8">
-                                <h5>On Duty:</h5>
+                                <h5>{{ $t('home.on_duty') }}:</h5>
                                 <h6 id="onDuty">{{ onDuty }}</h6>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="col-sm-6 col-md-8">
-                                <h5>Account:</h5>
+                                <h5>{{ $t('home.account') }}:</h5>
                                 <h6 id="account">{{ account }}</h6>
                             </div>
                         </div>
@@ -82,11 +82,11 @@
         </div>
 
         <h4 class="mt-3">
-            Last actions
+            {{ $t('home.last_actions') }}
             <button class="btn btn-primary"
                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;"
                 @click="$emit('see-all-actions')">
-                See all
+                {{ $t('buttons.see_all') }}
             </button>
         </h4>
 
@@ -94,9 +94,9 @@
             <thead>
                 <tr>
                     <th><b>#</b></th>
-                    <th><b>Action</b></th>
-                    <th><b>Employee</b></th>
-                    <th><b>Time</b></th>
+                    <th><b>{{ $t('home.table_action') }}</b></th>
+                    <th><b>{{ $t('home.table_employee') }}</b></th>
+                    <th><b>{{ $t('home.table_time') }}</b></th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">

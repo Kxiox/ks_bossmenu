@@ -101,6 +101,7 @@ RegisterNUICallback('changeSalary', function (data, cb)
         if success then
             getSalaries()
             getActions()
+            getEmployees()
             cb('ok')
         else
             cb('error')
@@ -109,13 +110,35 @@ RegisterNUICallback('changeSalary', function (data, cb)
 end)
 
 RegisterNUICallback('deposit', function (data, cb)
-    ESX.TriggerServerCallback('ks_bossmenu:depositMoney', function(success)
-        if success then
+    ESX.TriggerServerCallback('ks_bossmenu:depositMoney', function(message)
+        if message == 'success' then
             getStats(stats)
-            getActions()
+            getTransactions()
             cb('ok')
-        else
+        elseif message == 'not_enough_money' then
+            cb('not_enough_money')
+        elseif message == 'error' then
             cb('error')
+        else
+            cb('unknown_error')
+        end
+    end, data)
+end)
+
+RegisterNUICallback('withdraw', function (data, cb)
+    ESX.TriggerServerCallback('ks_bossmenu:withdrawMoney', function(message)
+        print(message)
+        
+        if message == 'success' then
+            getStats(stats)
+            getTransactions()
+            cb('ok')
+        elseif message == 'not_enough_money' then
+            cb('not_enough_money')
+        elseif message == 'error' then
+            cb('error')
+        else
+            cb('unknown_error')
         end
     end, data)
 end)

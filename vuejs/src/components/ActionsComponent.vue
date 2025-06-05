@@ -10,7 +10,7 @@
 <template>
     <div style="display: flex; align-items: center; gap: 1rem;">
         <a href="#" @click.prevent="$emit('back-to-home')" class="back-btn"><i class="bi bi-arrow-left"></i></a>
-        <h1 class="text-start" style="margin: 0;">Home</h1>
+        <h1 class="text-start" style="margin: 0;">{{ $t('pages.home') }}</h1>
     </div>
 
     <hr>

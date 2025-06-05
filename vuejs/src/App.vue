@@ -1,5 +1,12 @@
 <script setup>
   import { ref, onMounted } from 'vue'
+
+  // import translations from '../public/en.json'
+
+  // function t(key) {
+  //   return key.split('.').reduce((o, i) => (o ? o[i] : key), translations)
+  // }
+
   import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
   import HomeComponent from './components/HomeComponent.vue'
   import ActionsComponent from './components/ActionsComponent.vue'
@@ -182,10 +189,6 @@
     </ul>
   </div>
 
-  <div class="alert alert-success" role="alert">
-    A simple success alert—check it out!
-  </div>
-
   <div class="dashboard">
     <div class="d-flex align-items-start">
       <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -193,22 +196,22 @@
         <hr>
         <button class="nav-link text-start active" id="v-pills-home-tab" data-bs-toggle="pill"
           data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
-          <i class="bi bi-house-door me-2"></i> Home
+          <i class="bi bi-house-door me-2"></i> {{ $t('pages.home') }}
         </button>
         <button class="nav-link text-start" id="v-pills-employees-tab" data-bs-toggle="pill"
           data-bs-target="#v-pills-employees" type="button" role="tab" aria-controls="v-pills-employees"
           aria-selected="false">
-          <i class="bi bi-people me-2"></i> Employees
+          <i class="bi bi-people me-2"></i> {{ $t('pages.employees') }}
         </button>
         <button class="nav-link text-start" id="v-pills-salaries-tab" data-bs-toggle="pill"
           data-bs-target="#v-pills-salaries" type="button" role="tab" aria-controls="v-pills-salaries"
           aria-selected="false">
-          <i class="bi bi-cash me-2"></i> Salaries
+          <i class="bi bi-cash me-2"></i> {{ $t('pages.salaries') }}
         </button>
         <button class="nav-link text-start" id="v-pills-account-tab" data-bs-toggle="pill"
           data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account"
           aria-selected="false">
-          <i class="bi bi-bank me-2"></i> Account
+          <i class="bi bi-bank me-2"></i> {{ $t('pages.account') }}
         </button>
       </div>
       <!-- <div class="vr"></div> -->
@@ -232,17 +235,14 @@
         <div class="tab-pane fade" id="v-pills-salaries" role="tabpanel" aria-labelledby="v-pills-salaries-tab"
           tabindex="0">
 
-          <SalariesComponent
-            :saleries="saleriesList"
-            @open-salary-modal="handleOpenSalaryModal"
-          />
+          <SalariesComponent :saleries="saleriesList" @open-salary-modal="handleOpenSalaryModal"/>
 
         </div>
         <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab"
           tabindex="0">
 
           <div v-if="!showAllTransactions" :class="['fade', { show: fadeAccount }]">
-            <AccountComponent :currency="currency" :transactions="transactionsList" :account="account"
+            <AccountComponent :notifiesRef="notifiesRef" :currency="currency" :transactions="transactionsList" :account="account"
               @see-all-transactions="showTransactions" />
           </div>
 

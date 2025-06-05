@@ -1,39 +1,8 @@
 <script setup>
     import { ref } from 'vue'
 
-    const balance = ref(5000)
-    const amount = ref(0)
-    const history = ref([
-        'Einzahlung: 1000 $',
-        'Auszahlung: 500 $',
-        'Einzahlung: 200 $'
-    ])
-
-    function deposit() {
-        if (amount.value > 0) {
-            fetch(`https://${GetParentResourceName()}/deposit`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8'
-                },
-                body: JSON.stringify({
-                    amount: amount.value
-                })
-            })
-        } else {
-            props.notifiesRef?.triggerAlert('warning', 'Please enter a valid amount!');
-        }
-    }
-
-    function withdraw() {
-        if (amount.value > 0 && amount.value <= balance.value) {
-            balance.value -= amount.value
-            history.value.unshift(`Auszahlung: ${amount.value} $`)
-            amount.value = 0
-        }
-    }
-
-    defineProps({
+    const props = defineProps({
+        notifiesRef: Object,
         account: {
             type: String,
             default: '0'
@@ -49,16 +18,88 @@
             default: null
         }
     })
+
+    async function deposit() {
+        const amount = document.getElementById('amount');
+
+        if (amount.value > 0) {
+            try {
+                const respone = await fetch(`https://${GetParentResourceName()}/deposit`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({
+                        amount: amount.value
+                    })
+                });
+                const text = await respone.text();
+
+                if (text === '"ok"') {
+                    props.notifiesRef?.triggerAlert('success', `Deposit of ${amount.value} $ successful!`);
+                } else if (text === '"not_enough_money"') {
+                    props.notifiesRef?.triggerAlert('warning', 'Not enough money to deposit!');
+                } else if (text === '"error"') {
+                    props.notifiesRef?.triggerAlert('danger', 'An error occurred while processing the deposit.');
+                } else if (text === '"unknown_error"') {
+                    props.notifiesRef?.triggerAlert('danger', 'An unknown error occurred while processing the deposit.');
+                } else {
+                    props.notifiesRef?.triggerAlert('danger', 'An unexpected respone was received while deposit money.');
+                }
+
+                } catch (error) {
+                    props.notifiesRef?.triggerAlert('danger', `An error occurred in NUI while deposit money: ${error.message}`);
+                }
+        } else {
+            props.notifiesRef?.triggerAlert('warning', 'Please enter a valid amount!');
+        }
+    }
+
+    async function withdraw() {
+        const amount = document.getElementById('amount');
+
+        if (amount.value > 0) {
+            try {
+                const respone = await fetch(`https://${GetParentResourceName()}/withdraw`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({
+                        amount: amount.value
+                    })
+                });
+                const text = await respone.text();
+
+                if (text === '"ok"') {
+                    props.notifiesRef?.triggerAlert('success', `Withdraw of ${amount.value} $ successful!`);
+                } else if (text === '"not_enough_money"') {
+                    props.notifiesRef?.triggerAlert('warning', 'Not enough money to withdraw!');
+                } else if (text === '"error"') {
+                    props.notifiesRef?.triggerAlert('danger', 'An error occurred while processing the withdraw.');
+                } else if (text === '"unknown_error"') {
+                    props.notifiesRef?.triggerAlert('danger', 'An unknown error occurred while processing the withdraw.');
+                } else {
+                    props.notifiesRef?.triggerAlert('danger', 'An unexpected respone was received while withdraw money.');
+                }
+
+                } catch (error) {
+                    props.notifiesRef?.triggerAlert('danger', `An error occurred in NUI while withdraw money: ${error.message}`);
+                }
+        } else {
+            props.notifiesRef?.triggerAlert('warning', 'Please enter a valid amount!');
+        }
+    }
 </script>
 
 
 <template>
     <div class="account-container">
-        <h1 class="text-start">Account</h1>
+        <h1 class="text-start">{{ $t('pages.account') }}</h1>
         <hr />
 
         <div class="info-section">
-            <h4>Balance <span class="badge text-bg-primary">{{ account }}</span></h4>
+            <h4>{{ $t('account.balance') }} <span class="badge text-bg-primary">{{ account }}</span></h4>
 
             <div class="input-group mb-3">
                 <span class="input-group-text">
@@ -70,16 +111,16 @@
                     <i v-else class="bi bi-cash"></i>
                     <span v-else>{{ currency }}</span>
                 </span>
-                <input type="number" class="form-control" placeholder="Amount" aria-label="Amount" min="1">
+                <input id="amount" type="number" class="form-control" :placeholder="$t('account.placeholder')" aria-label="Amount" min="1">
                 <span class="input-group-text">.00</span>
 
-                <button class="btn btn-primary" @click="deposit">Einzahlen</button>
-                <button class="btn btn-primary" @click="withdraw">Auszahlen</button>
+                <button class="btn btn-primary" @click="deposit()">{{ $t('buttons.deposit') }}</button>
+                <button class="btn btn-primary" @click="withdraw()">{{ $t('buttons.withdraw') }}</button>
             </div>
 
-            <h4 class="mt-3">Last transactions
+            <h4 class="mt-3">{{ $t('account.last_transactions') }}
                 <button class="btn btn-primary" @click="$emit('see-all-transactions')"
-                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">See all
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">{{ $t('buttons.see_all') }}
                 </button>
             </h4>
 
@@ -88,9 +129,9 @@
                     <thead>
                         <tr>
                             <th style="font-weight: bold;">#</th>
-                            <th style="font-weight: bold;">Action</th>
-                            <th style="font-weight: bold;">Employee</th>
-                            <th style="font-weight: bold;">Amount</th>
+                            <th style="font-weight: bold;">{{ $t('account.table_action') }}</th>
+                            <th style="font-weight: bold;">{{ $t('account.table_employee') }}</th>
+                            <th style="font-weight: bold;">{{ $t('account.table_amount') }}</th>
                         </tr>
                     </thead>
                     <tbody style="color: #fff;" class="table-group-divider">

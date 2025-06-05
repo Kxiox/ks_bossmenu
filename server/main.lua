@@ -13,3 +13,17 @@ function addAction(source, data)
         xPlayer.getJob().name
     })
 end
+
+function addTransaction(source, data)
+    local xPlayer = ESX.GetPlayerFromId(source)
+
+    if not IsPlayerAllowed(source) then return false end
+
+    MySQL.insert('INSERT INTO ks_bossmenu_transactions (action, employee, amount, time, job) VALUES (?, ?, ?, ?, ?)', {
+        data.action,
+        xPlayer.getName(),
+        data.amount,
+        os.time(os.date("!*t")),
+        xPlayer.getJob().name,
+    })
+end

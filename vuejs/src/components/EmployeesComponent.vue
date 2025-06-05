@@ -106,20 +106,20 @@
 </script>
 
 <template>
-    <h1 class="text-start">Employees</h1>
+    <h1 class="text-start">{{ $t('pages.employees') }}</h1>
 
     <hr>
 
-    <button class="btn btn-primary mb-3 w-100" data-bs-toggle="modal" data-bs-target="#employeeModal"><i class="bi bi-person-plus-fill"></i> Add Employee</button>
+    <button class="btn btn-primary mb-3 w-100" data-bs-toggle="modal" data-bs-target="#employeeModal"><i class="bi bi-person-plus-fill"></i> {{ $t('employees.add_employee') }}</button>
 
     <div style="overflow-x: auto; overflow-y: auto; max-height: 36vh; max-width: 100%; min-width: 100%;">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th style="font-weight: bold;">Name</th>
-                    <th style="font-weight: bold;">Position</th>
-                    <th style="font-weight: bold;">Salary</th>
-                    <th style="font-weight: bold;">Actions</th>
+                    <th style="font-weight: bold;">{{ $t('employees.table_name') }}</th>
+                    <th style="font-weight: bold;">{{ $t('employees.table_position') }}</th>
+                    <th style="font-weight: bold;">{{ $t('employees.table_salary') }}</th>
+                    <th style="font-weight: bold;">{{ $t('employees.table_actions') }}</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -127,7 +127,7 @@
                     <td>{{ employee.firstname }} {{ employee.lastname }}</td>
                     <td>{{ employee.jobgrade }}</td>
                     <td>{{ employee.salary }}</td>
-                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="promote(employee)">Promote</button><button class="btn btn-sm btn-primary" @click="demote(employee)">Demote</button><button class="btn btn-sm btn-danger" @click="fire(employee)">Fire</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-primary" @click="promote(employee)">{{ $t('buttons.promote') }}</button><button class="btn btn-sm btn-primary" @click="demote(employee)">{{ $t('buttons.demote') }}</button><button class="btn btn-sm btn-danger" @click="fire(employee)">{{ $t('buttons.fire') }}</button></td>
                 </tr>
             </tbody>
         </table>

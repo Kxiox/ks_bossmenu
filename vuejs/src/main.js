@@ -7,11 +7,10 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
 import { createApp } from 'vue'
 import App from './App.vue'
+import { t } from './utils/translation'
 
-import { Bar } from 'vue-chartjs'
-
-const app = createApp(App).use(bootstrap)
-
+const app = createApp(App)
+app.config.globalProperties.$t = t
 app.mount('#app')
 
 window.addEventListener('message', (event) => {

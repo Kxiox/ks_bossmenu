@@ -1,0 +1,56 @@
+{
+    "pages": {
+        "home": "Home",
+        "employees": "Employees",
+        "salaries": "Salaries",
+        "account": "Account"
+    },
+
+    "home": {
+        "stats": "Stats",
+        "employees": "Employees",
+        "on_duty": "On Duty",
+        "account": "Account",
+
+        "last_actions": "Last Actions",
+        "table_action": "Action",
+        "table_employee": "Employee",
+        "table_time": "Time"
+    },
+
+    "employees": {
+        "add_employee": "Add Employee",
+        "table_name": "Name",
+        "table_position": "Position",
+        "table_salary": "Salary",
+        "table_actions": "Actions"
+    },
+
+    "salaries": {
+        "table_name": "Name",
+        "table_salary": "Salary",
+        "table_actions": "Actions"
+    },
+
+    "account": {
+        "balance": "Balance",
+        "placeholder": "Amount",
+
+        "last_transactions": "Last transactions",
+        "table_action": "Action",
+        "table_employee": "Employee",
+        "table_amount": "Amount"
+    },
+
+    "buttons": {
+        "see_all": "See all",
+        "promote": "Promote",
+        "demote": "Demote",
+        "fire": "Fire",
+        "cancel": "Cancel",
+        "add": "Add",
+        "change": "Change",
+        "deposit": "Deposit",
+        "withdraw": "Withdraw"
+    }
+}
