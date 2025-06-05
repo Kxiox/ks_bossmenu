@@ -145,6 +145,7 @@ function getEmployees()
         for _, employee in ipairs(employeeslist) do
             print(employee.grade)
             table.insert(args, {
+                identifier = employee.identifier,
                 firstname = employee.firstname,
                 lastname = employee.lastname,
                 jobgrade = employee.jobgrade,

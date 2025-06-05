@@ -30,13 +30,14 @@ ESX.RegisterServerCallback('ks_bossmenu:getEmployees', function(source, cb, jobN
 end)
 
 ESX.RegisterServerCallback('ks_bossmenu:getEmployeesList', function(source, cb, jobName)
-    MySQL.query('SELECT firstname, lastname, job_grade FROM users WHERE job = ?', {
+    MySQL.query('SELECT identifier, firstname, lastname, job_grade FROM users WHERE job = ?', {
         jobName
     }, function(result)
         local employees = {}
 
         for _, row in ipairs(result) do
             table.insert(employees, {
+                identifier = row.identifier,
                 firstname = row.firstname,
                 lastname = row.lastname,
                 jobgrade = getGradeLabel(row.job_grade, jobName),
@@ -135,10 +136,12 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
     local targetFirstname = data['employee'].firstname
     local targetLastname = data['employee'].lastname
     local targetJobGrade = data['employee'].jobgradenr
+    local targetIdentifier = data['employee'].identifier
 
+    print(targetIdentifier)
 
     if IsPlayerAllowed(source) then
-        if xPlayer.getName() == targetFirstname .. ' ' .. targetLastname then
+        if xPlayer.getIdentifier() == targetIdentifier then
             cb('self_promote')
             return
         end
@@ -152,8 +155,8 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
             return
         end
 
-        local targetJob = MySQL.single.await('SELECT job FROM users WHERE firstname = ? AND lastname = ?', {
-            targetFirstname, targetLastname
+        local targetJob = MySQL.single.await('SELECT job FROM users WHERE identifier = ?', {
+            targetIdentifier
         })
 
         if targetJob.job ~= xPlayer.getJob().name then
@@ -161,8 +164,8 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
             return
         end
 
-        MySQL.update('UPDATE users SET job_grade = job_grade + 1 WHERE firstname = ? AND lastname = ?', {
-            targetFirstname, targetLastname
+        MySQL.update('UPDATE users SET job_grade = job_grade + 1 WHERE identifier = ?', {
+            targetIdentifier
         }, function(affectedRows)
             if affectedRows > 0 then
                 local newGrade = MySQL.single.await('SELECT label FROM job_grades WHERE job_name = ? AND grade = ?', {
@@ -190,9 +193,10 @@ ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, da
     local targetFirstname = data['employee'].firstname
     local targetLastname = data['employee'].lastname
     local targetJobGrade = data['employee'].jobgradenr
+    local targetIdentifier = data['employee'].identifier
 
     if IsPlayerAllowed(source) then
-        if xPlayer.getName() == targetFirstname .. ' ' .. targetLastname then
+        if xPlayer.getIdentifier() == targetIdentifier then
             cb('self_demote')
             return
         end
@@ -206,8 +210,8 @@ ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, da
             return
         end
 
-        local targetJob = MySQL.single.await('SELECT job FROM users WHERE firstname = ? AND lastname = ?', {
-            targetFirstname, targetLastname
+        local targetJob = MySQL.single.await('SELECT job FROM users WHERE identifier = ?', {
+            targetIdentifier
         })
 
         if targetJob.job ~= xPlayer.getJob().name then
@@ -215,8 +219,8 @@ ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, da
             return
         end
 
-        MySQL.update('UPDATE users SET job_grade = job_grade - 1 WHERE firstname = ? AND lastname = ?', {
-            targetFirstname, targetLastname
+        MySQL.update('UPDATE users SET job_grade = job_grade - 1 WHERE identifier = ?', {
+            targetIdentifier
         }, function(affectedRows)
             if affectedRows > 0 then
                 local newGrade = MySQL.single.await('SELECT label FROM job_grades WHERE job_name = ? AND grade = ?', {
@@ -243,15 +247,16 @@ ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data
     local xPlayer = ESX.GetPlayerFromId(source)
     local targetFirstname = data['employee'].firstname
     local targetLastname = data['employee'].lastname
+    local targetIdentifier = data['employee'].identifier
 
     if IsPlayerAllowed(source) then
-        if xPlayer.getName() == targetFirstname .. ' ' .. targetLastname then
+        if xPlayer.getIdentifier() == targetIdentifier then
             cb('self_fire')
             return
         end
 
-        local targetJob = MySQL.single.await('SELECT job FROM users WHERE firstname = ? AND lastname = ?', {
-            targetFirstname, targetLastname
+        local targetJob = MySQL.single.await('SELECT job FROM users WHERE identifier = ?', {
+            targetIdentifier
         })
 
         if targetJob.job ~= xPlayer.getJob().name then
@@ -259,8 +264,8 @@ ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data
             return
         end
 
-        MySQL.update('UPDATE users SET job = ?, job_grade = ? WHERE firstname = ? AND lastname = ?', {
-            Config.UnemployedJobName, 0, targetFirstname, targetLastname
+        MySQL.update('UPDATE users SET job = ?, job_grade = ? WHERE identifier = ?', {
+            Config.UnemployedJobName, 0, targetIdentifier
         }, function(affectedRows)
             if affectedRows > 0 then
                 addAction(source, {

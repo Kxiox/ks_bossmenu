@@ -4,7 +4,7 @@ game 'gta5'
 author 'Kxiox Scripts'
 description 'Bossmenu for ESX'
 lua_54 'yes'
-version '1.0.0'
+version '0.1.0'
 
 shared_scripts {
     '@es_extended/imports.lua',
