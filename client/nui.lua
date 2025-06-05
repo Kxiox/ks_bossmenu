@@ -21,14 +21,6 @@ end
 
 -- Callbacks
 
--- RegisterNUICallback('openNUI', function (data, cb)
---     SetNuiFocus(true, true)
---     SendNUIMessage({
---         action = 'openNUI',
---     })
---     cb('ok')
--- end)
-
 RegisterNUICallback('closeNUI', function (data, cb)
     SetNuiFocus(false, false)
     cb('ok')
@@ -42,6 +34,64 @@ RegisterNUICallback('addEmployee', function (data, cb)
             cb('ok')
         else
             cb('error')
+        end
+    end, data)
+end)
+
+RegisterNUICallback('promoteEmployee', function (data, cb)
+    ESX.TriggerServerCallback('ks_bossmenu:promoteEmployee', function(message)       
+        if message == 'success' then
+            getEmployees()
+            getActions()
+            cb('ok')
+        elseif message == 'self_promote' then
+            cb('self_promote')
+        elseif message == 'highest_grade' then
+            cb('highest_grade')
+        elseif message == 'not_same_job' then
+            cb('not_same_job')
+        elseif message == 'error' then
+            cb('error')
+        else
+            cb('unknown_error')
+        end
+    end, data)
+end)
+
+RegisterNUICallback('demoteEmployee', function (data, cb)
+    ESX.TriggerServerCallback('ks_bossmenu:demoteEmployee', function(message)
+        if message == 'success' then
+            getEmployees()
+            getActions()
+            cb('ok')
+        elseif message == 'self_demote' then
+            cb('self_demote')
+        elseif message == 'lowest_grade' then
+            cb('lowest_grade')
+        elseif message == 'not_same_job' then
+            cb('not_same_job')
+        elseif message == 'error' then
+            cb('error')
+        else
+            cb('unknown_error')
+        end
+    end, data)
+end)
+
+RegisterNUICallback('fireEmployee', function (data, cb)
+    ESX.TriggerServerCallback('ks_bossmenu:fireEmployee', function(message)
+        if message == 'success' then
+            getEmployees()
+            getActions()
+            cb('ok')
+        elseif message == 'self_fire' then
+            cb('self_fire')
+        elseif message == 'not_same_job' then
+            cb('not_same_job')
+        elseif message == 'error' then
+            cb('error')
+        else
+            cb('unknown_error')
         end
     end, data)
 end)

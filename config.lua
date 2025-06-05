@@ -8,6 +8,8 @@ Config.Currency = '$' -- currency symbol, e.g. $, €, £ etc.
 
 Config.Timestamp = 'us' -- us or de
 
+Config.UnemployedJobName = 'unemployed' -- job name of the unemployed job, used for employees wich get fired
+
 Config.Jobs = {
     ['police'] = {
         logo = 'https://iili.io/Hg0h0Ux.png', -- image.png or url

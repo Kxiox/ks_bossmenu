@@ -130,6 +130,153 @@ ESX.RegisterServerCallback('ks_bossmenu:addEmployee', function(source, cb, data)
     end
 end)
 
+ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, data)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local targetFirstname = data['employee'].firstname
+    local targetLastname = data['employee'].lastname
+    local targetJobGrade = data['employee'].jobgradenr
+
+
+    if IsPlayerAllowed(source) then
+        if xPlayer.getName() == targetFirstname .. ' ' .. targetLastname then
+            cb('self_promote')
+            return
+        end
+
+        local highestGrade = MySQL.single.await('SELECT MAX(grade) as max_grade FROM job_grades WHERE job_name = ?', {
+            xPlayer.getJob().name
+        })
+
+        if targetJobGrade == highestGrade.max_grade then
+            cb('highest_grade')
+            return
+        end
+
+        local targetJob = MySQL.single.await('SELECT job FROM users WHERE firstname = ? AND lastname = ?', {
+            targetFirstname, targetLastname
+        })
+
+        if targetJob.job ~= xPlayer.getJob().name then
+            cb('not_same_job')
+            return
+        end
+
+        MySQL.update('UPDATE users SET job_grade = job_grade + 1 WHERE firstname = ? AND lastname = ?', {
+            targetFirstname, targetLastname
+        }, function(affectedRows)
+            if affectedRows > 0 then
+                local newGrade = MySQL.single.await('SELECT label FROM job_grades WHERE job_name = ? AND grade = ?', {
+                    xPlayer.getJob().name, targetJobGrade + 1
+                })
+
+                addAction(source, {
+                    action = 'promote_employee',
+                    data = {
+                        target = targetFirstname .. ' ' .. targetLastname,
+                        new_grade = newGrade.label,
+                    }
+                })
+
+                cb('success')
+            else
+                cb('error')
+            end
+        end)
+    end
+end)
+
+ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, data)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local targetFirstname = data['employee'].firstname
+    local targetLastname = data['employee'].lastname
+    local targetJobGrade = data['employee'].jobgradenr
+
+    if IsPlayerAllowed(source) then
+        if xPlayer.getName() == targetFirstname .. ' ' .. targetLastname then
+            cb('self_demote')
+            return
+        end
+
+        local lowestGrade = MySQL.single.await('SELECT MIN(grade) as min_grade FROM job_grades WHERE job_name = ?', {
+            xPlayer.getJob().name
+        })
+
+        if targetJobGrade == lowestGrade.min_grade then
+            cb('lowest_grade')
+            return
+        end
+
+        local targetJob = MySQL.single.await('SELECT job FROM users WHERE firstname = ? AND lastname = ?', {
+            targetFirstname, targetLastname
+        })
+
+        if targetJob.job ~= xPlayer.getJob().name then
+            cb('not_same_job')
+            return
+        end
+
+        MySQL.update('UPDATE users SET job_grade = job_grade - 1 WHERE firstname = ? AND lastname = ?', {
+            targetFirstname, targetLastname
+        }, function(affectedRows)
+            if affectedRows > 0 then
+                local newGrade = MySQL.single.await('SELECT label FROM job_grades WHERE job_name = ? AND grade = ?', {
+                    xPlayer.getJob().name, targetJobGrade - 1
+                })
+
+                addAction(source, {
+                    action = 'demote_employee',
+                    data = {
+                        target = targetFirstname .. ' ' .. targetLastname,
+                        new_grade = newGrade.label,
+                    }
+                })
+
+                cb('success')
+            else
+                cb('error')
+            end
+        end)
+    end
+end)
+
+ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local targetFirstname = data['employee'].firstname
+    local targetLastname = data['employee'].lastname
+
+    if IsPlayerAllowed(source) then
+        if xPlayer.getName() == targetFirstname .. ' ' .. targetLastname then
+            cb('self_fire')
+            return
+        end
+
+        local targetJob = MySQL.single.await('SELECT job FROM users WHERE firstname = ? AND lastname = ?', {
+            targetFirstname, targetLastname
+        })
+
+        if targetJob.job ~= xPlayer.getJob().name then
+            cb('not_same_job')
+            return
+        end
+
+        MySQL.update('UPDATE users SET job = ?, job_grade = ? WHERE firstname = ? AND lastname = ?', {
+            Config.UnemployedJobName, 0, targetFirstname, targetLastname
+        }, function(affectedRows)
+            if affectedRows > 0 then
+                addAction(source, {
+                    action = 'fire_employee',
+                    data = {
+                        target = targetFirstname .. ' ' .. targetLastname,
+                    }
+                })
+                cb('success')
+            else
+                cb('error')
+            end
+        end)
+    end
+end)
+
 ESX.RegisterServerCallback('ks_bossmenu:changeSalary', function(source, cb, data)
     local xPlayer = ESX.GetPlayerFromId(source)
 

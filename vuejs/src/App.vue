@@ -226,7 +226,7 @@
         <div class="tab-pane fade" id="v-pills-employees" role="tabpanel" aria-labelledby="v-pills-employees-tab"
           tabindex="0">
 
-          <EmployeesComponent :employees="employeesList"></EmployeesComponent>
+          <EmployeesComponent :notifiesRef="notifiesRef" :employees="employeesList"></EmployeesComponent>
 
         </div>
         <div class="tab-pane fade" id="v-pills-salaries" role="tabpanel" aria-labelledby="v-pills-salaries-tab"
