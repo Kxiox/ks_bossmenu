@@ -29,7 +29,9 @@
     "salaries": {
         "table_name": "Name",
         "table_salary": "Salary",
-        "table_actions": "Actions"
+        "table_actions": "Actions",
+        "change_salary": "Change Salary",
+        "placeholder": "New Salary"
     },
 
     "account": {

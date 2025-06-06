@@ -105,7 +105,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="salaryModalLabel"><i class="bi bi-cash"></i> Change Salary</h1>
+                    <h1 class="modal-title fs-5" id="salaryModalLabel"><i class="bi bi-cash"></i> {{ $t('salaries.change_salary') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -117,14 +117,14 @@
                             <i v-else-if="currency === '¥'" class="bi bi-currency-yen"></i>
                             <i v-else-if="currency === '₹'" class="bi bi-currency-rupee"></i>
                             <span v-else>{{ currency }}</span></span>
-                        <input id="newSalary" type="number" class="form-control" placeholder="Salary"
+                        <input id="newSalary" type="number" class="form-control" :placeholder="$t('salaries.placeholder')"
                             aria-label="Salary" min="0">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t('buttons.cancel') }}</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        @click="changeSalary()">Change</button>
+                        @click="changeSalary()">{{ $t('buttons.change') }}</button>
                 </div>
             </div>
         </div>
