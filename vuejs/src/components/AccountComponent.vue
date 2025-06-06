@@ -1,5 +1,8 @@
 <script setup>
-    import { ref } from 'vue'
+    import { getCurrentInstance } from 'vue'
+
+    const { proxy } = getCurrentInstance()
+    const $t = proxy.$t
 
     const props = defineProps({
         notifiesRef: Object,
@@ -36,23 +39,25 @@
                 const text = await respone.text();
 
                 if (text === '"ok"') {
-                    props.notifiesRef?.triggerAlert('success', `Deposit of ${amount.value} $ successful!`);
+                    props.notifiesRef?.triggerAlert('success', $t('notifies.account.deposit.success', {amount: amount.value}));
                 } else if (text === '"not_enough_money"') {
-                    props.notifiesRef?.triggerAlert('warning', 'Not enough money to deposit!');
+                    props.notifiesRef?.triggerAlert('warning', $t('notifies.account.deposit.not_enough_money'));
                 } else if (text === '"error"') {
-                    props.notifiesRef?.triggerAlert('danger', 'An error occurred while processing the deposit.');
+                    props.notifiesRef?.triggerAlert('danger', $t('notifies.account.deposit.error'));
                 } else if (text === '"unknown_error"') {
-                    props.notifiesRef?.triggerAlert('danger', 'An unknown error occurred while processing the deposit.');
+                    props.notifiesRef?.triggerAlert('danger', $t('notifies.account.deposit.unknown_error'));
                 } else {
-                    props.notifiesRef?.triggerAlert('danger', 'An unexpected respone was received while deposit money.');
+                    props.notifiesRef?.triggerAlert('danger', $t('notifies.account.deposit.unknown'));
                 }
 
                 } catch (error) {
-                    props.notifiesRef?.triggerAlert('danger', `An error occurred in NUI while deposit money: ${error.message}`);
+                    props.notifiesRef?.triggerAlert('danger', $t('notifies.account.deposit.nui_error', {error: error.message}));
                 }
         } else {
-            props.notifiesRef?.triggerAlert('warning', 'Please enter a valid amount!');
+            props.notifiesRef?.triggerAlert('warning', $t('notifies.account.deposit.invalid_amount'));
         }
+
+        document.getElementById('amount').value = '';
     }
 
     async function withdraw() {
@@ -72,23 +77,25 @@
                 const text = await respone.text();
 
                 if (text === '"ok"') {
-                    props.notifiesRef?.triggerAlert('success', `Withdraw of ${amount.value} $ successful!`);
+                    props.notifiesRef?.triggerAlert('success', $t('notifies.account.withdraw.success', {amount: amount.value}));
                 } else if (text === '"not_enough_money"') {
-                    props.notifiesRef?.triggerAlert('warning', 'Not enough money to withdraw!');
+                    props.notifiesRef?.triggerAlert('warning', $t('notifies.account.withdraw.not_enough_money'));
                 } else if (text === '"error"') {
-                    props.notifiesRef?.triggerAlert('danger', 'An error occurred while processing the withdraw.');
+                    props.notifiesRef?.triggerAlert('danger', $t('notifies.account.withdraw.error'));
                 } else if (text === '"unknown_error"') {
-                    props.notifiesRef?.triggerAlert('danger', 'An unknown error occurred while processing the withdraw.');
+                    props.notifiesRef?.triggerAlert('danger', $t('notifies.account.withdraw.unknown_error'));
                 } else {
-                    props.notifiesRef?.triggerAlert('danger', 'An unexpected respone was received while withdraw money.');
+                    props.notifiesRef?.triggerAlert('danger', $t('notifies.account.withdraw.unknown'));
                 }
 
                 } catch (error) {
-                    props.notifiesRef?.triggerAlert('danger', `An error occurred in NUI while withdraw money: ${error.message}`);
+                    props.notifiesRef?.triggerAlert('danger', $t('notifies.account.withdraw.nui_error', {error: error.message}));
                 }
         } else {
-            props.notifiesRef?.triggerAlert('warning', 'Please enter a valid amount!');
+            props.notifiesRef?.triggerAlert('warning', $t('notifies.account.withdraw.invalid_amount'));
         }
+
+        document.getElementById('amount').value = '';
     }
 </script>
 

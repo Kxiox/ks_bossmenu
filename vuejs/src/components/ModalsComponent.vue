@@ -1,5 +1,8 @@
 <script setup>
-    import { defineProps } from 'vue'
+    import { getCurrentInstance } from 'vue'
+
+    const { proxy } = getCurrentInstance()
+    const $t = proxy.$t
 
     const props = defineProps({
         notifiesRef: Object,
@@ -30,24 +33,28 @@
                 const text = await response.text();
 
                 if (text === '"ok"') {
-                    props.notifiesRef?.triggerAlert('success', `Employee with ID ${targetId} added successfully!`);
-                    document.getElementById('targetId').value = '';
+                    props.notifiesRef?.triggerAlert('success', $t('notifies.employees.add.success', { id: targetId }));
                 } else {
-                    props.notifiesRef?.triggerAlert('danger', `Player is not online or already in this job!`);
+                    props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.add.failed'));
                 }
             } catch (error) {
-                console.error('Error:', error);
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.add.nui_error', { error: error.message }));
             }
         } else {
-            props.notifiesRef?.triggerAlert('warning', 'Please enter an ID over 0!');
+            props.notifiesRef?.triggerAlert('warning', $t('notifies.employees.add.invalid_id'));
         }
+
+        document.getElementById('targetId').value = '';
     }
 
     async function changeSalary() {
         const newSalary = parseInt(document.getElementById('newSalary').value);
 
         if (newSalary && newSalary >= 0) {
-            if (newSalary === props.selectedSalary.salary) { props.notifiesRef?.triggerAlert('info', 'Salary is already set to this value!'); return; }
+            if (newSalary === props.selectedSalary.salary) {
+                props.notifiesRef?.triggerAlert('info', $t('notifies.salaries.change.already_set'));
+                return;
+            }
 
             try {
                 const response = await fetch(`https://${GetParentResourceName()}/changeSalary`, {
@@ -63,17 +70,18 @@
                 const text = await response.text();
 
                 if (text === '"ok"') {
-                    props.notifiesRef?.triggerAlert('success', `Salary changed to ${newSalary}${props.currency}!`);
-                    document.getElementById('newSalary').value = '';
+                    props.notifiesRef?.triggerAlert('success', $t('notifies.salaries.change.success', { salary: newSalary, currency: props.currency }));
                 } else {
-                    props.notifiesRef?.triggerAlert('danger', `Failed to change salary!`);
+                    props.notifiesRef?.triggerAlert('danger', $t('notifies.salaries.change.failed'));
                 }
             } catch (error) {
-                console.error('Error:', error);
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.salaries.change.nui_error', { error: error.message }));
             }
         } else {
-            props.notifiesRef?.triggerAlert('warning', 'Please enter a valid salary!');
+            props.notifiesRef?.triggerAlert('warning', $t('notifies.salaries.change.invalid_salary'));
         }
+
+        document.getElementById('newSalary').value = '';
     }
 </script>
 

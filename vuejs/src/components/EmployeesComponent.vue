@@ -1,4 +1,9 @@
 <script setup>
+    import { getCurrentInstance } from 'vue'
+
+    const { proxy } = getCurrentInstance()
+    const $t = proxy.$t
+    
     const props = defineProps({
         notifiesRef: Object,
         employees: {
@@ -21,22 +26,22 @@
             const text = await response.text();
 
             if (text === '"ok"') {
-                props.notifiesRef?.triggerAlert('success', `Employee ${employee.firstname} ${employee.lastname} promoted successfully!`);
+                props.notifiesRef?.triggerAlert('success', $t('notifies.employees.promote.success', { name: `${employee.firstname} ${employee.lastname}` }));
             } else if (text === '"self_promote"') {
-                props.notifiesRef?.triggerAlert('warning', `You cannot promote yourself.`);
+                props.notifiesRef?.triggerAlert('warning', $t('notifies.employees.promote.self_promote'));
             } else if (text === '"highest_grade"') {
-                props.notifiesRef?.triggerAlert('warning', `Employee ${employee.firstname} ${employee.lastname} is already at the highest grade.`);
+                props.notifiesRef?.triggerAlert('warning', $t('notifies.employees.promote.highest_grade', { name: `${employee.firstname} ${employee.lastname}` }));
             } else if (text === '"not_same_job"') {
-                props.notifiesRef?.triggerAlert('warning', `Employee ${employee.firstname} ${employee.lastname} is not in the same job.`);
+                props.notifiesRef?.triggerAlert('warning', $t('notifies.employees.promote.not_same_job', { name: `${employee.firstname} ${employee.lastname}` }));
             } else if (text === '"error"') {
-                props.notifiesRef?.triggerAlert('danger', 'An error occurred while promoting the employee.');
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.promote.error'));
             } else if (text === '"unknown_error"') {
-                props.notifiesRef?.triggerAlert('danger', 'An unknown error occurred while promoting the employee.');
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.promote.unknown_error'));
             } else {
-                props.notifiesRef?.triggerAlert('danger', 'An unexpected response was received while promoting the employee.');
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.promote.unknown'));
             }
         } catch (error) {
-            props.notifiesRef?.triggerAlert('danger', `An error occurred in NUI while promoting the employee: ${error.message}`);
+            props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.promote.nui_error', { error: error.message }));
         }
     }
 
@@ -54,22 +59,22 @@
             const text = await response.text();
 
             if (text === '"ok"') {
-                props.notifiesRef?.triggerAlert('success', `Employee ${employee.firstname} ${employee.lastname} demoted successfully!`);
+                props.notifiesRef?.triggerAlert('success', $t('notifies.employees.demote.success', { name: `${employee.firstname} ${employee.lastname}` }));
             } else if (text === '"self_demote"') {
-                props.notifiesRef?.triggerAlert('warning', `You cannot demote yourself.`);
+                props.notifiesRef?.triggerAlert('warning', $t('notifies.employees.demote.self_demote'));
             } else if (text === '"lowest_grade"') {
-                props.notifiesRef?.triggerAlert('warning', `Employee ${employee.firstname} ${employee.lastname} is already at the lowest grade.`);
+                props.notifiesRef?.triggerAlert('warning', $t('notifies.employees.demote.lowest_grade', { name: `${employee.firstname} ${employee.lastname}` }));
             } else if (text === '"not_same_job"') {
-                props.notifiesRef?.triggerAlert('warning', `Employee ${employee.firstname} ${employee.lastname} is not in the same job.`);
+                props.notifiesRef?.triggerAlert('warning', $t('notifies.employees.demote.not_same_job', { name: `${employee.firstname} ${employee.lastname}` }));
             } else if (text === '"error"') {
-                props.notifiesRef?.triggerAlert('danger', 'An error occurred while demoting the employee.');
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.demote.error'));
             } else if (text === '"unknown_error"') {
-                props.notifiesRef?.triggerAlert('danger', 'An unknown error occurred while demoting the employee.');
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.demote.unknown_error'));
             } else {
-                props.notifiesRef?.triggerAlert('danger', 'An unexpected response was received while demoting the employee.');
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.demote.unknown'));
             }
         } catch (error) {
-            props.notifiesRef?.triggerAlert('danger', `An error occurred in NUI while demoting the employee: ${error.message}`);
+            props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.demote.nui_error', { error: error.message }));
         }
     }
 
@@ -87,20 +92,20 @@
             const text = await response.text();
 
             if (text === '"ok"') {
-                props.notifiesRef?.triggerAlert('success', `Employee ${employee.firstname} ${employee.lastname} fired successfully!`);
+                props.notifiesRef?.triggerAlert('success', $t('notifies.employees.fire.success', { name: `${employee.firstname} ${employee.lastname}` }));
             } else if (text === '"self_fire"') {
-                props.notifiesRef?.triggerAlert('warning', `You cannot fire yourself.`);
+                props.notifiesRef?.triggerAlert('warning', $t('notifies.employees.fire.self_fire'));
             } else if (text === '"not_same_job"') {
-                props.notifiesRef?.triggerAlert('warning', `Employee ${employee.firstname} ${employee.lastname} is not in the same job.`);
+                props.notifiesRef?.triggerAlert('warning', $t('notifies.employees.fire.not_same_job', { name: `${employee.firstname} ${employee.lastname}` }));
             } else if (text === '"error"') {
-                props.notifiesRef?.triggerAlert('danger', 'An error occurred while firing the employee.');
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.fire.error'));
             } else if (text === '"unknown_error"') {
-                props.notifiesRef?.triggerAlert('danger', 'An unknown error occurred while firing the employee.');
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.fire.unknown_error'));
             } else {
-                props.notifiesRef?.triggerAlert('danger', 'An unexpected response was received while firing the employee.');
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.fire.unknown'));
             }
         } catch (error) {
-            props.notifiesRef?.triggerAlert('danger', `An error occurred in NUI while firing the employee: ${error.message}`);
+            props.notifiesRef?.triggerAlert('danger', $t('notifies.employees.fire.nui_error', { error: error.message }));
         }
     }
 </script>
