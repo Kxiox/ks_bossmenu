@@ -15,7 +15,8 @@
         "last_actions": "Letzte Aktionen",
         "table_action": "Aktion",
         "table_employee": "Mitarbeiter",
-        "table_time": "Zeit"
+        "table_time": "Zeit",
+        "all_actions": "Alle Aktionen"
     },
 
     "employees": {
@@ -41,7 +42,8 @@
         "last_transactions": "Letzte Transaktionen",
         "table_action": "Aktion",
         "table_employee": "Mitarbeiter",
-        "table_amount": "Betrag"
+        "table_amount": "Betrag",
+        "all_transactions": "Alle Transaktionen"
     },
 
     "buttons": {
@@ -64,7 +66,7 @@
                 "error": "Beim Verarbeiten der Einzahlung ist ein Fehler aufgetreten!",
                 "unknown_error": "Ein unbekannter Fehler ist bei der Einzahlung aufgetreten!",
                 "unknown": "Eine unerwartete Antwort wurde beim Einzahlen erhalten!",
-                "nui_error": "Ein Fehler ist im NUI beim Einzahlen aufgetreten: {error}",
+                "nui_error": "Ein Fehler ist in NUI beim Einzahlen aufgetreten: {error}",
                 "invalid_amount": "Bitte gib einen gültigen Betrag ein!"
             },
 
@@ -74,7 +76,7 @@
                 "error": "Beim Verarbeiten der Auszahlung ist ein Fehler aufgetreten!",
                 "unknown_error": "Ein unbekannter Fehler ist bei der Auszahlung aufgetreten!",
                 "unknown": "Eine unerwartete Antwort wurde beim Abheben erhalten!",
-                "nui_error": "Ein Fehler ist im NUI beim Abheben aufgetreten: {error}",
+                "nui_error": "Ein Fehler ist in NUI beim Abheben aufgetreten: {error}",
                 "invalid_amount": "Bitte gib einen gültigen Betrag ein!"
             }
         },
@@ -88,7 +90,7 @@
                 "error": "Beim Befördern des Mitarbeiters ist ein Fehler aufgetreten.",
                 "unknown_error": "Ein unbekannter Fehler ist beim Befördern des Mitarbeiters aufgetreten.",
                 "unknown": "Eine unerwartete Antwort wurde beim Befördern des Mitarbeiters erhalten.",
-                "nui_error": "Ein Fehler ist im NUI beim Befördern des Mitarbeiters aufgetreten: {error}"
+                "nui_error": "Ein Fehler ist in NUI beim Befördern des Mitarbeiters aufgetreten: {error}"
             },
             "demote": {
                 "success": "Mitarbeiter {name} erfolgreich degradiert!",
@@ -98,7 +100,7 @@
                 "error": "Beim Degradieren des Mitarbeiters ist ein Fehler aufgetreten.",
                 "unknown_error": "Ein unbekannter Fehler ist beim Degradieren des Mitarbeiters aufgetreten.",
                 "unknown": "Eine unerwartete Antwort wurde beim Degradieren des Mitarbeiters erhalten.",
-                "nui_error": "Ein Fehler ist im NUI beim Degradieren des Mitarbeiters aufgetreten: {error}"
+                "nui_error": "Ein Fehler ist in NUI beim Degradieren des Mitarbeiters aufgetreten: {error}"
             },
             "fire": {
                 "success": "Mitarbeiter {name} erfolgreich entlassen!",
@@ -107,13 +109,13 @@
                 "error": "Beim Entlassen des Mitarbeiters ist ein Fehler aufgetreten.",
                 "unknown_error": "Ein unbekannter Fehler ist beim Entlassen des Mitarbeiters aufgetreten.",
                 "unknown": "Eine unerwartete Antwort wurde beim Entlassen des Mitarbeiters erhalten.",
-                "nui_error": "Ein Fehler ist im NUI beim Entlassen des Mitarbeiters aufgetreten: {error}"
+                "nui_error": "Ein Fehler ist in NUI beim Entlassen des Mitarbeiters aufgetreten: {error}"
             },
             "add": {
                 "success": "Mitarbeiter mit der ID {id} erfolgreich hinzugefügt!",
                 "failed": "Spieler ist nicht online oder bereits in diesem Job!",
                 "invalid_id": "Bitte gib eine ID über 0 ein!",
-                "nui_error": "Ein Fehler ist im NUI beim Hinzufügen des Mitarbeiters aufgetreten: {error}"
+                "nui_error": "Ein Fehler ist in NUI beim Hinzufügen des Mitarbeiters aufgetreten: {error}"
             }
         },
 
@@ -123,7 +125,7 @@
                 "already_set": "Das Gehalt ist bereits auf diesen Wert gesetzt!",
                 "failed": "Gehalt konnte nicht geändert werden!",
                 "invalid_salary": "Bitte gib ein gültiges Gehalt ein!",
-                "nui_error": "Ein Fehler ist im NUI beim Ändern des Gehalts aufgetreten: {error}"
+                "nui_error": "Ein Fehler ist in NUI beim Ändern des Gehalts aufgetreten: {error}"
             }
         }
     }

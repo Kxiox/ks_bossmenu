@@ -137,8 +137,10 @@
         
         changeColorMode(event.data.color)
         const logo = document.querySelector('.logo');
-        if (logo && event.data.logo) {
+        if (event.data.logo.startsWith('http://') || event.data.logo.startsWith('https://')) {
           logo.src = event.data.logo;
+        } else {
+          logo.src = `./img/${event.data.logo}`;
         }
         
       } else if (event.data.action === 'getEmployeesList') {

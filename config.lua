@@ -1,18 +1,16 @@
 Config = {}
 
-Config.Debug = false -- set to true to enable debug messages in console
-
-Config.Locale = GetConvar('esx:locale', 'en') -- en, de or create your own locale file in locales
+Config.Locale = 'de' -- en, de or create your own locale file in locales and html/locales
 
 Config.Currency = '$' -- currency symbol, e.g. $, €, £ etc.
 
-Config.Timestamp = 'us' -- us or de
+Config.Timestamp = 'de' -- us, de, iso, uk or fr
 
 Config.UnemployedJobName = 'unemployed' -- job name of the unemployed job, used for employees wich get fired
 
 Config.Jobs = {
     ['police'] = {
-        logo = 'https://iili.io/Hg0h0Ux.png', -- url //TODO add files support
+        logo = 'police.png', -- url or file in html/img/
         color = 'blue', -- light, dark, blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan, white, gray
         grades = { 4 },
         marker = {

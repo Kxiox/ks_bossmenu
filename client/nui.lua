@@ -229,3 +229,17 @@ function getCurrency()
         currency = Config.Currency,
     })
 end
+
+function setLocale()
+    SendNUIMessage({
+        action = 'setLocale',
+        locale = Config.Locale,
+    })
+end
+
+function setTimestampFormat()
+    SendNUIMessage({
+        action = 'setTimestampFormat',
+        format = Config.Timestamp,
+    })
+end

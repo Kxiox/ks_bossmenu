@@ -24,15 +24,15 @@ server_scripts {
     'locales/*.lua'
 }
 
--- ui_page 'html/index.html'
-ui_page 'http://localhost:5173/'
+ui_page 'html/index.html'
+-- ui_page 'http://localhost:5173/'
 
 files {
     'html/index.html',
     'html/assets/*.css',
     'html/assets/*.js',
     'html/assets/*.png',
-    'html/favicon.ico',
+    'html/img/*.png',
 }
 
 dependencies {

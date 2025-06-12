@@ -95,7 +95,7 @@
             </button>
         </h4>
 
-        <div style="overflow-x: auto; overflow-y: auto; max-height: 21vh; max-width: 100%; min-width: 100%;">
+        <div style="overflow-x: auto; overflow-y: auto; max-height: 20vh; max-width: 100%; min-width: 100%;">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -135,9 +135,7 @@
                             <span style="margin-left: 0.5rem;">{{ action.actionLabel }}</span>
                         </td>
                         <td>{{ action.employee }}</td>
-                        <td>{{ new Date(action.time * 1000).toLocaleString('en-US', {
-                            day: '2-digit', month: 'short',
-                            year: 'numeric', hour: '2-digit', minute: '2-digit' }) }}</td>
+                        <td>{{ $formatTimestamp(action.time) }}</td>
                     </tr>
                 </tbody>
             </table>

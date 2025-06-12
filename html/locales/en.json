@@ -15,7 +15,8 @@
         "last_actions": "Last Actions",
         "table_action": "Action",
         "table_employee": "Employee",
-        "table_time": "Time"
+        "table_time": "Time",
+        "all_actions": "All Actions"
     },
 
     "employees": {
@@ -41,7 +42,8 @@
         "last_transactions": "Last transactions",
         "table_action": "Action",
         "table_employee": "Employee",
-        "table_amount": "Amount"
+        "table_amount": "Amount",
+        "all_transactions": "All Transactions"
     },
 
     "buttons": {

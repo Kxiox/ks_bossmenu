@@ -133,7 +133,7 @@
                 </button>
             </h4>
 
-            <div style="overflow-x: auto; overflow-y: auto; max-height: 24vh; max-width: 100%; min-width: 100%;">
+            <div style="overflow-x: auto; overflow-y: auto; max-height: 23vh; max-width: 100%; min-width: 100%;">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>

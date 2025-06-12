@@ -60,7 +60,7 @@
                         <span style="margin-left: 0.5rem;">{{ action.actionLabel }}</span>
                     </td>
                     <td>{{ action.employee }}</td>
-                    <td>{{ new Date(action.time * 1000).toLocaleString('en-US', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) }}</td>
+                    <td>{{ $formatTimestamp(action.time) }}</td>
                 </tr>
             </tbody>
         </table>

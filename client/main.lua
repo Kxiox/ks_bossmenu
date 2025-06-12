@@ -5,10 +5,10 @@ Citizen.CreateThread(function ()
         Citizen.Wait(100)
     end
 
-    SendNUIMessage({
-        action = 'setLocale',
-        locale = Config.Locale,
-    })
+    Wait(3000)
+
+    setLocale()
+    setTimestampFormat()
 
     while true do
         local sleep = 1000
