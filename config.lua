@@ -1,17 +1,17 @@
 Config = {}
 
-Config.Locale = 'de' -- en, de or create your own locale file in locales and html/locales
+Config.Locale = 'en' -- en, de or create your own locale file in locales and html/locales
 
 Config.Currency = '$' -- currency symbol, e.g. $, €, £ etc.
 
-Config.Timestamp = 'de' -- us, de, iso, uk or fr
+Config.Timestamp = 'us' -- us, de, iso, uk or fr
 
 Config.UnemployedJobName = 'unemployed' -- job name of the unemployed job, used for employees wich get fired
 
 Config.Jobs = {
     ['police'] = {
         logo = 'police.png', -- url or file in html/img/
-        color = 'blue', -- light, dark, blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan, white, gray
+        color = 'blue', -- light, dark, blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan
         grades = { 4 },
         marker = {
             type = 1,
