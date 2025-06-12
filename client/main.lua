@@ -5,6 +5,11 @@ Citizen.CreateThread(function ()
         Citizen.Wait(100)
     end
 
+    SendNUIMessage({
+        action = 'setLocale',
+        locale = Config.Locale,
+    })
+
     while true do
         local sleep = 1000
         

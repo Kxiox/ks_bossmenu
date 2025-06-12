@@ -12,7 +12,7 @@ Config.UnemployedJobName = 'unemployed' -- job name of the unemployed job, used 
 
 Config.Jobs = {
     ['police'] = {
-        logo = 'https://iili.io/Hg0h0Ux.png', -- image.png or url
+        logo = 'https://iili.io/Hg0h0Ux.png', -- url //TODO add files support
         color = 'blue', -- light, dark, blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan, white, gray
         grades = { 4 },
         marker = {

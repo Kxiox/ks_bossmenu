@@ -32,6 +32,8 @@
   const fadeActions = ref(false)
   const notifiesRef = ref(null)
 
+  const devMode = ref(false) // Set to true to show the color mode dropdown
+
   function showActions() {
     fadeHome.value = false
     setTimeout(() => {
@@ -169,7 +171,7 @@
 
   <NotifiesComponent :currency="currency" ref="notifiesRef"/>
 
-  <div class="dropdown">
+  <div class="dropdown" v-if="devMode">
     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       Color mode
     </button>
@@ -219,11 +221,11 @@
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
           tabindex="0">
           <div v-if="!showAllActions" :class="['fade', { show: fadeHome }]">
-            <HomeComponent :actions="actionsList" :employees="employeesAmount" :onDuty="onDuty" :account="account"
+            <HomeComponent :currency="currency" :actions="actionsList" :employees="employeesAmount" :onDuty="onDuty" :account="account"
               @see-all-actions="showActions" />
           </div>
           <div v-else :class="['fade', { show: fadeActions }]">
-            <ActionsComponent :actions="actionsList" @back-to-home="showHome" />
+            <ActionsComponent :currency="currency" :actions="actionsList" @back-to-home="showHome" />
           </div>
         </div>
         <div class="tab-pane fade" id="v-pills-employees" role="tabpanel" aria-labelledby="v-pills-employees-tab"

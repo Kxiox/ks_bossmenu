@@ -77,12 +77,32 @@ ESX.RegisterServerCallback('ks_bossmenu:getActionsList', function(source, cb, jo
         local actions = {}
 
         for _, row in ipairs(result) do
+            local data = row.data
+            if type(data) == "string" then
+                data = json.decode(data)
+            end
+
+            if row.action == 'change_salary' then
+                newAction = _U('action_change_salary', data.grade, string.gsub(ESX.Math.GroupDigits(data.salary), ",", ".") .. Config.Currency)
+            elseif row.action == 'add_employee' then
+                newAction = _U('action_add_employee', data.target)
+            elseif row.action == 'fire_employee' then
+                newAction = _U('action_fire_employee', data.target)
+            elseif row.action == 'promote_employee' then
+                newAction = _U('action_promote_employee', data.target, data.new_grade)
+            elseif row.action == 'demote_employee' then
+                newAction = _U('action_demote_employee', data.target, data.new_grade)
+            else
+                newAction = row.action
+            end
+
             table.insert(actions, {
                 id = row.id,
                 action = row.action,
+                actionLabel = newAction,
                 employee = row.employee,
                 time = row.time,
-                data = row.data,
+                data = data,
             })
         end
 
@@ -97,9 +117,18 @@ ESX.RegisterServerCallback('ks_bossmenu:getTransactionsList', function(source, c
         local transactions = {}
 
         for _, row in ipairs(result) do
+            if row.action == 'withdraw' then
+                newAction = _U('transaction_withdraw')
+            elseif row.action   == 'deposit' then
+                newAction = _U('transaction_deposit')
+            else
+                newAction = row.action
+            end
+
             table.insert(transactions, {
                 id = row.id,
                 action = row.action,
+                actionLabel = newAction,
                 employee = row.employee,
                 amount = string.gsub(ESX.Math.GroupDigits(row.amount), ",", ".") .. Config.Currency,
                 time = row.time,

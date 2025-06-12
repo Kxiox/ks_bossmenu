@@ -18,6 +18,11 @@
         actions: {
             type: Array,
             default: () => []
+        },
+
+        currency: {
+            type: String,
+            default: null
         }
     });
 </script>
@@ -90,24 +95,53 @@
             </button>
         </h4>
 
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th><b>#</b></th>
-                    <th><b>{{ $t('home.table_action') }}</b></th>
-                    <th><b>{{ $t('home.table_employee') }}</b></th>
-                    <th><b>{{ $t('home.table_time') }}</b></th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                <tr v-for="(action, i) in actions.slice().sort((a, b) => b.id - a.id).slice(0, 4)" :key="i">
-                    <td>{{ action.id }}</td>
-                    <td>{{ action.action }}</td>
-                    <td>{{ action.employee }}</td>
-                    <td>{{ new Date(action.time * 1000).toLocaleString('en-US', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div style="overflow-x: auto; overflow-y: auto; max-height: 21vh; max-width: 100%; min-width: 100%;">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th><b>#</b></th>
+                        <th><b>{{ $t('home.table_action') }}</b></th>
+                        <th><b>{{ $t('home.table_employee') }}</b></th>
+                        <th><b>{{ $t('home.table_time') }}</b></th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr v-for="(action, i) in actions.slice().sort((a, b) => b.id - a.id).slice(0, 4)" :key="i">
+                        <td>{{ action.id }}</td>
+                        <td>
+                            <span class="icon-bg" v-if="action.action === 'change_salary'">
+                                <i v-if="currency === '$'" class="bi bi-currency-dollar text-success"></i>
+                                <i v-else-if="currency === '€'" class="bi bi-currency-euro text-success"></i>
+                                <i v-else-if="currency === '£'" class="bi bi-currency-pound text-success"></i>
+                                <i v-else-if="currency === '¥'" class="bi bi-currency-yen text-success"></i>
+                                <i v-else-if="currency === '₹'" class="bi bi-currency-rupee text-success"></i>
+                                <i v-else class="bi bi-cash text-success"></i>
+                            </span>
+                            <span class="icon-bg" v-else-if="action.action === 'add_employee'">
+                                <i class="bi bi-person-plus text-success"></i>
+                            </span>
+                            <span class="icon-bg" v-else-if="action.action === 'fire_employee'">
+                                <i class="bi bi-person-x text-danger"></i>
+                            </span>
+                            <span class="icon-bg" v-else-if="action.action === 'promote_employee'">
+                                <i class="bi bi-arrow-up-circle text-primary"></i>
+                            </span>
+                            <span class="icon-bg" v-else-if="action.action === 'demote_employee'">
+                                <i class="bi bi-arrow-down-circle text-warning"></i>
+                            </span>
+                            <span class="icon-bg" v-else>
+                                <i class="bi bi-gear text-secondary"></i>
+                            </span>
+                            <span style="margin-left: 0.5rem;">{{ action.actionLabel }}</span>
+                        </td>
+                        <td>{{ action.employee }}</td>
+                        <td>{{ new Date(action.time * 1000).toLocaleString('en-US', {
+                            day: '2-digit', month: 'short',
+                            year: 'numeric', hour: '2-digit', minute: '2-digit' }) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -160,5 +194,40 @@
 
     tbody {
         color: #fff;
+    }
+
+    .icon-bg {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.8rem;
+        height: 1.8rem;
+        border-radius: 0.75rem;
+        background: linear-gradient(135deg, rgba(15, 15, 15, 0.3) 0%, rgba(122, 122, 122, 0.3) 100%);
+        margin-right: 0.75rem;
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+        transition: background 0.2s, box-shadow 0.2s;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08), 0 1.5px 4px 0 rgba(255, 255, 255, 0.10) inset;
+        vertical-align: middle;
+
+        i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            font-size: 1rem;
+        }
+    }
+
+    ::-webkit-scrollbar {
+        width: 0.2rem;
+        height: 0.5rem;
+    }
+        
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-400);
+        border-radius: 10px;
     }
 </style>

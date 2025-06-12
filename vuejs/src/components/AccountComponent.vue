@@ -118,7 +118,8 @@
                     <i v-else class="bi bi-cash"></i>
                     <span v-else>{{ currency }}</span>
                 </span>
-                <input id="amount" type="number" class="form-control" :placeholder="$t('account.placeholder')" aria-label="Amount" min="1">
+                <input id="amount" type="number" class="form-control" :placeholder="$t('account.placeholder')"
+                    aria-label="Amount" min="1">
                 <span class="input-group-text">.00</span>
 
                 <button class="btn btn-primary" @click="deposit()">{{ $t('buttons.deposit') }}</button>
@@ -127,11 +128,12 @@
 
             <h4 class="mt-3">{{ $t('account.last_transactions') }}
                 <button class="btn btn-primary" @click="$emit('see-all-transactions')"
-                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">{{ $t('buttons.see_all') }}
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">{{
+                    $t('buttons.see_all') }}
                 </button>
             </h4>
 
-            <div>
+            <div style="overflow-x: auto; overflow-y: auto; max-height: 24vh; max-width: 100%; min-width: 100%;">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -145,7 +147,28 @@
                         <tr v-for="(transaction, i) in [...transactions].sort((a, b) => b.id - a.id).slice(0, 5)"
                             :key="i">
                             <td>{{ transaction.id }}</td>
-                            <td>{{ transaction.action }}</td>
+                            <td>
+                                <span class="icon-bg" v-if="transaction.action === 'withdraw'">
+                                    <i v-if="currency === '$'" class="bi bi-currency-dollar text-danger"></i>
+                                    <i v-else-if="currency === '€'" class="bi bi-currency-euro text-danger"></i>
+                                    <i v-else-if="currency === '£'" class="bi bi-currency-pound text-danger"></i>
+                                    <i v-else-if="currency === '¥'" class="bi bi-currency-yen text-danger"></i>
+                                    <i v-else-if="currency === '₹'" class="bi bi-currency-rupee text-danger"></i>
+                                    <i v-else class="bi bi-cash text-danger"></i>
+                                </span>
+                                <span class="icon-bg" v-else-if="transaction.action === 'deposit'">
+                                    <i v-if="currency === '$'" class="bi bi-currency-dollar text-success"></i>
+                                    <i v-else-if="currency === '€'" class="bi bi-currency-euro text-success"></i>
+                                    <i v-else-if="currency === '£'" class="bi bi-currency-pound text-success"></i>
+                                    <i v-else-if="currency === '¥'" class="bi bi-currency-yen text-success"></i>
+                                    <i v-else-if="currency === '₹'" class="bi bi-currency-rupee text-success"></i>
+                                    <i v-else class="bi bi-cash text-success"></i>
+                                </span>
+                                <span class="icon-bg" v-else>
+                                    <i class="bi bi-gear text-secondary"></i>
+                                </span>
+                                <span style="margin-left: 0.5rem;">{{ transaction.actionLabel }}</span>
+                            </td>
                             <td>{{ transaction.employee }}</td>
                             <td>{{ transaction.amount }}</td>
                         </tr>
@@ -209,12 +232,37 @@
     }
 
     ::-webkit-scrollbar {
-        width: 0.5rem;
+        width: 0.2rem;
         height: 0.5rem;
     }
 
     ::-webkit-scrollbar-thumb {
         background: var(--color-400);
         border-radius: 10px;
+    }
+
+    .icon-bg {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.8rem;
+        height: 1.8rem;
+        border-radius: 0.75rem;
+        background: linear-gradient(135deg, rgba(15, 15, 15, 0.3) 0%, rgba(122, 122, 122, 0.3) 100%);
+        margin-right: 0.75rem;
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+        transition: background 0.2s, box-shadow 0.2s;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08), 0 1.5px 4px 0 rgba(255, 255, 255, 0.10) inset;
+        vertical-align: middle;
+
+        i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            font-size: 1rem;
+        }
     }
 </style>
