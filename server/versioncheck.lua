@@ -1,5 +1,5 @@
 Citizen.CreateThread(function()
-    updatePath = "/Kxiox/ks_bossmenu"
+    updatePath = "/Kxiox/ks_bossmenu_testv"
     resourceName = "ks_bossmenu ("..GetCurrentResourceName()..")"
 
     local RED = "^1"
@@ -8,21 +8,40 @@ Citizen.CreateThread(function()
     local RESET = "^7"
 
     function checkVersion(err, responseText, headers)
-        curVersion = LoadResourceFile(GetCurrentResourceName(), "version")
+        local curVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
 
         if curVersion and string.find(curVersion, "dev") then
-            print("\n"..YELLOW..resourceName.." is running a development version ("..curVersion.."). Version check skipped."..RESET)
+            print(YELLOW..resourceName.." is running a development version ("..curVersion.."). Skipping version check."..RESET)
             return
         end
 
-        if curVersion ~= responseText and tonumber(curVersion) < tonumber(responseText) then
+        local function splitVersion(version)
+            local t = {}
+            for num in string.gmatch(version or "", "%d+") do
+                table.insert(t, tonumber(num))
+            end
+            return t
+        end
+
+        local function compareVersions(v1, v2)
+            local a, b = splitVersion(v1), splitVersion(v2)
+            for i = 1, math.max(#a, #b) do
+                local n1, n2 = a[i] or 0, b[i] or 0
+                if n1 < n2 then return -1 end
+                if n1 > n2 then return 1 end
+            end
+            return 0
+        end
+
+        local cmp = compareVersions(curVersion, responseText)
+        if cmp < 0 then
+            print(RED.."###############################"..RESET)
+            print("\n"..RED..resourceName.." is outdated. Latest version: "..responseText.."\nCurrent version: "..curVersion.."\nPlease update from: https://github.com"..updatePath..RESET)
             print("\n"..RED.."###############################"..RESET)
-            print("\n"..RED..resourceName.." is outdated, should be:\n"..responseText.."is:\n"..curVersion.."\nplease update it from https://github.com"..updatePath..""..RESET)
-            print("\n"..RED.."###############################"..RESET)
-        elseif tonumber(curVersion) > tonumber(responseText) then
-            print(YELLOW.."You somehow skipped a few versions of "..resourceName.." or the git went offline, if it's still online i advise you to update ( or downgrade? )"..RESET)
+        elseif cmp > 0 then
+            print(YELLOW.."You are running a newer version of "..resourceName..". If the GitHub repository is still online, consider updating or downgrading as needed."..RESET)
         else
-            print("\n"..GREEN..resourceName.." is up to date, have fun!"..RESET)
+            print(GREEN..resourceName.." is up to date. Enjoy!"..RESET)
         end
     end
 
