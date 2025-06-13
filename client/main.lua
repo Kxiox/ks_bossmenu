@@ -11,7 +11,7 @@ Citizen.CreateThread(function ()
     setTimestampFormat()
 
     while true do
-        local sleep = 1000
+        local sleep = 3000
         
         for k, v in pairs(Config.Jobs) do
             if ESX.PlayerData.job.name == k and tableContains(v.grades, ESX.PlayerData.job.grade) then
