@@ -7,7 +7,7 @@
 ]]
 
 Citizen.CreateThread(function()
-    updatePath = "/Kxiox/ks_bossmenu_testv"
+    updatePath = "/Kxiox/ks_versions"
     resourceName = "ks_bossmenu ("..GetCurrentResourceName()..")"
 
     local RED = "^1"
@@ -53,5 +53,5 @@ Citizen.CreateThread(function()
         end
     end
 
-    PerformHttpRequest("https://raw.githubusercontent.com"..updatePath.."/master/version", checkVersion, "GET")
+    PerformHttpRequest("https://raw.githubusercontent.com"..updatePath.."/master/ks_bossmenu", checkVersion, "GET")
 end)
