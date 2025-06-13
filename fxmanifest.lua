@@ -39,5 +39,3 @@ dependencies {
     'es_extended',
     'oxmysql',
 }
-
--- // TODO version checker erstellen
