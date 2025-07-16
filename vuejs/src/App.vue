@@ -13,6 +13,7 @@
   import EmployeesComponent from './components/EmployeesComponent.vue'
   import SalariesComponent from './components/SalariesComponent.vue'
   import AccountComponent from './components/AccountComponent.vue'
+  import BonusComponent from './components/BonusComponent.vue'
   import TransactionsComponent from './components/TransactionsComponent.vue'
   import ModalsComponent from './components/ModalsComponent.vue'
   import NotifiesComponent from './components/NotifiesComponent.vue'
@@ -32,7 +33,7 @@
   const fadeActions = ref(false)
   const notifiesRef = ref(null)
 
-  const devMode = ref(false) // Set to true to show the color mode dropdown
+  const devMode = ref(true) // Set to true to show the color mode dropdown
 
   function showActions() {
     fadeHome.value = false
@@ -161,6 +162,8 @@
       }
     })
   })
+
+  openNUI()
 </script>
 
 
@@ -217,8 +220,13 @@
           aria-selected="false">
           <i class="bi bi-bank me-2"></i> {{ $t('pages.account') }}
         </button>
+        <button class="nav-link text-start" id="v-pills-bonus-tab" data-bs-toggle="pill"
+          data-bs-target="#v-pills-bonus" type="button" role="tab" aria-controls="v-pills-bonus"
+          aria-selected="false">
+          <i class="bi bi-gift-fill"></i> {{ $t('pages.bonus') }} <span class="badge">New</span>
+        </button>
       </div>
-      <!-- <div class="vr"></div> -->
+
       <div class="tab-content" id="v-pills-tabContent">
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
           tabindex="0">
@@ -253,6 +261,11 @@
           <div v-else :class="['fade', { show: fadeTransactions }]">
             <TransactionsComponent :transactions="transactionsList" @back-to-account="showAccount" />
           </div>
+        </div>
+
+        <div class="tab-pane fade" id="v-pills-bonus" role="tabpanel" aria-labelledby="v-pills-bonus-tab"
+          tabindex="0">
+          <BonusComponent :notifiesRef="notifiesRef" />
         </div>
       </div>
     </div>
@@ -352,5 +365,9 @@
         right: 20px;
         color: white;
     }
+  }
+
+  .badge {
+    background-color: var(--color-500);
   }
 </style>

@@ -3,7 +3,8 @@
         "home": "Startseite",
         "employees": "Mitarbeiter",
         "salaries": "Gehälter",
-        "account": "Konto"
+        "account": "Konto",
+        "bonus": "Bonus"
     },
 
     "home": {
@@ -44,6 +45,10 @@
         "table_employee": "Mitarbeiter",
         "table_amount": "Betrag",
         "all_transactions": "Alle Transaktionen"
+    },
+
+    "bonus": {
+        "only_online": "Only online"
     },
 
     "buttons": {

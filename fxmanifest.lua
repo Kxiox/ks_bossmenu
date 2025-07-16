@@ -12,7 +12,7 @@ game 'gta5'
 author 'Kxiox Scripts'
 description 'Bossmenu for ESX'
 lua_54 'yes'
-version 'dev-1.0.0'
+version 'dev-1.0.1'
 
 shared_scripts {
     '@es_extended/imports.lua',
@@ -32,8 +32,8 @@ server_scripts {
     'locales/*.lua'
 }
 
-ui_page 'html/index.html'
--- ui_page 'http://localhost:5173/'
+-- ui_page 'html/index.html'
+ui_page 'http://localhost:5173/'
 
 files {
     'html/index.html',
