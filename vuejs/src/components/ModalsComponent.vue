@@ -101,8 +101,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t('buttons.cancel') }}</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-second" data-bs-dismiss="modal">{{ $t('buttons.cancel') }}</button>
+                    <button type="button" class="btn btn-main" data-bs-dismiss="modal"
                         @click="addEmployee()">{{ $t('buttons.add') }}</button>
                 </div>
             </div>
@@ -130,8 +130,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t('buttons.cancel') }}</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-second" data-bs-dismiss="modal">{{ $t('buttons.cancel') }}</button>
+                    <button type="button" class="btn btn-main" data-bs-dismiss="modal"
                         @click="changeSalary()">{{ $t('buttons.change') }}</button>
                 </div>
             </div>
@@ -164,20 +164,47 @@
         // border: none;
     }
 
-    .btn-primary {
-        background-color: var(--color-500);
-        border: none !important;
-        box-shadow: none !important;
+    .btn-main {
+        background: var(--color-700);
+        border: 1px solid var(--color-600);
+        color: #fff;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+
+        i {
+            font-size: 0.9rem;
+        }
 
         &:hover {
-            background-color: var(--color-600);
+            background: var(--color-600);
+            border-color: var(--color-500);
+            color: #ddd;
         }
 
         &:active {
-            background-color: var(--color-700) !important;
-            color: #fff !important;
-            border: none !important;
-            box-shadow: none !important;
+            background: var(--color-500);
+        }
+    }
+
+    .btn-second {
+        background: #686b6d;
+        border: 1px solid #8b8e92;
+        color: #fff;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+
+        i {
+            font-size: 0.9rem;
+        }
+
+        &:hover {
+            background: #8b8e92;
+            border-color: #aeb2b6;
+            color: #ddd;
+        }
+
+        &:active {
+            background: #aeb2b6;
         }
     }
 </style>

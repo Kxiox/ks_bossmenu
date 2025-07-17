@@ -114,7 +114,7 @@
         
     }
 
-    .btn-primary {
+    .btn-main {
         background-color: var(--color-500);
         border: none !important;
         box-shadow: none !important;

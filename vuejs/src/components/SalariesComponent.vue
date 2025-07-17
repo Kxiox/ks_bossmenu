@@ -34,7 +34,7 @@
                     <td>{{ salary.grade_label }}</td>
                     <td>{{ salary.salary }}</td>
                     <td class="buttons">
-                        <button class="btn btn-sm btn-primary" @click="openSalaryModal(salary)">{{ $t('buttons.change') }}</button>
+                        <button class="btn btn-sm btn-main" @click="openSalaryModal(salary)">{{ $t('buttons.change') }}</button>
                     </td>
                 </tr>
             </tbody>
@@ -66,23 +66,28 @@
             display: flex;
             gap: 10px;
         }
-
-        .btn-primary {
-            background-color: var(--color-500);
-            border: none !important;
-            box-shadow: none !important;
-
-            &:hover {
-                background-color: var(--color-600);
-            }
-
-            &:active {
-                background-color: var(--color-700) !important;
-                color: #fff !important;
-                border: none !important;
-                box-shadow: none !important;
-            }
-        }
-        
     }
+
+    .btn-main {
+        background: var(--color-700);
+        border: 1px solid var(--color-600);
+        color: #fff;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+
+        i {
+            font-size: 0.9rem;
+        }
+
+        &:hover {
+            background: var(--color-600);
+            border-color: var(--color-500);
+            color: #ddd;
+        }
+
+        &:active {
+            background: var(--color-500);
+        }
+    }
+
 </style>

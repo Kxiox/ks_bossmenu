@@ -88,7 +88,7 @@
 
         <h4 class="mt-3">
             {{ $t('home.last_actions') }}
-            <button class="btn btn-primary"
+            <button class="btn btn-main"
                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;"
                 @click="$emit('see-all-actions')">
                 {{ $t('buttons.see_all') }}
@@ -173,23 +173,6 @@
         
     }
 
-    .btn-primary {
-        background-color: var(--color-500);
-        border: none !important;
-        box-shadow: none !important;
-
-        &:hover {
-            background-color: var(--color-600);
-        }
-
-        &:active {
-            background-color: var(--color-700) !important;
-            color: #fff !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-    }
-
     tbody {
         color: #fff;
     }
@@ -227,5 +210,27 @@
     ::-webkit-scrollbar-thumb {
         background: var(--color-400);
         border-radius: 10px;
+    }
+
+    .btn-main {
+        background: var(--color-700);
+        border: 1px solid var(--color-600);
+        color: #fff;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+
+        i {
+            font-size: 0.9rem;
+        }
+
+        &:hover {
+            background: var(--color-600);
+            border-color: var(--color-500);
+            color: #ddd;
+        }
+
+        &:active {
+            background: var(--color-500);
+        }
     }
 </style>

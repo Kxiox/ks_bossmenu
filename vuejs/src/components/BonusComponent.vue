@@ -1,40 +1,60 @@
 <script setup>
-    defineProps({
-        employees: {
-            type: Number,
-            default: 0
-        },
-
-        onDuty: {
-            type: Number,
-            default: 0
-        },
-
-        account: {
-            type: String,
-            default: '0'
-        },
-
-        actions: {
-            type: Array,
-            default: () => []
-        },
-
-        currency: {
-            type: String,
-            default: null
-        }
-    });
+    import { getCurrentInstance } from 'vue';
+    const { proxy } = getCurrentInstance()
+    const $t = proxy.$t
 </script>
 
 <template>
     <h1 class="text-start">{{ $t('pages.bonus') }}</h1>
+    
+    <hr />
 
-    <hr>
+    <div class="bonus-container">
+        <div class="bonus-grid">
+            <div class="bonus-card">
+                <div class="card-header">
+                    <i class="bi bi-person"></i>
+                    <span>Einzelpersonen</span>
+                </div>
+                <button class="btn btn-bonus" type="button">
+                    <i class="bi bi-person-plus"></i>
+                    Bonus an Mitarbeiter
+                </button>
+            </div>
 
-    <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-        <label class="form-check-label" for="switchCheckDefault">Default switch checkbox input</label>
+            <div class="bonus-card">
+                <div class="card-header">
+                    <i class="bi bi-diagram-3"></i>
+                    <span>Ränge</span>
+                </div>
+                <button class="btn btn-bonus" type="button">
+                    <i class="bi bi-award"></i>
+                    Bonus an Ränge
+                </button>
+            </div>
+        </div>
+
+        <!-- Gruppen Card - Volle Breite -->
+        <div class="bonus-card group full-width">
+            <div class="card-header">
+                <i class="bi bi-people"></i>
+                <span>Gruppen</span>
+            </div>
+            <div class="card-actions horizontal">
+                <button class="btn btn-bonus" type="button">
+                    <i class="bi bi-people-fill"></i>
+                    Alle Mitarbeiter
+                </button>
+                <button class="btn btn-bonus" type="button">
+                    <i class="bi bi-diagram-2"></i>
+                    Alle Ränge
+                </button>
+                <button class="btn btn-bonus online" type="button">
+                    <i class="bi bi-wifi"></i>
+                    Online Mitarbeiter
+                </button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -47,30 +67,147 @@
         text-align: center;
     }
 
-    .btn-primary {
-        background-color: var(--color-500);
-        border: none !important;
-        box-shadow: none !important;
+    .bonus-container {
+        padding: 0.75rem;
+        max-width: 100%;
+    }
+
+    .bonus-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+    .bonus-card {
+        background: var(--color-800);
+        border-radius: 8px;
+        border: 1px solid var(--color-700);
+        overflow: hidden;
+        transition: all 0.2s ease;
 
         &:hover {
-            background-color: var(--color-600);
+            border-color: var(--color-500);
+        }
+
+        .card-header {
+            background: var(--color-600);
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            
+            i {
+                font-size: 1rem;
+                color: #fff;
+            }
+        }
+
+        .card-actions {
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            &.horizontal {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                
+                .btn-bonus {
+                    flex: 1;
+                    min-width: 200px;
+                }
+            }
+        }
+
+        .btn-bonus:not(.card-actions .btn-bonus) {
+            margin: 0.75rem;
+            width: calc(100% - 1.5rem); // Volle Breite minus margin
+        }
+    }
+
+    .btn-bonus {
+        background: var(--color-700);
+        border: 1px solid var(--color-600);
+        color: #fff;
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: all 0.2s ease;
+        font-size: 0.85rem;
+        
+        i {
+            font-size: 0.9rem;
+        }
+
+        &:hover {
+            background: var(--color-600);
+            border-color: var(--color-500);
+            color: #ddd;
         }
 
         &:active {
-            background-color: var(--color-700) !important;
-            color: #fff !important;
-            border: none !important;
-            box-shadow: none !important;
+            background: var(--color-500);
+        }
+
+        &.online {
+            background: linear-gradient(135deg, #059669, #047857);
+            border-color: #10b981;
+            
+            &:hover {
+                background: linear-gradient(135deg, #047857, #065f46);
+            }
+        }
+    }
+
+    .form-check-input[type="checkbox"] {
+        background-color: var(--color-800);
+        border: var(--color-400) 1px solid;
+        width: 2.5rem;
+        height: 1.25rem;
+        
+        &:checked {
+            background-color: var(--color-500);
+            border-color: var(--color-400);
         }
     }
 
     ::-webkit-scrollbar {
         width: 0.2rem;
-        height: 0.5rem;
+        height: 0.2rem;
     }
         
     ::-webkit-scrollbar-thumb {
-        background: var(--color-400);
+        background: var(--color-500);
         border-radius: 10px;
     }
+
+    ::-webkit-scrollbar-track {
+        background: var(--color-800);
+    }
+
+    @media (max-width: 768px) {
+        .bonus-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .bonus-container {
+            padding: 0.5rem;
+        }
+    }
+
+    .badge {
+    background-color: var(--color-500);
+  }
 </style>

@@ -162,8 +162,6 @@
       }
     })
   })
-
-  openNUI()
 </script>
 
 
@@ -223,7 +221,7 @@
         <button class="nav-link text-start" id="v-pills-bonus-tab" data-bs-toggle="pill"
           data-bs-target="#v-pills-bonus" type="button" role="tab" aria-controls="v-pills-bonus"
           aria-selected="false">
-          <i class="bi bi-gift-fill"></i> {{ $t('pages.bonus') }} <span class="badge">New</span>
+          <i class="bi bi-gift me-2"></i> {{ $t('pages.bonus') }} <span class="badge">New</span>
         </button>
       </div>
 
@@ -287,7 +285,6 @@
 
   .dashboard {
     background: var(--color-900);
-    // padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 50vw;
@@ -296,7 +293,29 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);    .btn-danger {
+        background: #990000;
+        border: 1px solid #cc0000;
+        color: #fff;
+        border-radius: 6px;
+        font-weight: 500;
+        gap: 0.4rem;
+        transition: all 0.2s ease;
+        font-size: 0.85rem;
+
+        &:hover {
+            background: #cc0000;
+            border-color: #ff0000;
+            color: #ddd;
+        }
+
+        &:active {
+            background-color: #990000 !important;
+            color: #fff !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+    }
 
     color: #fff;
 
@@ -333,21 +352,23 @@
         width: 100%;
         // background-color: #444;
         color: #fff;
-        border: none;
-        border-radius: 5px;
+        border: 1px solid transparent;
+        border-radius: 6px;
         font-weight: bold;
         text-align: left;
         // padding-left: 20px;
 
         &:hover {
+          border: 1px solid var(--color-600);
           background-color: var(--color-800);
           cursor: pointer;
         }
 
         &.active {
-          background-color: var(--color-500);
+          background: var(--color-700);
+          border: 1px solid var(--color-600);
           color: #fff;
-          font-weight: bold;
+          border-radius: 6px;
         }
       }
     }
@@ -364,6 +385,30 @@
         top: 20px;
         right: 20px;
         color: white;
+    }
+
+    .btn-danger {
+        background: #990000;
+        border: 1px solid #cc0000;
+        color: #fff;
+        border-radius: 6px;
+        font-weight: 500;
+        gap: 0.4rem;
+        transition: all 0.2s ease;
+        font-size: 0.85rem;
+
+        &:hover {
+            background: #cc0000;
+            border-color: #ff0000;
+            color: #ddd;
+        }
+
+        &:active {
+            background-color: #990000 !important;
+            color: #fff !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
     }
   }
 
