@@ -189,6 +189,9 @@
       <li><a class="dropdown-item" href="#" @click="changeColorMode('green')">Green</a></li>
       <li><a class="dropdown-item" href="#" @click="changeColorMode('teal')">Teal</a></li>
       <li><a class="dropdown-item" href="#" @click="changeColorMode('cyan')">Cyan</a></li>
+      <li><a class="dropdown-item" href="#" @click="changeColorMode('rose')">Rose</a></li>
+      <li><a class="dropdown-item" href="#" @click="changeColorMode('magenta')">Magenta</a></li>
+      <li><a class="dropdown-item" href="#" @click="changeColorMode('brown')">Brown</a></li>
       <li><a class="dropdown-item" href="#" @click="changeColorMode('light')">Light</a></li>
       <li><a class="dropdown-item" href="#" @click="changeColorMode('dark')">Dark</a></li>
     </ul>

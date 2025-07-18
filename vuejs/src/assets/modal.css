@@ -1,0 +1,179 @@
+/* Modal Animation */
+.modal.fade .modal-dialog {
+  transform: translateY(-50px) scale(0.95) !important;
+  transition: transform 0.3s ease-out !important;
+}
+
+.modal.show .modal-dialog {
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Modal Sizes */
+.modal-dialog {
+  max-width: 500px !important;
+  margin: 1.75rem auto !important;
+}
+
+.modal-sm {
+  max-width: 300px !important;
+}
+
+.modal-lg {
+  max-width: 800px !important;
+}
+
+.modal-xl {
+  max-width: 1140px !important;
+}
+
+/* Modal Form Styles - Match Account design */
+.modal .form-control,
+.modal .form-select {
+  background: var(--color-800) !important;
+  border: 1px solid var(--color-600) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.9rem !important;
+  transition: all 0.3s ease !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  outline: none !important;
+}
+
+.modal .form-control:focus,
+.modal .form-select:focus {
+  background: var(--color-700) !important;
+  border-color: var(--color-500) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.modal .form-control:hover:not(:focus) {
+  border-color: var(--color-500) !important;
+}
+
+.modal .form-control::placeholder {
+  color: var(--color-400) !important;
+  opacity: 0.8 !important;
+}
+
+.modal .input-group-text {
+  background: var(--color-700) !important;
+  border: 1px solid var(--color-600) !important;
+  color: var(--color-200) !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.9rem !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 45px !important;
+}
+
+.modal .input-group:focus-within .input-group-text {
+  background: var(--color-600) !important;
+  border-color: var(--color-500) !important;
+  color: var(--color-100) !important;
+}
+
+.modal .input-group-text i {
+  color: var(--color-300) !important;
+  font-size: 1rem !important;
+}
+
+.modal .input-group:focus-within .input-group-text i {
+  color: var(--color-100) !important;
+}
+
+/* Remove Bootstrap default focus styles completely */
+.modal *:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.modal input:focus,
+.modal textarea:focus,
+.modal select:focus,
+.modal button:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Modal Scrollbar */
+.modal-body::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: var(--color-800) !important;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: var(--color-600) !important;
+  border-radius: 3px !important;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: var(--color-500) !important;
+}
+
+/* Modal Header Icon Animation */
+.modal-header i {
+  animation: modalIconGlow 2s ease-in-out infinite alternate !important;
+}
+
+@keyframes modalIconGlow {
+  0% { 
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) !important;
+  }
+  100% { 
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 8px rgba(59, 130, 246, 0.3)) !important;
+  }
+}
+
+/* Override Bootstrap modal defaults */
+.modal {
+  --bs-modal-bg: var(--color-900) !important;
+  --bs-modal-border-color: var(--color-600) !important;
+  --bs-modal-border-width: 1px !important;
+  --bs-modal-border-radius: 12px !important;
+  --bs-modal-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  --bs-modal-header-border-color: var(--color-600) !important;
+  --bs-modal-footer-border-color: var(--color-600) !important;
+  --bs-modal-color: var(--color-200) !important;
+}
+
+/* Responsive Modal Enhancements */
+@media (max-width: 768px) {
+  .modal-dialog {
+    margin: 0.5rem !important;
+    max-width: calc(100vw - 1rem) !important;
+  }
+  
+  .modal-content {
+    border-radius: 8px !important;
+  }
+  
+  .modal-header {
+    padding: 1rem !important;
+  }
+  
+  .modal-body {
+    padding: 1rem !important;
+  }
+  
+  .modal-footer {
+    padding: 1rem !important;
+    flex-direction: column !important;
+  }
+  
+  .modal-footer .btn {
+    width: 100% !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .modal-footer .btn:last-child {
+    margin-bottom: 0 !important;
+  }
+}

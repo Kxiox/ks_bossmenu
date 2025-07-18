@@ -1,0 +1,163 @@
+.table {
+  --bs-table-color: #fff !important;
+  --bs-table-bg: transparent !important;
+  --bs-table-border-color: var(--color-700) !important;
+  --bs-table-accent-bg: var(--color-800) !important;
+  --bs-table-striped-color: #fff !important;
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.05) !important;
+  --bs-table-active-color: #fff !important;
+  --bs-table-active-bg: var(--color-600) !important;
+  --bs-table-hover-color: #fff !important;
+  --bs-table-hover-bg: rgba(255, 255, 255, 0.075) !important;
+  
+  color: #fff !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.table thead th {
+  background: var(--color-700) !important;
+  color: #fff !important;
+  border-bottom: 2px solid var(--color-600) !important;
+  border-top: none !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.5px !important;
+  padding: 1rem 0.75rem !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+}
+
+.table thead th:first-child {
+  border-top-left-radius: 8px !important;
+}
+
+.table thead th:last-child {
+  border-top-right-radius: 8px !important;
+}
+
+.table tbody tr {
+  background: var(--color-800) !important;
+  transition: all 0.2s ease !important;
+}
+
+.table tbody tr:hover {
+  background: var(--color-700) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.table tbody tr:nth-child(even):hover {
+  background: var(--color-700) !important;
+}
+
+.table tbody td {
+  color: #fff !important;
+  border-bottom: 1px solid var(--color-700) !important;
+  border-top: none !important;
+  padding: 0.875rem 0.75rem !important;
+  vertical-align: middle !important;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px !important;
+}
+
+.table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px !important;
+}
+
+/* Table container with scrollbars */
+.table-container {
+  background: var(--color-800) !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--color-700) !important;
+  overflow: hidden !important;
+}
+
+.table-container::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: var(--color-800) !important;
+  border-radius: 4px !important;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--color-600) !important;
+  border-radius: 4px !important;
+  transition: background 0.2s ease !important;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: var(--color-500) !important;
+}
+
+.table-container::-webkit-scrollbar-corner {
+  background: var(--color-800) !important;
+}
+
+/* Table buttons styling */
+.table .buttons {
+  display: flex !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+.table .btn-sm {
+  padding: 0.375rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  line-height: 1.25 !important;
+  border-radius: 4px !important;
+}
+
+/* Badge styling for tables */
+.table .badge {
+  background: var(--color-600) !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+  padding: 0.375rem 0.75rem !important;
+  border-radius: 6px !important;
+  font-size: 0.8rem !important;
+}
+
+/* Icon styling in tables */
+.table .icon-bg {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 2rem !important;
+  height: 2rem !important;
+  border-radius: 6px !important;
+  background: var(--color-600) !important;
+  margin-right: 0.5rem !important;
+  transition: background 0.2s ease !important;
+}
+
+.table .icon-bg i {
+  color: #fff !important;
+  font-size: 1rem !important;
+}
+
+/* Table responsive wrapper */
+.table-responsive {
+  border-radius: 8px !important;
+  border: 1px solid var(--color-700) !important;
+  background: var(--color-800) !important;
+}

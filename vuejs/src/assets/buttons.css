@@ -1,0 +1,105 @@
+/* Global Button Styles */
+.btn-primary,
+.btn-main {
+  background: var(--color-700) !important;
+  border: 1px solid var(--color-600) !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+.btn-primary:hover,
+.btn-main:hover {
+  background: var(--color-600) !important;
+  border-color: var(--color-500) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.btn-primary:active,
+.btn-primary:focus,
+.btn-main:active,
+.btn-main:focus {
+  border-color: #fff !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.btn-primary:disabled,
+.btn-main:disabled {
+  background: var(--color-800) !important;
+  border-color: var(--color-700) !important;
+  color: var(--color-400) !important;
+  opacity: 0.6;
+}
+
+/* Red button for danger actions */
+.btn-red {
+  background: #990000 !important;
+  border: 1px solid #cc0000 !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+.btn-red:hover {
+  background: #cc0000 !important;
+  border-color: #ff0000 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.btn-red:active,
+.btn-red:focus {
+  border-color: #fff !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+/* Second button for neutral actions */
+.btn-second {
+  background: #686b6d !important;
+  border: 1px solid #8b8e92 !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+.btn-second:hover {
+  background: #8b8e92 !important;
+  border-color: #aeb2b6 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.btn-second:active,
+.btn-second:focus {
+  border-color: #d1d5d9 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.btn-main.online {
+  background: #059669 !important;
+  border-color: #10b981 !important;
+}
+
+.btn-main.online:hover {
+  background: #047857 !important;
+  border-color: #059669 !important;
+}
+
+.btn-main.online:active,
+.btn-main.online:focus {
+  border-color: #fff !important;
+}
+
+/* Remove any residual Bootstrap button focus styles */
+button:focus,
+.btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
