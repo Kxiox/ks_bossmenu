@@ -67,27 +67,4 @@
             gap: 10px;
         }
     }
-
-    .btn-main {
-        background: var(--color-700);
-        border: 1px solid var(--color-600);
-        color: #fff;
-        border-radius: 6px;
-        transition: all 0.2s ease;
-
-        i {
-            font-size: 0.9rem;
-        }
-
-        &:hover {
-            background: var(--color-600);
-            border-color: var(--color-500);
-            color: #ddd;
-        }
-
-        &:active {
-            background: var(--color-500);
-        }
-    }
-
 </style>

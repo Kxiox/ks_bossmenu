@@ -16,7 +16,7 @@
                     <i class="bi bi-person"></i>
                     <span>Einzelpersonen</span>
                 </div>
-                <button class="btn btn-bonus" type="button">
+                <button class="btn btn-main" type="button">
                     <i class="bi bi-person-plus"></i>
                     Bonus an Mitarbeiter
                 </button>
@@ -27,7 +27,7 @@
                     <i class="bi bi-diagram-3"></i>
                     <span>Ränge</span>
                 </div>
-                <button class="btn btn-bonus" type="button">
+                <button class="btn btn-main" type="button">
                     <i class="bi bi-award"></i>
                     Bonus an Ränge
                 </button>
@@ -41,15 +41,15 @@
                 <span>Gruppen</span>
             </div>
             <div class="card-actions horizontal">
-                <button class="btn btn-bonus" type="button">
+                <button class="btn btn-main" type="button">
                     <i class="bi bi-people-fill"></i>
                     Alle Mitarbeiter
                 </button>
-                <button class="btn btn-bonus" type="button">
+                <button class="btn btn-main" type="button">
                     <i class="bi bi-diagram-2"></i>
                     Alle Ränge
                 </button>
-                <button class="btn btn-bonus online" type="button">
+                <button class="btn btn-main online" type="button">
                     <i class="bi bi-wifi"></i>
                     Online Mitarbeiter
                 </button>
@@ -121,53 +121,16 @@
                 flex-wrap: wrap;
                 gap: 0.5rem;
                 
-                .btn-bonus {
+                .btn-main {
                     flex: 1;
                     min-width: 200px;
                 }
             }
         }
 
-        .btn-bonus:not(.card-actions .btn-bonus) {
+        .btn-main:not(.card-actions .btn-main) {
             margin: 0.75rem;
             width: calc(100% - 1.5rem); // Volle Breite minus margin
-        }
-    }
-
-    .btn-bonus {
-        background: var(--color-700);
-        border: 1px solid var(--color-600);
-        color: #fff;
-        padding: 0.5rem 0.75rem;
-        border-radius: 6px;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        transition: all 0.2s ease;
-        font-size: 0.85rem;
-        
-        i {
-            font-size: 0.9rem;
-        }
-
-        &:hover {
-            background: var(--color-600);
-            border-color: var(--color-500);
-            color: #ddd;
-        }
-
-        &:active {
-            background: var(--color-500);
-        }
-
-        &.online {
-            background: linear-gradient(135deg, #059669, #047857);
-            border-color: #10b981;
-            
-            &:hover {
-                background: linear-gradient(135deg, #047857, #065f46);
-            }
         }
     }
 
@@ -206,8 +169,4 @@
             padding: 0.5rem;
         }
     }
-
-    .badge {
-    background-color: var(--color-500);
-  }
 </style>

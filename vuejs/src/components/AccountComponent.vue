@@ -122,18 +122,18 @@
                     aria-label="Amount" min="1">
                 <span class="input-group-text">.00</span>
 
-                <button class="btn btn-main" @click="deposit()">{{ $t('buttons.deposit') }}</button>
-                <button class="btn btn-main" @click="withdraw()">{{ $t('buttons.withdraw') }}</button>
+                <button class="btn btn-primary" type="button" @click="deposit()">{{ $t('buttons.deposit') }}</button>
+                <button class="btn btn-primary" @click="withdraw()">{{ $t('buttons.withdraw') }}</button>
             </div>
 
             <h4 class="mt-3">{{ $t('account.last_transactions') }}
-                <button class="btn btn-main" @click="$emit('see-all-transactions')"
+                <button class="btn btn-primary" @click="$emit('see-all-transactions')"
                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .6rem;">{{
                     $t('buttons.see_all') }}
                 </button>
             </h4>
 
-            <div style="overflow-x: auto; overflow-y: auto; max-height: 23vh; max-width: 100%; min-width: 100%;">
+            <div style="overflow-x: auto; overflow-y: auto; max-height: 22vh; max-width: 100%; min-width: 100%;">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -207,28 +207,6 @@
             color: white;
         }
         
-    }
-
-    .btn-main {
-        background: var(--color-700);
-        border: 1px solid var(--color-600);
-        color: #fff;
-        border-radius: 6px;
-        transition: all 0.2s ease;
-
-        i {
-            font-size: 0.9rem;
-        }
-
-        &:hover {
-            background: var(--color-600);
-            border-color: var(--color-500);
-            color: #ddd;
-        }
-
-        &:active {
-            background: var(--color-500);
-        }
     }
 
     .text-bg-primary {

@@ -132,7 +132,7 @@
                     <td>{{ employee.firstname }} {{ employee.lastname }}</td>
                     <td>{{ employee.jobgrade }}</td>
                     <td>{{ employee.salary }}</td>
-                    <td class="buttons"><button class="btn btn-sm btn-main" @click="promote(employee)">{{ $t('buttons.promote') }}</button><button class="btn btn-sm btn-main" @click="demote(employee)">{{ $t('buttons.demote') }}</button><button class="btn btn-sm btn-danger" @click="fire(employee)">{{ $t('buttons.fire') }}</button></td>
+                    <td class="buttons"><button class="btn btn-sm btn-main" @click="promote(employee)">{{ $t('buttons.promote') }}</button><button class="btn btn-sm btn-main" @click="demote(employee)">{{ $t('buttons.demote') }}</button><button class="btn btn-sm btn-red" @click="fire(employee)">{{ $t('buttons.fire') }}</button></td>
                 </tr>
             </tbody>
         </table>
@@ -163,52 +163,6 @@
         .buttons {
             display: flex;
             gap: 10px;
-        }
-    }
-
-    .btn-main {
-        background: var(--color-700);
-        border: 1px solid var(--color-600);
-        color: #fff;
-        border-radius: 6px;
-        transition: all 0.2s ease;
-
-        i {
-            font-size: 0.9rem;
-        }
-
-        &:hover {
-            background: var(--color-600);
-            border-color: var(--color-500);
-            color: #ddd;
-        }
-
-        &:active {
-            background: var(--color-500);
-        }
-    }
-    
-    .btn-danger {
-        background: #990000;
-        border: 1px solid #cc0000;
-        color: #fff;
-        border-radius: 6px;
-        font-weight: 500;
-        gap: 0.4rem;
-        transition: all 0.2s ease;
-        font-size: 0.85rem;
-
-        &:hover {
-            background: #cc0000;
-            border-color: #ff0000;
-            color: #ddd;
-        }
-
-        &:active {
-            background-color: #990000 !important;
-            color: #fff !important;
-            border: none !important;
-            box-shadow: none !important;
         }
     }
 </style>

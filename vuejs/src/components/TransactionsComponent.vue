@@ -113,24 +113,7 @@
         }
         
     }
-
-    .btn-main {
-        background-color: var(--color-500);
-        border: none !important;
-        box-shadow: none !important;
-
-        &:hover {
-            background-color: var(--color-600);
-        }
-
-        &:active {
-            background-color: var(--color-700) !important;
-            color: #fff !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-    }
-
+    
     .icon-bg {
         display: inline-flex;
         align-items: center;

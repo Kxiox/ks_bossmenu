@@ -142,69 +142,43 @@
 <style scoped lang="scss">
     @use 'bootstrap/scss/bootstrap' as *;
 
-    .modal-dialog {
-        max-width: 17vw;
+    /* Ensure input groups work properly in modals */
+    .input-group {
+        margin-bottom: 0;
     }
 
-    .modal-header {
-        background-color: var(--color-900);
-        color: var(--color-200);
-        // border: none;
+    .input-group-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 45px;
     }
 
-    .modal-body {
-        background-color: var(--color-900);
-        color: white;
-        // border: none;
+    /* Remove all focus outlines and blue borders */
+    * {
+        outline: none !important;
+        box-shadow: none !important;
     }
 
-    .modal-footer {
-        background-color: var(--color-900);
-        color: white;
-        // border: none;
+    *:focus {
+        outline: none !important;
+        box-shadow: none !important;
     }
 
-    .btn-main {
-        background: var(--color-700);
-        border: 1px solid var(--color-600);
-        color: #fff;
-        border-radius: 6px;
-        transition: all 0.2s ease;
-
-        i {
-            font-size: 0.9rem;
-        }
-
-        &:hover {
-            background: var(--color-600);
-            border-color: var(--color-500);
-            color: #ddd;
-        }
-
-        &:active {
-            background: var(--color-500);
-        }
+    input:focus,
+    textarea:focus,
+    select:focus,
+    button:focus {
+        outline: none !important;
+        box-shadow: none !important;
     }
 
-    .btn-second {
-        background: #686b6d;
-        border: 1px solid #8b8e92;
-        color: #fff;
-        border-radius: 6px;
-        transition: all 0.2s ease;
-
-        i {
-            font-size: 0.9rem;
-        }
-
-        &:hover {
-            background: #8b8e92;
-            border-color: #aeb2b6;
-            color: #ddd;
-        }
-
-        &:active {
-            background: #aeb2b6;
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .modal-dialog {
+            max-width: 95vw;
+            min-width: unset;
+            margin: 0.5rem;
         }
     }
 </style>

@@ -3,7 +3,8 @@
         "home": "Home",
         "employees": "Employees",
         "salaries": "Salaries",
-        "account": "Account"
+        "account": "Account",
+        "bonus": "Bonus"
     },
 
     "home": {
@@ -44,6 +45,10 @@
         "table_employee": "Employee",
         "table_amount": "Amount",
         "all_transactions": "All Transactions"
+    },
+
+    "bonus": {
+        "only_online": "Only online"
     },
 
     "buttons": {

@@ -268,7 +268,7 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-sm btn-danger closebtn" @click="closeNUI()"><i class="bi bi-x-lg"></i></button>
+    <button type="button" class="btn btn-sm btn-red closebtn" @click="closeNUI()"><i class="bi bi-x-lg"></i></button>
 
   </div>
 </template>
@@ -285,134 +285,140 @@
 
   .dashboard {
     background: var(--color-900);
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-700);
     width: 50vw;
     height: 50vh;
-
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);    .btn-danger {
-        background: #990000;
-        border: 1px solid #cc0000;
-        color: #fff;
-        border-radius: 6px;
-        font-weight: 500;
-        gap: 0.4rem;
-        transition: all 0.2s ease;
-        font-size: 0.85rem;
-
-        &:hover {
-            background: #cc0000;
-            border-color: #ff0000;
-            color: #ddd;
-        }
-
-        &:active {
-            background-color: #990000 !important;
-            color: #fff !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-    }
-
+    transform: translate(-50%, -50%);
     color: #fff;
+    overflow: hidden;
+  }
 
-    .vr {
-        width: 1px;
-        background-color: #ccc;
-        height: auto;
-        align-self: stretch;
-    }
+  .vr {
+    width: 1px;
+    background-color: var(--color-600);
+    height: auto;
+    align-self: stretch;
+  }
 
-    hr {
-      border: 0;
-      height: 1px;
-      background-color: #ccc;
-    }
+  hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      var(--color-600) 50%, 
+      transparent 100%);
+    margin: 1rem 0;
+  }
 
-    .nav {
-      width: 20%;
-      height: 50vh;
-      gap: 15px;
+  .nav {
+    width: 20%;
+    height: 50vh;
+    gap: 8px;
+    border-right: 1px solid var(--color-700);
+    padding: 20px;
+    background: linear-gradient(180deg, 
+      var(--color-900) 0%, 
+      var(--color-800) 100%);
+  }
 
-      border-right: 1px solid #cccccc30;
-      padding: 20px;
+  .logo {
+    width: 60%;
+    height: auto;
+    margin: 1rem auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
 
-      .logo {
-        width: 50%;
-        height: auto;
-        margin-top: 1rem;
-        margin-left: auto;
-        margin-right: auto;
-      }
+  .nav button {
+    width: 100%;
+    color: var(--color-200);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
 
-      button {
-        width: 100%;
-        // background-color: #444;
-        color: #fff;
-        border: 1px solid transparent;
-        border-radius: 6px;
-        font-weight: bold;
-        text-align: left;
-        // padding-left: 20px;
+  .nav button::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--color-500);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+  }
 
-        &:hover {
-          border: 1px solid var(--color-600);
-          background-color: var(--color-800);
-          cursor: pointer;
-        }
+  .nav button:hover {
+    border: 1px solid var(--color-600);
+    background: linear-gradient(135deg, 
+      var(--color-800) 0%, 
+      var(--color-700) 100%);
+    color: #fff;
+    transform: translateX(4px);
+  }
 
-        &.active {
-          background: var(--color-700);
-          border: 1px solid var(--color-600);
-          color: #fff;
-          border-radius: 6px;
-        }
-      }
-    }
+  .nav button:hover::before {
+    transform: scaleY(1);
+  }
 
-    .tab-content {
-        width: 80%;
-        height: 100%;
-        padding: 20px;
-        padding-left: 0;
-    }
+  .nav button.active {
+    background: linear-gradient(135deg, 
+      var(--color-700) 0%, 
+      var(--color-600) 100%);
+    border: 1px solid var(--color-500);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
 
-    .closebtn {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        color: white;
-    }
+  .nav button.active::before {
+    transform: scaleY(1);
+  }
 
-    .btn-danger {
-        background: #990000;
-        border: 1px solid #cc0000;
-        color: #fff;
-        border-radius: 6px;
-        font-weight: 500;
-        gap: 0.4rem;
-        transition: all 0.2s ease;
-        font-size: 0.85rem;
+  .nav button i {
+    color: var(--color-400);
+    transition: color 0.3s ease;
+  }
 
-        &:hover {
-            background: #cc0000;
-            border-color: #ff0000;
-            color: #ddd;
-        }
+  .nav button:hover i,
+  .nav button.active i {
+    color: #fff;
+  }
 
-        &:active {
-            background-color: #990000 !important;
-            color: #fff !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-    }
+  .tab-content {
+    width: 80%;
+    height: 100%;
+    padding: 20px;
+    padding-left: 0;
+    background: var(--color-900);
+  }
+
+  .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    z-index: 10;
   }
 
   .badge {
-    background-color: var(--color-500);
+    font-weight: 600 !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 4px !important;
+    font-size: 0.7rem !important;
+    margin-left: 0.5rem !important;
   }
 </style>
