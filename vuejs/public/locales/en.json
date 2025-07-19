@@ -51,19 +51,26 @@
     },
 
     "bonus": {
+        "individual": "Individual",
+        "ranks": "Ranks",
+        "groups": "Groups",
+        "all_employees": "All Employees",
+        "all_ranks": "All Ranks",
+        "single_employee_bonus": "Single Employee Bonus",
         "add_employee_bonus": "Employee Bonus",
         "add_rank_bonus": "Rank Bonus",
         "table_name": "Name",
         "bonus_amount": "Bonus Amount",
-        "all_employees_title": "Bonus for All Employees",
         "all_employees_info": "You are about to give a bonus to all {count} employees.",
         "all_ranks_title": "Bonus for All Ranks",
         "all_ranks_info": "You are about to give a bonus to all employees in {count} ranks.",
-        "online_employees_title": "Bonus for Online Employees",
         "online_employees_info": "You are about to give a bonus to {count} online employees.",
         "online_employees": "Online Employees",
         "no_online_employees": "No employees are currently online.",
-        "affected_ranks": "Affected Ranks"
+        "affected_ranks": "Affected Ranks",
+        "give_to_all_employees": "Give to All Employees",
+        "give_to_all_ranks": "Give to All Ranks",
+        "give_to_online_employees": "Give to Online Employees"
     },
 
     "buttons": {

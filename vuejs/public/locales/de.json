@@ -8,165 +8,170 @@
     },
 
     "home": {
-        "stats": "Statistiken",
-        "employees": "Mitarbeiter",
-        "on_duty": "Im Dienst",
-        "account": "Konto",
+        "stats": "Stats",
+        "employees": "Employees",
+        "on_duty": "On Duty",
+        "account": "Account",
 
-        "last_actions": "Letzte Aktionen",
-        "table_action": "Aktion",
-        "table_employee": "Mitarbeiter",
-        "table_time": "Zeit",
-        "all_actions": "Alle Aktionen"
+        "last_actions": "Last Actions",
+        "table_action": "Action",
+        "table_employee": "Employee",
+        "table_time": "Time",
+        "all_actions": "All Actions"
     },
 
     "employees": {
-        "add_employee": "Mitarbeiter hinzufügen",
+        "add_employee": "Add Employee",
         "table_name": "Name",
         "table_position": "Position",
-        "table_salary": "Gehalt",
-        "table_actions": "Aktionen",
-        "table_grade": "Rang",
-        "selected": "ausgewählt"
+        "table_salary": "Salary",
+        "table_actions": "Actions",
+        "table_grade": "Grade",
+        "selected": "selected"
     },
 
     "salaries": {
         "table_name": "Name",
-        "table_salary": "Gehalt",
-        "table_actions": "Aktionen",
-        "table_grade": "Rang",
-        "change_salary": "Gehalt ändern",
-        "placeholder": "Neues Gehalt",
-        "ranks_selected": "Ränge ausgewählt"
+        "table_salary": "Salary",
+        "table_actions": "Actions",
+        "table_grade": "Grade",
+        "change_salary": "Change Salary",
+        "placeholder": "New Salary",
+        "ranks_selected": "ranks selected"
     },
 
     "account": {
-        "balance": "Kontostand",
-        "placeholder": "Betrag",
-
-        "last_transactions": "Letzte Transaktionen",
-        "table_action": "Aktion",
-        "table_employee": "Mitarbeiter",
-        "table_amount": "Betrag",
-        "all_transactions": "Alle Transaktionen"
+        "balance": "Balance",
+        "placeholder": "Amount",
+        "last_transactions": "Last transactions",
+        "table_action": "Action",
+        "table_employee": "Employee",
+        "table_amount": "Amount",
+        "all_transactions": "All Transactions"
     },
 
     "bonus": {
-        "add_employee_bonus": "Bonus an Mitarbeiter",
-        "add_rank_bonus": "Bonus an Rang",
+        "individual": "Individual",
+        "ranks": "Ranks",
+        "groups": "Groups",
+        "all_employees": "All Employees",
+        "all_ranks": "All Ranks",
+        "single_employee_bonus": "Single Employee Bonus",
+        "add_employee_bonus": "Employee Bonus",
+        "add_rank_bonus": "Rank Bonus",
         "table_name": "Name",
-        "bonus_amount": "Bonus Betrag",
-        "all_employees_title": "Bonus für alle Mitarbeiter",
-        "all_employees_info": "Sie sind dabei, allen {count} Mitarbeitern einen Bonus zu geben.",
-        "all_ranks_title": "Bonus für alle Ränge",
-        "all_ranks_info": "Sie sind dabei, allen Mitarbeitern in {count} Rängen einen Bonus zu geben.",
-        "online_employees_title": "Bonus für Online-Mitarbeiter",
-        "online_employees_info": "Sie sind dabei, {count} Online-Mitarbeitern einen Bonus zu geben.",
-        "online_employees": "Online-Mitarbeiter",
-        "no_online_employees": "Derzeit sind keine Mitarbeiter online.",
-        "affected_ranks": "Betroffene Ränge",
-        "only_online": "Nur Online"
+        "bonus_amount": "Bonus Amount",
+        "all_employees_info": "You are about to give a bonus to all {count} employees.",
+        "all_ranks_title": "Bonus for All Ranks",
+        "all_ranks_info": "You are about to give a bonus to all employees in {count} ranks.",
+        "online_employees_info": "You are about to give a bonus to {count} online employees.",
+        "online_employees": "Online Employees",
+        "no_online_employees": "No employees are currently online.",
+        "affected_ranks": "Affected Ranks",
+        "give_to_all_employees": "Give to All Employees",
+        "give_to_all_ranks": "Give to All Ranks",
+        "give_to_online_employees": "Give to Online Employees"
     },
 
     "buttons": {
-        "see_all": "Alle anzeigen",
-        "promote": "Befördern",
-        "demote": "Degradieren",
-        "fire": "Entlassen",
-        "cancel": "Abbrechen",
-        "add": "Hinzufügen",
-        "change": "Ändern",
-        "deposit": "Einzahlen",
-        "withdraw": "Abheben",
-        "give_bonus": "Bonus geben",
-        "select": "Auswählen",
-        "select_all": "Alle auswählen",
-        "deselect_all": "Alle abwählen",
-        "give_to_all_employees": "An alle Mitarbeiter geben",
-        "give_to_all_ranks": "An alle Ränge geben",
-        "give_to_online_employees": "An Online-Mitarbeiter geben"
+        "see_all": "See all",
+        "promote": "Promote",
+        "demote": "Demote",
+        "fire": "Fire",
+        "cancel": "Cancel",
+        "add": "Add",
+        "change": "Change",
+        "deposit": "Deposit",
+        "withdraw": "Withdraw",
+        "give_bonus": "Give Bonus",
+        "select": "Select",
+        "select_all": "Select All",
+        "deselect_all": "Deselect All",
+        "give_to_all_employees": "Give to All Employees",
+        "give_to_all_ranks": "Give to All Ranks",
+        "give_to_online_employees": "Give to Online Employees"
     },
 
     "notifies": {
         "account": {
             "deposit": {
-                "success": "Einzahlung von {amount}$ erfolgreich!",
-                "not_enough_money": "Nicht genug Geld zum Einzahlen!",
-                "error": "Beim Verarbeiten der Einzahlung ist ein Fehler aufgetreten!",
-                "unknown_error": "Ein unbekannter Fehler ist bei der Einzahlung aufgetreten!",
-                "unknown": "Eine unerwartete Antwort wurde beim Einzahlen erhalten!",
-                "nui_error": "Ein Fehler ist in NUI beim Einzahlen aufgetreten: {error}",
-                "invalid_amount": "Bitte gib einen gültigen Betrag ein!"
+                "success": "Deposit of {amount}$ successful!",
+                "not_enough_money": "Not enough money to deposit!",
+                "error": "An error occurred while processing the deposit!",
+                "unknown_error": "An unknown error occurred while processing the deposit!",
+                "unknown": "An unexpected respone was received while deposit money!",
+                "nui_error": "An error occurred in NUI while deposit money: {error}",
+                "invalid_amount": "Please enter a valid amount!"
             },
 
             "withdraw": {
-                "success": "Auszahlung von {amount}$ erfolgreich!",
-                "not_enough_money": "Nicht genug Geld zum Abheben!",
-                "error": "Beim Verarbeiten der Auszahlung ist ein Fehler aufgetreten!",
-                "unknown_error": "Ein unbekannter Fehler ist bei der Auszahlung aufgetreten!",
-                "unknown": "Eine unerwartete Antwort wurde beim Abheben erhalten!",
-                "nui_error": "Ein Fehler ist in NUI beim Abheben aufgetreten: {error}",
-                "invalid_amount": "Bitte gib einen gültigen Betrag ein!"
+                "success": "Withdrawal of {amount}$ successful!",
+                "not_enough_money": "Not enough money to withdraw!",
+                "error": "An error occurred while processing the withdrawal!",
+                "unknown_error": "An unknown error occurred while processing the withdrawal!",
+                "unknown": "An unexpected respone was received while withdraw money!",
+                "nui_error": "An error occurred in NUI while withdraw money: {error}",
+                "invalid_amount": "Please enter a valid amount!"
             }
         },
 
         "employees": {
             "promote": {
-                "success": "Mitarbeiter {name} erfolgreich befördert!",
-                "self_promote": "Du kannst dich nicht selbst befördern.",
-                "highest_grade": "Mitarbeiter {name} ist bereits auf der höchsten Stufe.",
-                "not_same_job": "Mitarbeiter {name} ist nicht im selben Job.",
-                "error": "Beim Befördern des Mitarbeiters ist ein Fehler aufgetreten.",
-                "unknown_error": "Ein unbekannter Fehler ist beim Befördern des Mitarbeiters aufgetreten.",
-                "unknown": "Eine unerwartete Antwort wurde beim Befördern des Mitarbeiters erhalten.",
-                "nui_error": "Ein Fehler ist in NUI beim Befördern des Mitarbeiters aufgetreten: {error}"
+                "success": "Employee {name} promoted successfully!",
+                "self_promote": "You cannot promote yourself.",
+                "highest_grade": "Employee {name} is already at the highest grade.",
+                "not_same_job": "Employee {name} is not in the same job.",
+                "error": "An error occurred while promoting the employee.",
+                "unknown_error": "An unknown error occurred while promoting the employee.",
+                "unknown": "An unexpected response was received while promoting the employee.",
+                "nui_error": "An error occurred in NUI while promoting the employee: {error}"
             },
             "demote": {
-                "success": "Mitarbeiter {name} erfolgreich degradiert!",
-                "self_demote": "Du kannst dich nicht selbst degradieren.",
-                "lowest_grade": "Mitarbeiter {name} ist bereits auf der niedrigsten Stufe.",
-                "not_same_job": "Mitarbeiter {name} ist nicht im selben Job.",
-                "error": "Beim Degradieren des Mitarbeiters ist ein Fehler aufgetreten.",
-                "unknown_error": "Ein unbekannter Fehler ist beim Degradieren des Mitarbeiters aufgetreten.",
-                "unknown": "Eine unerwartete Antwort wurde beim Degradieren des Mitarbeiters erhalten.",
-                "nui_error": "Ein Fehler ist in NUI beim Degradieren des Mitarbeiters aufgetreten: {error}"
+                "success": "Employee {name} demoted successfully!",
+                "self_demote": "You cannot demote yourself.",
+                "lowest_grade": "Employee {name} is already at the lowest grade.",
+                "not_same_job": "Employee {name} is not in the same job.",
+                "error": "An error occurred while demoting the employee.",
+                "unknown_error": "An unknown error occurred while demoting the employee.",
+                "unknown": "An unexpected response was received while demoting the employee.",
+                "nui_error": "An error occurred in NUI while demoting the employee: {error}"
             },
             "fire": {
-                "success": "Mitarbeiter {name} erfolgreich entlassen!",
-                "self_fire": "Du kannst dich nicht selbst entlassen.",
-                "not_same_job": "Mitarbeiter {name} ist nicht im selben Job.",
-                "error": "Beim Entlassen des Mitarbeiters ist ein Fehler aufgetreten.",
-                "unknown_error": "Ein unbekannter Fehler ist beim Entlassen des Mitarbeiters aufgetreten.",
-                "unknown": "Eine unerwartete Antwort wurde beim Entlassen des Mitarbeiters erhalten.",
-                "nui_error": "Ein Fehler ist in NUI beim Entlassen des Mitarbeiters aufgetreten: {error}"
+                "success": "Employee {name} fired successfully!",
+                "self_fire": "You cannot fire yourself.",
+                "not_same_job": "Employee {name} is not in the same job.",
+                "error": "An error occurred while firing the employee.",
+                "unknown_error": "An unknown error occurred while firing the employee.",
+                "unknown": "An unexpected response was received while firing the employee.",
+                "nui_error": "An error occurred in NUI while firing the employee: {error}"
             },
             "add": {
-                "success": "Mitarbeiter mit der ID {id} erfolgreich hinzugefügt!",
-                "failed": "Spieler ist nicht online oder bereits in diesem Job!",
-                "invalid_id": "Bitte gib eine ID über 0 ein!",
-                "nui_error": "Ein Fehler ist in NUI beim Hinzufügen des Mitarbeiters aufgetreten: {error}"
+                "success": "Employee with ID {id} added successfully!",
+                "failed": "Player is not online or already in this job!",
+                "invalid_id": "Please enter an ID over 0!",
+                "nui_error": "An error occurred in NUI while adding the employee: {error}"
             }
         },
 
         "salaries": {
             "change": {
-                "success": "Gehalt auf {salary}{currency} geändert!",
-                "already_set": "Das Gehalt ist bereits auf diesen Wert gesetzt!",
-                "failed": "Gehalt konnte nicht geändert werden!",
-                "invalid_salary": "Bitte gib ein gültiges Gehalt ein!",
-                "nui_error": "Ein Fehler ist in NUI beim Ändern des Gehalts aufgetreten: {error}"
+                "success": "Salary changed to {salary}{currency}!",
+                "already_set": "Salary is already set to this value!",
+                "failed": "Failed to change salary!",
+                "invalid_salary": "Please enter a valid salary!",
+                "nui_error": "An error occurred in NUI while changing the salary: {error}"
             }
         },
 
         "bonus": {
-            "no_employees_selected": "Keine Mitarbeiter ausgewählt!",
-            "no_ranks_selected": "Keine Ränge ausgewählt!",
-            "invalid_amount": "Bitte gib einen gültigen Bonus-Betrag ein!",
-            "success": "Bonus erfolgreich an {count} Mitarbeiter gegeben!",
-            "rank_success": "Bonus von {amount} erfolgreich an {count} Ränge gegeben!",
-            "all_employees_success": "Bonus von {amount} erfolgreich an alle {count} Mitarbeiter gegeben!",
-            "all_ranks_success": "Bonus von {amount} erfolgreich an alle Mitarbeiter in {count} Rängen gegeben!",
-            "online_employees_success": "Bonus von {amount} erfolgreich an {count} Online-Mitarbeiter gegeben!"
+            "no_employees_selected": "No employees selected!",
+            "no_ranks_selected": "No ranks selected!",
+            "invalid_amount": "Please enter a valid bonus amount!",
+            "success": "Bonus given to {count} employees successfully!",
+            "rank_success": "Bonus of {amount} given to {count} ranks successfully!",
+            "all_employees_success": "Bonus of {amount} given to all {count} employees successfully!",
+            "all_ranks_success": "Bonus of {amount} given to all employees in {count} ranks successfully!",
+            "online_employees_success": "Bonus of {amount} given to {count} online employees successfully!"
         }
     }
 }

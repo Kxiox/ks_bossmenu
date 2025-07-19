@@ -14,22 +14,22 @@
             <div class="bonus-card">
                 <div class="card-header">
                     <i class="bi bi-person"></i>
-                    <span>Einzelpersonen</span>
+                    <span>{{ $t('bonus.individual') }}</span>
                 </div>
                 <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusEmployeesModal">
                     <i class="bi bi-person-plus"></i>
-                    Bonus an Mitarbeiter
+                    {{ $t('bonus.add_employee_bonus') }}
                 </button>
             </div>
 
             <div class="bonus-card">
                 <div class="card-header">
                     <i class="bi bi-diagram-3"></i>
-                    <span>Ränge</span>
+                    <span>{{ $t('bonus.ranks') }}</span>
                 </div>
                 <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusRanksModal">
                     <i class="bi bi-award"></i>
-                    Bonus an Ränge
+                    {{ $t('bonus.add_rank_bonus') }}
                 </button>
             </div>
         </div>
@@ -38,20 +38,20 @@
         <div class="bonus-card group full-width">
             <div class="card-header">
                 <i class="bi bi-people"></i>
-                <span>Gruppen</span>
+                <span>{{ $t('bonus.groups') }}</span>
             </div>
             <div class="card-actions horizontal">
                 <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusAllEmployeesModal">
                     <i class="bi bi-people-fill"></i>
-                    Alle Mitarbeiter
+                    {{ $t('bonus.all_employees') }}
                 </button>
                 <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusAllRanksModal">
                     <i class="bi bi-diagram-2"></i>
-                    Alle Ränge
+                    {{ $t('bonus.all_ranks') }}
                 </button>
                 <button class="btn btn-main online" type="button" data-bs-toggle="modal" data-bs-target="#bonusOnlineEmployeesModal">
                     <i class="bi bi-wifi"></i>
-                    Online Mitarbeiter
+                    {{ $t('bonus.online_employees') }}
                 </button>
             </div>
         </div>
