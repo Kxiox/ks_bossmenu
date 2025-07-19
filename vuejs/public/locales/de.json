@@ -25,15 +25,19 @@
         "table_name": "Name",
         "table_position": "Position",
         "table_salary": "Gehalt",
-        "table_actions": "Aktionen"
+        "table_actions": "Aktionen",
+        "table_grade": "Rang",
+        "selected": "ausgewählt"
     },
 
     "salaries": {
         "table_name": "Name",
         "table_salary": "Gehalt",
         "table_actions": "Aktionen",
+        "table_grade": "Rang",
         "change_salary": "Gehalt ändern",
-        "placeholder": "Neues Gehalt"
+        "placeholder": "Neues Gehalt",
+        "ranks_selected": "Ränge ausgewählt"
     },
 
     "account": {
@@ -48,7 +52,20 @@
     },
 
     "bonus": {
-        "only_online": "Only online"
+        "add_employee_bonus": "Bonus an Mitarbeiter",
+        "add_rank_bonus": "Bonus an Rang",
+        "table_name": "Name",
+        "bonus_amount": "Bonus Betrag",
+        "all_employees_title": "Bonus für alle Mitarbeiter",
+        "all_employees_info": "Sie sind dabei, allen {count} Mitarbeitern einen Bonus zu geben.",
+        "all_ranks_title": "Bonus für alle Ränge",
+        "all_ranks_info": "Sie sind dabei, allen Mitarbeitern in {count} Rängen einen Bonus zu geben.",
+        "online_employees_title": "Bonus für Online-Mitarbeiter",
+        "online_employees_info": "Sie sind dabei, {count} Online-Mitarbeitern einen Bonus zu geben.",
+        "online_employees": "Online-Mitarbeiter",
+        "no_online_employees": "Derzeit sind keine Mitarbeiter online.",
+        "affected_ranks": "Betroffene Ränge",
+        "only_online": "Nur Online"
     },
 
     "buttons": {
@@ -60,7 +77,14 @@
         "add": "Hinzufügen",
         "change": "Ändern",
         "deposit": "Einzahlen",
-        "withdraw": "Abheben"
+        "withdraw": "Abheben",
+        "give_bonus": "Bonus geben",
+        "select": "Auswählen",
+        "select_all": "Alle auswählen",
+        "deselect_all": "Alle abwählen",
+        "give_to_all_employees": "An alle Mitarbeiter geben",
+        "give_to_all_ranks": "An alle Ränge geben",
+        "give_to_online_employees": "An Online-Mitarbeiter geben"
     },
 
     "notifies": {
@@ -132,6 +156,17 @@
                 "invalid_salary": "Bitte gib ein gültiges Gehalt ein!",
                 "nui_error": "Ein Fehler ist in NUI beim Ändern des Gehalts aufgetreten: {error}"
             }
+        },
+
+        "bonus": {
+            "no_employees_selected": "Keine Mitarbeiter ausgewählt!",
+            "no_ranks_selected": "Keine Ränge ausgewählt!",
+            "invalid_amount": "Bitte gib einen gültigen Bonus-Betrag ein!",
+            "success": "Bonus erfolgreich an {count} Mitarbeiter gegeben!",
+            "rank_success": "Bonus von {amount} erfolgreich an {count} Ränge gegeben!",
+            "all_employees_success": "Bonus von {amount} erfolgreich an alle {count} Mitarbeiter gegeben!",
+            "all_ranks_success": "Bonus von {amount} erfolgreich an alle Mitarbeiter in {count} Rängen gegeben!",
+            "online_employees_success": "Bonus von {amount} erfolgreich an {count} Online-Mitarbeiter gegeben!"
         }
     }
 }

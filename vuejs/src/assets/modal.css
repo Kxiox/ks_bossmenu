@@ -10,7 +10,7 @@
 
 /* Modal Sizes */
 .modal-dialog {
-  max-width: 500px !important;
+  max-width: 20vw !important;
   margin: 1.75rem auto !important;
 }
 

@@ -18,6 +18,7 @@ function openNUI(data)
     getActions()
     getTransactions()
     getCurrency()
+    getOnlineEmployeesList()
 
     SetNuiFocus(true, true)
     SendNUIMessage({
@@ -188,6 +189,27 @@ function getEmployees()
         SendNUIMessage({
             action = 'getEmployeesList',
             employees = args,
+        })
+        
+    end, ESX.PlayerData.job.name)
+end
+
+function getOnlineEmployeesList()
+    ESX.TriggerServerCallback('ks_bossmenu:getOnlineEmployeesList', function(onlineEmployees)
+        local args = {}
+
+        for _, employee in ipairs(onlineEmployees) do
+            table.insert(args, {
+                identifier = employee.identifier,
+                name = employee.name,
+                jobgrade = employee.jobgrade,
+                jobgradenr = employee.jobgradenr,
+            })
+        end
+
+        SendNUIMessage({
+            action = 'getOnlineEmployeesList',
+            onlineEmployees = args,
         })
         
     end, ESX.PlayerData.job.name)

@@ -25,21 +25,24 @@
         "table_name": "Name",
         "table_position": "Position",
         "table_salary": "Salary",
-        "table_actions": "Actions"
+        "table_actions": "Actions",
+        "table_grade": "Grade",
+        "selected": "selected"
     },
 
     "salaries": {
         "table_name": "Name",
         "table_salary": "Salary",
         "table_actions": "Actions",
+        "table_grade": "Grade",
         "change_salary": "Change Salary",
-        "placeholder": "New Salary"
+        "placeholder": "New Salary",
+        "ranks_selected": "ranks selected"
     },
 
     "account": {
         "balance": "Balance",
         "placeholder": "Amount",
-
         "last_transactions": "Last transactions",
         "table_action": "Action",
         "table_employee": "Employee",
@@ -48,7 +51,19 @@
     },
 
     "bonus": {
-        "only_online": "Only online"
+        "add_employee_bonus": "Employee Bonus",
+        "add_rank_bonus": "Rank Bonus",
+        "table_name": "Name",
+        "bonus_amount": "Bonus Amount",
+        "all_employees_title": "Bonus for All Employees",
+        "all_employees_info": "You are about to give a bonus to all {count} employees.",
+        "all_ranks_title": "Bonus for All Ranks",
+        "all_ranks_info": "You are about to give a bonus to all employees in {count} ranks.",
+        "online_employees_title": "Bonus for Online Employees",
+        "online_employees_info": "You are about to give a bonus to {count} online employees.",
+        "online_employees": "Online Employees",
+        "no_online_employees": "No employees are currently online.",
+        "affected_ranks": "Affected Ranks"
     },
 
     "buttons": {
@@ -60,7 +75,14 @@
         "add": "Add",
         "change": "Change",
         "deposit": "Deposit",
-        "withdraw": "Withdraw"
+        "withdraw": "Withdraw",
+        "give_bonus": "Give Bonus",
+        "select": "Select",
+        "select_all": "Select All",
+        "deselect_all": "Deselect All",
+        "give_to_all_employees": "Give to All Employees",
+        "give_to_all_ranks": "Give to All Ranks",
+        "give_to_online_employees": "Give to Online Employees"
     },
 
     "notifies": {
@@ -132,6 +154,17 @@
                 "invalid_salary": "Please enter a valid salary!",
                 "nui_error": "An error occurred in NUI while changing the salary: {error}"
             }
+        },
+
+        "bonus": {
+            "no_employees_selected": "No employees selected!",
+            "no_ranks_selected": "No ranks selected!",
+            "invalid_amount": "Please enter a valid bonus amount!",
+            "success": "Bonus given to {count} employees successfully!",
+            "rank_success": "Bonus of {amount} given to {count} ranks successfully!",
+            "all_employees_success": "Bonus of {amount} given to all {count} employees successfully!",
+            "all_ranks_success": "Bonus of {amount} given to all employees in {count} ranks successfully!",
+            "online_employees_success": "Bonus of {amount} given to {count} online employees successfully!"
         }
     }
 }

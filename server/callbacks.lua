@@ -37,6 +37,25 @@ ESX.RegisterServerCallback('ks_bossmenu:getEmployees', function(source, cb, jobN
     cb(employees, onduty, factionmoney)
 end)
 
+ESX.RegisterServerCallback('ks_bossmenu:getOnlineEmployeesList', function( source, cb, jobName)
+    local xPlayers = ESX.GetExtendedPlayers('job', jobName)
+    local onlineEmployees = {}
+
+    for _, xPlayer in ipairs(xPlayers) do
+        if xPlayer.getJob().name == jobName then
+            table.insert(onlineEmployees, {
+                identifier = xPlayer.getIdentifier(),
+                name = xPlayer.getName(),
+                jobgrade = getGradeLabel(xPlayer.getJob().grade, jobName),
+                jobgradenr = xPlayer.getJob().grade,
+                salary = getSalary(xPlayer.getJob().grade, jobName),
+            })
+        end
+    end
+
+    cb(onlineEmployees)
+end)
+
 ESX.RegisterServerCallback('ks_bossmenu:getEmployeesList', function(source, cb, jobName)
     MySQL.query('SELECT identifier, firstname, lastname, job_grade FROM users WHERE job = ?', {
         jobName

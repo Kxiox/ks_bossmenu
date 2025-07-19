@@ -23,6 +23,7 @@
   const account = ref('0$')
   const currency = ref(null)
   const employeesList = ref([])
+  const onlineEmployeesList = ref([])
   const saleriesList = ref([])
   const actionsList = ref([])
   const transactionsList = ref([])
@@ -146,6 +147,9 @@
         
       } else if (event.data.action === 'getEmployeesList') {
         employeesList.value = event.data.employees
+
+      } else if (event.data.action === 'getOnlineEmployeesList') {
+        onlineEmployeesList.value = event.data.onlineEmployees
       
       } else if (event.data.action === 'getSalaries') {
         saleriesList.value = event.data.salaries
@@ -170,6 +174,9 @@
     :currency="currency"
     :notifiesRef="notifiesRef"
     :selectedSalary="selectedSalary"
+    :employees="employeesList"
+    :saleries="saleriesList"
+    :onlineEmployees="onlineEmployeesList"
   />
 
   <NotifiesComponent :currency="currency" ref="notifiesRef"/>
