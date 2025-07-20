@@ -1,58 +1,82 @@
 <script setup>
-    import { getCurrentInstance } from 'vue';
+    import { getCurrentInstance, ref, onMounted } from 'vue';
     const { proxy } = getCurrentInstance()
     const $t = proxy.$t
+    
+    const translationsReady = ref(false)
+    
+    onMounted(async () => {
+        // Wait for translations to be ready
+        if (window.isTranslationsReady && window.isTranslationsReady()) {
+            translationsReady.value = true
+        } else if (window.waitForTranslations) {
+            await window.waitForTranslations()
+            translationsReady.value = true
+        } else {
+            // Fallback: just show after a short delay
+            setTimeout(() => {
+                translationsReady.value = true
+            }, 500)
+        }
+    })
 </script>
 
 <template>
-    <h1 class="text-start">{{ $t('pages.bonus') }}</h1>
+    <div v-if="!translationsReady" class="loading-translations">
+        <div class="spinner"></div>
+        <span>Lade Übersetzungen...</span>
+    </div>
     
-    <hr />
+    <div v-else>
+        <h1 class="text-start">{{ $t('pages.bonus') }}</h1>
+        
+        <hr />
 
-    <div class="bonus-container">
-        <div class="bonus-grid">
-            <div class="bonus-card">
-                <div class="card-header">
-                    <i class="bi bi-person"></i>
-                    <span>{{ $t('bonus.individual') }}</span>
+        <div class="bonus-container">
+            <div class="bonus-grid">
+                <div class="bonus-card">
+                    <div class="card-header">
+                        <i class="bi bi-person"></i>
+                        <span>{{ $t('bonus.individual') }}</span>
+                    </div>
+                    <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusEmployeesModal">
+                        <i class="bi bi-person-plus-fill"></i>
+                        {{ $t('bonus.add_employee_bonus') }}
+                    </button>
                 </div>
-                <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusEmployeesModal">
-                    <i class="bi bi-person-plus"></i>
-                    {{ $t('bonus.add_employee_bonus') }}
-                </button>
-            </div>
 
-            <div class="bonus-card">
-                <div class="card-header">
-                    <i class="bi bi-diagram-3"></i>
-                    <span>{{ $t('bonus.ranks') }}</span>
+                <div class="bonus-card">
+                    <div class="card-header">
+                        <i class="bi bi-diagram-3"></i>
+                        <span>{{ $t('bonus.ranks') }}</span>
+                    </div>
+                    <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusRanksModal">
+                        <i class="bi bi-award-fill"></i>
+                        {{ $t('bonus.add_rank_bonus') }}
+                    </button>
                 </div>
-                <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusRanksModal">
-                    <i class="bi bi-award"></i>
-                    {{ $t('bonus.add_rank_bonus') }}
-                </button>
             </div>
-        </div>
 
-        <!-- Gruppen Card - Volle Breite -->
-        <div class="bonus-card group full-width">
-            <div class="card-header">
-                <i class="bi bi-people"></i>
-                <span>{{ $t('bonus.groups') }}</span>
-            </div>
-            <div class="card-actions horizontal">
-                <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusAllEmployeesModal">
-                    <i class="bi bi-people-fill"></i>
-                    {{ $t('bonus.all_employees') }}
-                </button>
-                <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusAllRanksModal">
-                    <i class="bi bi-diagram-2"></i>
-                    {{ $t('bonus.all_ranks') }}
-                </button>
-                <button class="btn btn-main online" type="button" data-bs-toggle="modal" data-bs-target="#bonusOnlineEmployeesModal">
-                    <i class="bi bi-wifi"></i>
-                    {{ $t('bonus.online_employees') }}
-                </button>
+            <!-- Gruppen Card - Volle Breite -->
+            <div class="bonus-card group full-width">
+                <div class="card-header">
+                    <i class="bi bi-people"></i>
+                    <span>{{ $t('bonus.groups') }}</span>
+                </div>
+                <div class="card-actions horizontal">
+                    <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusAllEmployeesModal">
+                        <i class="bi bi-people-fill"></i>
+                        {{ $t('bonus.all_employees') }}
+                    </button>
+                    <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#bonusAllRanksModal">
+                        <i class="bi bi-diagram-2-fill"></i>
+                        {{ $t('bonus.all_ranks') }}
+                    </button>
+                    <button class="btn btn-main online" type="button" data-bs-toggle="modal" data-bs-target="#bonusOnlineEmployeesModal">
+                        <i class="bi bi-wifi"></i>
+                        {{ $t('bonus.online_employees') }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -60,6 +84,36 @@
 
 <style scoped lang="scss">
     @use 'bootstrap/scss/bootstrap' as *;
+
+    .loading-translations {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem;
+        text-align: center;
+        color: #fff;
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--color-700);
+            border-top: 4px solid var(--color-500);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        
+        span {
+            font-size: 1.1rem;
+            color: var(--color-300);
+        }
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
 
     h1 {
         font-size: 1.7rem;

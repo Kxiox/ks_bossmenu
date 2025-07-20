@@ -1,0 +1,177 @@
+{
+    "pages": {
+        "home": "Accueil",
+        "employees": "Employés",
+        "salaries": "Salaires",
+        "account": "Compte",
+        "bonus": "Prime"
+    },
+
+    "home": {
+        "stats": "Statistiques",
+        "employees": "Employés",
+        "on_duty": "En service",
+        "account": "Compte",
+
+        "last_actions": "Dernières actions",
+        "table_action": "Action",
+        "table_employee": "Employé",
+        "table_time": "Heure",
+        "all_actions": "Toutes les actions"
+    },
+
+    "employees": {
+        "add_employee": "Ajouter un employé",
+        "table_name": "Nom",
+        "table_position": "Position",
+        "table_salary": "Salaire",
+        "table_actions": "Actions",
+        "table_grade": "Grade",
+        "selected": "sélectionné"
+    },
+
+    "salaries": {
+        "table_name": "Nom",
+        "table_salary": "Salaire",
+        "table_actions": "Actions",
+        "table_grade": "Grade",
+        "change_salary": "Changer le salaire",
+        "placeholder": "Nouveau salaire",
+        "ranks_selected": "grades sélectionnés"
+    },
+
+    "account": {
+        "balance": "Solde",
+        "placeholder": "Montant",
+        "last_transactions": "Dernières transactions",
+        "table_action": "Action",
+        "table_employee": "Employé",
+        "table_amount": "Montant",
+        "all_transactions": "Toutes les transactions"
+    },
+
+    "bonus": {
+        "individual": "Individuel",
+        "ranks": "Grades",
+        "groups": "Groupes",
+        "all_employees": "Tous les employés",
+        "all_ranks": "Tous les grades",
+        "single_employee_bonus": "Prime employé unique",
+        "add_employee_bonus": "Prime employé",
+        "add_rank_bonus": "Prime de grade",
+        "table_name": "Nom",
+        "bonus_amount": "Montant de la prime",
+        "all_employees_info": "Vous êtes sur le point de donner une prime à tous les {count} employés.",
+        "all_ranks_title": "Prime pour tous les grades",
+        "all_ranks_info": "Vous êtes sur le point de donner une prime à tous les employés de {count} grades.",
+        "online_employees_info": "Vous êtes sur le point de donner une prime à {count} employés en ligne.",
+        "online_employees": "Employés en ligne",
+        "no_online_employees": "Aucun employé n'est actuellement en ligne.",
+        "affected_ranks": "Grades affectés",
+        "give_to_all_employees": "Donner à tous les employés",
+        "give_to_all_ranks": "Donner à tous les grades",
+        "give_to_online_employees": "Donner aux employés en ligne"
+    },
+
+    "buttons": {
+        "see_all": "Voir tout",
+        "promote": "Promouvoir",
+        "demote": "Rétrograder",
+        "fire": "Licencier",
+        "cancel": "Annuler",
+        "add": "Ajouter",
+        "change": "Changer",
+        "deposit": "Déposer",
+        "withdraw": "Retirer",
+        "give_bonus": "Donner une prime",
+        "select": "Sélectionner",
+        "select_all": "Tout sélectionner",
+        "deselect_all": "Tout désélectionner",
+        "give_to_all_employees": "Donner à tous les employés",
+        "give_to_all_ranks": "Donner à tous les grades",
+        "give_to_online_employees": "Donner aux employés en ligne"
+    },
+
+    "notifies": {
+        "account": {
+            "deposit": {
+                "success": "Dépôt de {amount}$ réussi !",
+                "not_enough_money": "Pas assez d'argent pour déposer !",
+                "error": "Une erreur s'est produite lors du traitement du dépôt !",
+                "unknown_error": "Une erreur inconnue s'est produite lors du traitement du dépôt !",
+                "unknown": "Une réponse inattendue a été reçue lors du dépôt d'argent !",
+                "nui_error": "Une erreur s'est produite dans NUI lors du dépôt d'argent : {error}",
+                "invalid_amount": "Veuillez entrer un montant valide !"
+            },
+
+            "withdraw": {
+                "success": "Retrait de {amount}$ réussi !",
+                "not_enough_money": "Pas assez d'argent pour retirer !",
+                "error": "Une erreur s'est produite lors du traitement du retrait !",
+                "unknown_error": "Une erreur inconnue s'est produite lors du traitement du retrait !",
+                "unknown": "Une réponse inattendue a été reçue lors du retrait d'argent !",
+                "nui_error": "Une erreur s'est produite dans NUI lors du retrait d'argent : {error}",
+                "invalid_amount": "Veuillez entrer un montant valide !"
+            }
+        },
+
+        "employees": {
+            "promote": {
+                "success": "Employé {name} promu avec succès !",
+                "self_promote": "Vous ne pouvez pas vous promouvoir vous-même.",
+                "highest_grade": "L'employé {name} est déjà au grade le plus élevé.",
+                "not_same_job": "L'employé {name} n'est pas dans le même emploi.",
+                "error": "Une erreur s'est produite lors de la promotion de l'employé.",
+                "unknown_error": "Une erreur inconnue s'est produite lors de la promotion de l'employé.",
+                "unknown": "Une réponse inattendue a été reçue lors de la promotion de l'employé.",
+                "nui_error": "Une erreur s'est produite dans NUI lors de la promotion de l'employé : {error}"
+            },
+            "demote": {
+                "success": "Employé {name} rétrogradé avec succès !",
+                "self_demote": "Vous ne pouvez pas vous rétrograder vous-même.",
+                "lowest_grade": "L'employé {name} est déjà au grade le plus bas.",
+                "not_same_job": "L'employé {name} n'est pas dans le même emploi.",
+                "error": "Une erreur s'est produite lors de la rétrogradation de l'employé.",
+                "unknown_error": "Une erreur inconnue s'est produite lors de la rétrogradation de l'employé.",
+                "unknown": "Une réponse inattendue a été reçue lors de la rétrogradation de l'employé.",
+                "nui_error": "Une erreur s'est produite dans NUI lors de la rétrogradation de l'employé : {error}"
+            },
+            "fire": {
+                "success": "Employé {name} licencié avec succès !",
+                "self_fire": "Vous ne pouvez pas vous licencier vous-même.",
+                "not_same_job": "L'employé {name} n'est pas dans le même emploi.",
+                "error": "Une erreur s'est produite lors du licenciement de l'employé.",
+                "unknown_error": "Une erreur inconnue s'est produite lors du licenciement de l'employé.",
+                "unknown": "Une réponse inattendue a été reçue lors du licenciement de l'employé.",
+                "nui_error": "Une erreur s'est produite dans NUI lors du licenciement de l'employé : {error}"
+            },
+            "add": {
+                "success": "Employé avec ID {id} ajouté avec succès !",
+                "failed": "Le joueur n'est pas en ligne ou déjà dans ce travail !",
+                "invalid_id": "Veuillez entrer un ID supérieur à 0 !",
+                "nui_error": "Une erreur s'est produite dans NUI lors de l'ajout de l'employé : {error}"
+            }
+        },
+
+        "salaries": {
+            "change": {
+                "success": "Salaire changé à {salary}{currency} !",
+                "already_set": "Le salaire est déjà défini à cette valeur !",
+                "failed": "Échec du changement de salaire !",
+                "invalid_salary": "Veuillez entrer un salaire valide !",
+                "nui_error": "Une erreur s'est produite dans NUI lors du changement de salaire : {error}"
+            }
+        },
+
+        "bonus": {
+            "no_employees_selected": "Aucun employé sélectionné !",
+            "no_ranks_selected": "Aucun grade sélectionné !",
+            "invalid_amount": "Veuillez entrer un montant de prime valide !",
+            "success": "Prime donnée à {count} employés avec succès !",
+            "rank_success": "Prime de {amount} donnée à {count} grades avec succès !",
+            "all_employees_success": "Prime de {amount} donnée à tous les {count} employés avec succès !",
+            "all_ranks_success": "Prime de {amount} donnée à tous les employés de {count} grades avec succès !",
+            "online_employees_success": "Prime de {amount} donnée à {count} employés en ligne avec succès !"
+        }
+    }
+}

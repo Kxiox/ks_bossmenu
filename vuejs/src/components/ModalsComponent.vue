@@ -393,7 +393,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="bonusRanksModalLabel"><i class="bi bi-person-plus-fill"></i> {{
+                    <h1 class="modal-title fs-5" id="bonusRanksModalLabel"><i class="bi bi-award-fill"></i> {{
                         $t('bonus.add_rank_bonus') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -480,7 +480,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="bonusAllEmployeesModalLabel"><i class="bi bi-people-fill"></i> {{
-                        $t('bonus.add_employee_bonus') }}</h1>
+                        $t('bonus.all_employees') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -517,8 +517,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="bonusAllRanksModalLabel"><i class="bi bi-award-fill"></i> {{
-                        $t('bonus.add_rank_bonus') }}</h1>
+                    <h1 class="modal-title fs-5" id="bonusAllRanksModalLabel"><i class="bi bi-diagram-2-fill"></i> {{
+                        $t('bonus.all_ranks') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -565,7 +565,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="bonusOnlineEmployeesModalLabel"><i class="bi bi-person-check-fill"></i> {{
+                    <h1 class="modal-title fs-5" id="bonusOnlineEmployeesModalLabel"><i class="bi bi-wifi"></i> {{
                         $t('bonus.online_employees') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
