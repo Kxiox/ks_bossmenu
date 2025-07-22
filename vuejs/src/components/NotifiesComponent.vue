@@ -19,27 +19,27 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+    import { ref } from 'vue'
 
-const alerts = ref([])
+    const alerts = ref([])
 
-function triggerAlert(type, message) {
-    alerts.value.push({ type, message })
-    setTimeout(() => {
-        alerts.value.shift()
-    }, 3000)
-}
+    function triggerAlert(type, message) {
+        alerts.value.push({ type, message })
+        setTimeout(() => {
+            alerts.value.shift()
+        }, 5000)
+    }
 
-function alertClass(type) {
-    return {
-        info: 'alert-primary',
-        success: 'alert-success',
-        warning: 'alert-warning',
-        danger: 'alert-danger'
-    }[type] || 'alert-primary'
-}
+    function alertClass(type) {
+        return {
+            info: 'alert-primary',
+            success: 'alert-success',
+            warning: 'alert-warning',
+            danger: 'alert-danger'
+        }[type] || 'alert-primary'
+    }
 
-defineExpose({ triggerAlert })
+    defineExpose({ triggerAlert })
 </script>
 
 <style scoped>

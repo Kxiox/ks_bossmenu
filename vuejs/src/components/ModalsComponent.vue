@@ -28,65 +28,78 @@
         }
     })
 
-    // Reactive state for selected employees
     const selectedEmployees = ref([])
     
-    // Reactive state for selected ranks
     const selectedRanks = ref([])
     
-    // Import ref from Vue
     import { ref } from 'vue'
 
-    // Toggle employee selection
     function toggleEmployeeSelection(employee) {
         const index = selectedEmployees.value.findIndex(emp => emp.identifier === employee.identifier)
         
         if (index > -1) {
-            // Employee is already selected, remove them
             selectedEmployees.value.splice(index, 1)
         } else {
-            // Employee is not selected, add them
             selectedEmployees.value.push(employee)
         }
     }
 
-    // Check if employee is selected
     function isEmployeeSelected(employee) {
         return selectedEmployees.value.some(emp => emp.identifier === employee.identifier)
     }
 
-    // Select all employees
     function selectAllEmployees() {
         if (selectedEmployees.value.length === props.employees.length) {
-            // All selected, deselect all
             selectedEmployees.value = []
         } else {
-            // Not all selected, select all
             selectedEmployees.value = [...props.employees]
         }
     }
 
-    // Check if all employees are selected
     function areAllEmployeesSelected() {
         return selectedEmployees.value.length === props.employees.length && props.employees.length > 0
     }
 
-    // Give bonus to selected employees
-    function giveBonusToSelectedEmployees() {
+    async function giveBonusToSelectedEmployees() {
         if (selectedEmployees.value.length === 0) {
             props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.no_employees_selected'))
             return
         }
-
-        // Here you can add your bonus logic
-        console.log('Giving bonus to:', selectedEmployees.value)
-        props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.success', { count: selectedEmployees.value.length }))
         
-        // Clear selections after giving bonus
+        try {
+            const bonusAmount = parseInt(document.getElementById('bonusAmount').value)
+
+            if (!bonusAmount || bonusAmount <= 0) {
+                props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.invalid_amount'))
+                return
+            }
+
+            const response = await fetch(`https://${GetParentResourceName()}/giveBonusToSelectedEmployees`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    employees: selectedEmployees.value,
+                    amount: bonusAmount
+                })
+            })
+
+            const text = await response.text()
+
+            if (text === '"ok"') {
+                props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.given_to_employees', { count: selectedEmployees.value.length, amount: bonusAmount }))
+            } else {
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.error', { error: text }))
+            }
+        } catch (error) {
+            props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.unknown_error', { error: error.message }))
+        }
+        document.getElementById('bonusAmount').value = ''
+
         selectedEmployees.value = []
     }
 
-        // Rank selection functions
     function toggleRankSelection(rank) {
         const index = selectedRanks.value.findIndex(r => r.grade === rank.grade)
         
@@ -132,7 +145,6 @@
         document.getElementById('bonusRankAmount').value = ''
     }
 
-    // Functions for bulk bonus modals
     function giveBonusToAllEmployees() {
         const bonusAmount = parseInt(document.getElementById('bonusAllEmployeesAmount').value)
         if (!bonusAmount || bonusAmount <= 0) {
@@ -379,7 +391,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-second" data-bs-dismiss="modal">{{ $t('buttons.cancel') }}</button>
-                    <button type="button" class="btn btn-main" :disabled="selectedEmployees.length === 0"
+                    <button type="button" class="btn btn-main" data-bs-dismiss="modal" :disabled="selectedEmployees.length === 0"
                         @click="giveBonusToSelectedEmployees()">
                         {{ $t('buttons.give_bonus') }} ({{ selectedEmployees.length }})
                     </button>
@@ -464,7 +476,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-second" data-bs-dismiss="modal">{{ $t('buttons.cancel') }}</button>
-                    <button type="button" class="btn btn-main" :disabled="selectedRanks.length === 0"
+                    <button type="button" class="btn btn-main" data-bs-dismiss="modal" :disabled="selectedRanks.length === 0"
                         @click="giveBonusToSelectedRanks()">
                         {{ $t('buttons.give_bonus') }} ({{ selectedRanks.length }})
                     </button>

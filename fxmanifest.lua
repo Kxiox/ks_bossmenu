@@ -21,6 +21,7 @@ shared_scripts {
 }
 
 client_scripts {
+    'client/nui/*.lua',
     'client/*.lua',
     'locales/*.lua'
 }
@@ -28,6 +29,7 @@ client_scripts {
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     '@es_extended/locale.lua',
+    'server/callbacks/*.lua',
     'server/*.lua',
     'locales/*.lua'
 }

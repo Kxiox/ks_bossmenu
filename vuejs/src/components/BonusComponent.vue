@@ -6,14 +6,12 @@
     const translationsReady = ref(false)
     
     onMounted(async () => {
-        // Wait for translations to be ready
         if (window.isTranslationsReady && window.isTranslationsReady()) {
             translationsReady.value = true
         } else if (window.waitForTranslations) {
             await window.waitForTranslations()
             translationsReady.value = true
         } else {
-            // Fallback: just show after a short delay
             setTimeout(() => {
                 translationsReady.value = true
             }, 500)
@@ -184,7 +182,7 @@
 
         .btn-main:not(.card-actions .btn-main) {
             margin: 0.75rem;
-            width: calc(100% - 1.5rem); // Volle Breite minus margin
+            width: calc(100% - 1.5rem);
         }
     }
 

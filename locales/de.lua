@@ -9,4 +9,6 @@ Locales['de'] = {
 
     ['transaction_withdraw'] = 'Auszahlen',
     ['transaction_deposit'] = 'Einzahlen',
+
+    ['receive_bonus'] = 'Du hast einen Bonus von %s erhalten.',
 }

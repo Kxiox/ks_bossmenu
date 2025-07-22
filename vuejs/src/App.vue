@@ -1,12 +1,6 @@
 <script setup>
   import { ref, onMounted } from 'vue'
 
-  // import translations from '../public/en.json'
-
-  // function t(key) {
-  //   return key.split('.').reduce((o, i) => (o ? o[i] : key), translations)
-  // }
-
   import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
   import HomeComponent from './components/HomeComponent.vue'
   import ActionsComponent from './components/ActionsComponent.vue'
@@ -27,14 +21,14 @@
   const saleriesList = ref([])
   const actionsList = ref([])
   const transactionsList = ref([])
-  const selectedSalary = ref(null) // <-- hinzufügen
+  const selectedSalary = ref(null)
 
   const showAllActions = ref(false)
   const fadeHome = ref(true)
   const fadeActions = ref(false)
   const notifiesRef = ref(null)
 
-  const devMode = ref(true) // Set to true to show the color mode dropdown
+  const devMode = ref(true)
 
   function showActions() {
     fadeHome.value = false
@@ -123,7 +117,6 @@
 
   function handleOpenSalaryModal(salary) {
     selectedSalary.value = salary
-    // Modal öffnen (Bootstrap)
     const modal = new bootstrap.Modal(document.getElementById('salaryModal'))
     modal.show()
   }
@@ -163,6 +156,31 @@
       } else if (event.data.action === 'getCurrency') {
         currency.value = event.data.currency
 
+      } else if (event.data.action === 'notify') {
+        if (document.querySelector(':root').style.display === "block") {
+          if (notifiesRef.value) {
+              notifiesRef.value.triggerAlert(event.data.type, event.data.message)
+          } else {
+            console.warn('NotifiesComponent is not available yet.')
+          }
+        } else {
+          console.log(document.querySelector(':root').style.display)
+          if (notifiesRef.value) {
+            openNUI()
+            document.querySelector('.dashboard').style.display = 'none'
+            setTimeout(() => {
+              notifiesRef.value.triggerAlert(event.data.type, event.data.message)
+            }, 300)
+            setTimeout(() => {
+              closeNUI()
+              setTimeout(() => {
+                document.querySelector('.dashboard').style.display = ''
+              }, 150)
+            }, 5000)
+          } else {
+            console.warn('NotifiesComponent is not available yet.')
+          }
+        }
       }
     })
   })

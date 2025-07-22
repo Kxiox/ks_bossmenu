@@ -171,7 +171,10 @@
             "rank_success": "Bonus of {amount} given to {count} ranks successfully!",
             "all_employees_success": "Bonus of {amount} given to all {count} employees successfully!",
             "all_ranks_success": "Bonus of {amount} given to all employees in {count} ranks successfully!",
-            "online_employees_success": "Bonus of {amount} given to {count} online employees successfully!"
+            "online_employees_success": "Bonus of {amount} given to {count} online employees successfully!",
+            "given_to_employees": "Bonus of {amount} given to {count} employees successfully!",
+            "error": "An error occurred while giving the bonus: {error}",
+            "unknown_error": "An unknown error occurred while giving the bonus: {error}"
         }
     }
 }
