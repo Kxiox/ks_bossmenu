@@ -1,22 +1,7 @@
 <script setup>
-    import { getCurrentInstance, ref, onMounted } from 'vue';
-    const { proxy } = getCurrentInstance()
-    const $t = proxy.$t
+    import { useTranslations } from '../composables/useTranslations.js'
     
-    const translationsReady = ref(false)
-    
-    onMounted(async () => {
-        if (window.isTranslationsReady && window.isTranslationsReady()) {
-            translationsReady.value = true
-        } else if (window.waitForTranslations) {
-            await window.waitForTranslations()
-            translationsReady.value = true
-        } else {
-            setTimeout(() => {
-                translationsReady.value = true
-            }, 500)
-        }
-    })
+    const { translationsReady, $t } = useTranslations()
 </script>
 
 <template>

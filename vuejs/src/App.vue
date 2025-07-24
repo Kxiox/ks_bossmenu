@@ -1,5 +1,6 @@
 <script setup>
   import { ref, onMounted } from 'vue'
+  import { useTranslations } from './composables/useTranslations.js'
 
   import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
   import HomeComponent from './components/HomeComponent.vue'
@@ -11,6 +12,9 @@
   import TransactionsComponent from './components/TransactionsComponent.vue'
   import ModalsComponent from './components/ModalsComponent.vue'
   import NotifiesComponent from './components/NotifiesComponent.vue'
+
+  // Initialize translations globally
+  const { initializeTranslations } = useTranslations()
 
   const employeesAmount = ref(0)
   const onDuty = ref(0)
@@ -121,7 +125,10 @@
     modal.show()
   }
 
-  onMounted(() => {
+  onMounted(async () => {
+    // Initialize translations as early as possible
+    await initializeTranslations()
+    
     window.addEventListener('message', (event) => {
       if (event.data.action === 'openNUI') {
         openNUI()

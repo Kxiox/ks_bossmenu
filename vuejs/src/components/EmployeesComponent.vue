@@ -1,8 +1,7 @@
 <script setup>
-    import { getCurrentInstance } from 'vue'
+    import { useTranslations } from '../composables/useTranslations.js'
 
-    const { proxy } = getCurrentInstance()
-    const $t = proxy.$t
+    const { $t } = useTranslations()
     
     const props = defineProps({
         notifiesRef: Object,
