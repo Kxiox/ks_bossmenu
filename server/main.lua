@@ -35,3 +35,18 @@ function addTransaction(source, data)
         xPlayer.getJob().name,
     })
 end
+
+function removeMoney(source, jobname, amount)
+    MySQL.update('UPDATE addon_account_data SET money = money - ? WHERE account_name = ?', {
+        amount,
+        Config.Jobs[jobname] and Config.Jobs[jobname].society or 'society_' .. jobname
+    }, function(affectedRows)
+        if affectedRows > 0 then
+            local xPlayer = ESX.GetPlayerFromId(source)
+            xPlayer.removeMoney(amount)
+            TriggerClientEvent('ks_bossmenu:notify', source, TranslateCap('removed_money', amount .. Config.Currency), 'info')
+        else
+            TriggerClientEvent('ks_bossmenu:notify', source, TranslateCap('error_removing_money'), 'error')
+        end
+    end)
+end

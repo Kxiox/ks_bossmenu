@@ -1,3 +1,11 @@
+--[[
+    https://github.com/kxiox/ks_bossmenu
+
+    This file is licensed under GPL-3.0 or higher <https://www.gnu.org/licenses/gpl-3.0.en.html>
+
+    Copyright © 2025 Kxiox <https://github.com/kxiox>
+]]
+
 ESX = exports['es_extended']:getSharedObject()
 
 ESX.RegisterServerCallback('ks_bossmenu:giveBonusToSelectedEmployees', function(source, cb, data)
@@ -15,6 +23,8 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToSelectedEmployees', function(
         for _, employee in ipairs(employees) do
             local xTarget = ESX.GetPlayerFromIdentifier(employee.identifier)
             if xTarget then
+                removeMoney(source, job.name, amount)
+
                 xTarget.addMoney(amount)
 
                 TriggerClientEvent('ks_bossmenu:notify', xTarget.source, TranslateCap('receive_bonus', amount .. Config.Currency), 'info')
@@ -44,13 +54,11 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToRanks', function(source, cb, 
     end
     
     if IsPlayerAllowed(source) then
-        -- Erstelle eine Liste der ausgewählten Grade
         local selectedGrades = {}
         for _, rank in ipairs(ranks) do
             selectedGrades[rank.grade] = true
         end
         
-        -- Hole alle Mitarbeiter des Jobs aus der Datenbank
         MySQL.query('SELECT identifier, job_grade FROM users WHERE job = ?', {
             job.name
         }, function(employees)
@@ -58,16 +66,15 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToRanks', function(source, cb, 
             
             if employees and #employees > 0 then
                 for _, employee in ipairs(employees) do
-                    -- Prüfe ob der Mitarbeiter einen ausgewählten Rang hat
                     if selectedGrades[employee.job_grade] then
                         local xTarget = ESX.GetPlayerFromIdentifier(employee.identifier)
                         
                         if xTarget then
-                            -- Spieler ist online - Bonus direkt geben
+                            removeMoney(source, job.name, amount)
+
                             xTarget.addMoney(amount)
                             TriggerClientEvent('ks_bossmenu:notify', xTarget.source, TranslateCap('receive_bonus', amount .. Config.Currency), 'info')
                         else
-                            -- Spieler ist offline - zur Queue hinzufügen
                             MySQL.insert('INSERT INTO ks_bossmenu_bonus_queue (identifier, amount, job) VALUES (?, ?, ?)', {
                                 employee.identifier,
                                 tonumber(amount),
@@ -92,7 +99,6 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToRanks', function(source, cb, 
     end
 end)
 
--- Bonus für alle Mitarbeiter
 ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllEmployees', function(source, cb, data)
     local xPlayer = ESX.GetPlayerFromId(source)
     local job = xPlayer.getJob()
@@ -104,7 +110,6 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllEmployees', function(sourc
     end
     
     if IsPlayerAllowed(source) then
-        -- Hole alle Mitarbeiter des Jobs aus der Datenbank
         MySQL.query('SELECT identifier FROM users WHERE job = ?', {
             job.name
         }, function(employees)
@@ -115,11 +120,11 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllEmployees', function(sourc
                     local xTarget = ESX.GetPlayerFromIdentifier(employee.identifier)
                     
                     if xTarget then
-                        -- Spieler ist online - Bonus direkt geben
+                        removeMoney(source, job.name, amount)
+
                         xTarget.addMoney(amount)
                         TriggerClientEvent('ks_bossmenu:notify', xTarget.source, TranslateCap('receive_bonus', amount .. Config.Currency), 'info')
                     else
-                        -- Spieler ist offline - zur Queue hinzufügen
                         MySQL.insert('INSERT INTO ks_bossmenu_bonus_queue (identifier, amount, job) VALUES (?, ?, ?)', {
                             employee.identifier,
                             tonumber(amount),
@@ -139,7 +144,6 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllEmployees', function(sourc
     end
 end)
 
--- Bonus für alle Ränge
 ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllRanks', function(source, cb, data)
     local xPlayer = ESX.GetPlayerFromId(source)
     local job = xPlayer.getJob()
@@ -151,7 +155,6 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllRanks', function(source, c
     end
     
     if IsPlayerAllowed(source) then
-        -- Hole alle Mitarbeiter des Jobs aus der Datenbank
         MySQL.query('SELECT identifier FROM users WHERE job = ?', {
             job.name
         }, function(employees)
@@ -162,11 +165,11 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllRanks', function(source, c
                     local xTarget = ESX.GetPlayerFromIdentifier(employee.identifier)
                     
                     if xTarget then
-                        -- Spieler ist online - Bonus direkt geben
+                        removeMoney(source, job.name, amount)
+
                         xTarget.addMoney(amount)
                         TriggerClientEvent('ks_bossmenu:notify', xTarget.source, TranslateCap('receive_bonus', amount .. Config.Currency), 'info')
                     else
-                        -- Spieler ist offline - zur Queue hinzufügen
                         MySQL.insert('INSERT INTO ks_bossmenu_bonus_queue (identifier, amount, job) VALUES (?, ?, ?)', {
                             employee.identifier,
                             tonumber(amount),
@@ -186,7 +189,6 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllRanks', function(source, c
     end
 end)
 
--- Bonus für online Mitarbeiter
 ESX.RegisterServerCallback('ks_bossmenu:giveBonusToOnlineEmployees', function(source, cb, data)
     local xPlayer = ESX.GetPlayerFromId(source)
     local job = xPlayer.getJob()
@@ -200,12 +202,12 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToOnlineEmployees', function(so
     if IsPlayerAllowed(source) then
         local processedCount = 0
         
-        -- Hole alle online Spieler
         local xPlayers = ESX.GetExtendedPlayers()
         
         for _, xTarget in pairs(xPlayers) do
-            -- Prüfe ob der Spieler den gleichen Job hat
             if xTarget.getJob().name == job.name then
+                removeMoney(source, job.name, amount)
+
                 xTarget.addMoney(amount)
                 TriggerClientEvent('ks_bossmenu:notify', xTarget.source, TranslateCap('receive_bonus', amount .. Config.Currency), 'info')
                 processedCount = processedCount + 1

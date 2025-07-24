@@ -171,7 +171,6 @@
             console.warn('NotifiesComponent is not available yet.')
           }
         } else {
-          console.log(document.querySelector(':root').style.display)
           if (notifiesRef.value) {
             openNUI()
             document.querySelector('.dashboard').style.display = 'none'

@@ -45,7 +45,6 @@ async function discoverAvailableLocales() {
   }
 
   availableLocales.splice(0, availableLocales.length, ...discovered);
-  console.log('Discovered available locales:', availableLocales);
   return discovered;
 }
 
@@ -66,7 +65,6 @@ async function initializeTranslations() {
     currentLocale = localeToLoad;
     Object.assign(translations, localeData);
     isInitialized = true;
-    console.log('Initialized with locale:', currentLocale);
     
     // Notify that translations are ready
     translationEvents.dispatchEvent(new CustomEvent('translationsReady', {
@@ -97,7 +95,6 @@ async function setLocale(locale) {
     currentLocale = locale;
     Object.keys(translations).forEach(key => delete translations[key]);
     Object.assign(translations, localeData);
-    console.log('Locale changed to:', locale);
     
     // Notify that translations changed
     translationEvents.dispatchEvent(new CustomEvent('translationsChanged', {

@@ -194,8 +194,6 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
     local targetJobGrade = data['employee'].jobgradenr
     local targetIdentifier = data['employee'].identifier
 
-    print(targetIdentifier)
-
     if IsPlayerAllowed(source) then
         if xPlayer.getIdentifier() == targetIdentifier then
             cb('self_promote')
@@ -371,7 +369,6 @@ ESX.RegisterServerCallback('ks_bossmenu:changeSalary', function(source, cb, data
 end)
 
 ESX.RegisterServerCallback('ks_bossmenu:depositMoney', function(source, cb, data)
-    print(data.amount)
     local amount = tonumber(data.amount)
 
     if IsPlayerAllowed(source) and amount and amount > 0 then

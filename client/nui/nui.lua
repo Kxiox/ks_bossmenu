@@ -28,8 +28,6 @@ function openNUI(data)
     stats = data
 end
 
--- Callbacks
-
 RegisterNUICallback('closeNUI', function (data, cb)
     SetNuiFocus(false, false)
     cb('ok')
@@ -136,7 +134,6 @@ end)
 
 RegisterNUICallback('withdraw', function (data, cb)
     ESX.TriggerServerCallback('ks_bossmenu:withdrawMoney', function(message)
-        print(message)
         
         if message == 'success' then
             getStats(stats)
@@ -152,8 +149,6 @@ RegisterNUICallback('withdraw', function (data, cb)
     end, data)
 end)
 
--- Send NUI Messages
-
 function getStats(data)
     ESX.TriggerServerCallback('ks_bossmenu:getEmployees', function(employees, onduty, factionmoney)
         SendNUIMessage({
@@ -166,7 +161,6 @@ function getStats(data)
             currency = Config.Currency,
         })
 
-        print(onduty)
     end, ESX.PlayerData.job.name)
 end
 
@@ -175,7 +169,6 @@ function getEmployees()
         local args = {}
 
         for _, employee in ipairs(employeeslist) do
-            print(employee.grade)
             table.insert(args, {
                 identifier = employee.identifier,
                 firstname = employee.firstname,

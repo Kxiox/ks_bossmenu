@@ -18,6 +18,7 @@ Config.UnemployedJobName = 'unemployed' -- job name of the unemployed job, used 
 
 Config.Jobs = {
     ['police'] = {
+        society = nil, -- nil for society_yourjobname, or set a custom society name
         logo = 'police.png', -- url or file in html/img/
         color = 'blue', -- light, dark, blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan
         grades = { 4 },
