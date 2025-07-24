@@ -18,10 +18,10 @@ shared_scripts {
     '@es_extended/imports.lua',
     '@es_extended/locale.lua',
     'config.lua',
-    'locales/*.lua'
 }
 
 client_scripts {
+    'locales/*.lua',
     'client/nui/bonus.lua',
     'client/nui/notify.lua',
     'client/nui/nui.lua',
@@ -31,6 +31,7 @@ client_scripts {
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     '@es_extended/locale.lua',
+    'locales/*.lua',
     'webhooks.lua',
     'server/callbacks/bonus.lua',
     'server/callbacks/callbacks.lua',
@@ -39,8 +40,8 @@ server_scripts {
     'server/versioncheck.lua'
 }
 
--- ui_page 'html/index.html'
-ui_page 'http://localhost:5173/'
+ui_page 'html/index.html'
+-- ui_page 'http://localhost:5173/'
 
 files {
     'html/locales/*.json',

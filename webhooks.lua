@@ -6,8 +6,6 @@
     Copyright © 2025 Kxiox <https://github.com/kxiox>
 ]]
 
-Config = {}
-
-Config.Webhooks = {
-
+Webhooks = {
+    
 }

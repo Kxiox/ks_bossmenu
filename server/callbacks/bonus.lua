@@ -209,7 +209,7 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToOnlineEmployees', function(so
                 removeMoney(source, job.name, amount)
 
                 xTarget.addMoney(amount)
-                TriggerClientEvent('ks_bossmenu:notify', xTarget.source, TranslateCap('receive_bonus', amount .. Config.Currency), 'info')
+                TriggerClientEvent('ks_bossmenu:notify', xTarget.source, _U('receive_bonus', amount .. Config.Currency), 'info')
                 processedCount = processedCount + 1
             end
         end
