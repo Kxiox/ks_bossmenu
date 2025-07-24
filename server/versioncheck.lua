@@ -87,8 +87,14 @@ Citizen.CreateThread(function()
         local curVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
         local latestVersion = latestStableVersion
 
-        if not latestStableVersion and latestBetaVersion then
-            latestVersion = latestBetaVersion
+        if curVersion and string.find(curVersion, "^beta%-") then
+            if latestBetaVersion then
+                latestVersion = latestBetaVersion
+            end
+        else
+            if not latestStableVersion and latestBetaVersion then
+                latestVersion = latestBetaVersion
+            end
         end
 
         if latestVersion then

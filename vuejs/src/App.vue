@@ -32,7 +32,7 @@
   const fadeActions = ref(false)
   const notifiesRef = ref(null)
 
-  const devMode = ref(true)
+  const devMode = ref(false)
 
   function showActions() {
     fadeHome.value = false
