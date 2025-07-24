@@ -25,7 +25,7 @@ Citizen.CreateThread(function()
     function checkVersion(err, responseText, headers)
         local curVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
 
-        if curVersion and string.find(curVersion, "dev") then
+        if curVersion and string.find(curVersion, "^dev%-") then
             print(YELLOW..resourceName.." is running a development version ("..curVersion.."). Skipping version check."..RESET)
             return
         end
@@ -85,14 +85,31 @@ Citizen.CreateThread(function()
         if requestsCompleted < 2 then return end
 
         local curVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
-        local latestVersion = latestStableVersion
+        
+        if curVersion and string.find(curVersion, "^dev%-") then
+            print(YELLOW..resourceName.." is running a development version ("..curVersion.."). Skipping version check."..RESET)
+            return
+        end
+        
+        local latestVersion = nil
+        local currentIsBeta = curVersion and string.find(curVersion, "^beta%-")
 
-        if curVersion and string.find(curVersion, "^beta%-") then
+        if currentIsBeta then
+            local curVersionNum = string.sub(curVersion, 6) -- Entferne "beta-"
+            
+            if latestStableVersion and curVersionNum == latestStableVersion then
+                print(YELLOW..resourceName.." is running beta version "..curVersion..", but stable version "..latestStableVersion.." is available. Consider updating to stable."..RESET)
+                return
+            end
+            
             if latestBetaVersion then
                 latestVersion = latestBetaVersion
+            elseif latestStableVersion then
+                latestVersion = latestStableVersion
             end
         else
-            if not latestStableVersion and latestBetaVersion then
+            latestVersion = latestStableVersion
+            if not latestVersion and latestBetaVersion then
                 latestVersion = latestBetaVersion
             end
         end
