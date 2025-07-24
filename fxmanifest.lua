@@ -32,7 +32,6 @@ server_scripts {
     '@oxmysql/lib/MySQL.lua',
     '@es_extended/locale.lua',
     'locales/*.lua',
-    'webhooks.lua',
     'server/callbacks/bonus.lua',
     'server/callbacks/callbacks.lua',
     'server/main.lua',
