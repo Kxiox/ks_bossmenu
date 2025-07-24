@@ -12,7 +12,7 @@ game 'gta5'
 author 'Kxiox Scripts'
 description 'Bossmenu for ESX'
 lua_54 'yes'
-version 'beta-1.1.0'
+version 'dev-1.1.0'
 
 shared_scripts {
     '@es_extended/imports.lua',
