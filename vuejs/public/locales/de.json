@@ -8,88 +8,88 @@
     },
 
     "home": {
-        "stats": "Stats",
-        "employees": "Employees",
-        "on_duty": "On Duty",
-        "account": "Account",
+        "stats": "Statistiken",
+        "employees": "Mitarbeiter",
+        "on_duty": "Im Dienst",
+        "account": "Konto",
 
-        "last_actions": "Last Actions",
-        "table_action": "Action",
-        "table_employee": "Employee",
-        "table_time": "Time",
-        "all_actions": "All Actions"
+        "last_actions": "Letzte Aktionen",
+        "table_action": "Aktion",
+        "table_employee": "Mitarbeiter",
+        "table_time": "Zeit",
+        "all_actions": "Alle Aktionen"
     },
 
     "employees": {
-        "add_employee": "Add Employee",
+        "add_employee": "Mitarbeiter hinzufügen",
         "table_name": "Name",
         "table_position": "Position",
-        "table_salary": "Salary",
-        "table_actions": "Actions",
-        "table_grade": "Grade",
-        "selected": "selected"
+        "table_salary": "Gehalt",
+        "table_actions": "Aktionen",
+        "table_grade": "Rang",
+        "selected": "ausgewählt"
     },
 
     "salaries": {
         "table_name": "Name",
-        "table_salary": "Salary",
-        "table_actions": "Actions",
-        "table_grade": "Grade",
-        "change_salary": "Change Salary",
-        "placeholder": "New Salary",
-        "ranks_selected": "ranks selected"
+        "table_salary": "Gehalt",
+        "table_actions": "Aktionen",
+        "table_grade": "Rang",
+        "change_salary": "Gehalt ändern",
+        "placeholder": "Neues Gehalt",
+        "ranks_selected": "Ränge ausgewählt"
     },
 
     "account": {
-        "balance": "Balance",
-        "placeholder": "Amount",
-        "last_transactions": "Last transactions",
-        "table_action": "Action",
-        "table_employee": "Employee",
-        "table_amount": "Amount",
-        "all_transactions": "All Transactions"
+        "balance": "Guthaben",
+        "placeholder": "Betrag",
+        "last_transactions": "Letzte Transaktionen",
+        "table_action": "Aktion",
+        "table_employee": "Mitarbeiter",
+        "table_amount": "Betrag",
+        "all_transactions": "Alle Transaktionen"
     },
 
     "bonus": {
-        "individual": "Individual",
-        "ranks": "Ranks",
-        "groups": "Groups",
-        "all_employees": "All Employees",
-        "all_ranks": "All Ranks",
-        "single_employee_bonus": "Single Employee Bonus",
-        "add_employee_bonus": "Employee Bonus",
-        "add_rank_bonus": "Rank Bonus",
+        "individual": "Einzeln",
+        "ranks": "Ränge", 
+        "groups": "Gruppen",
+        "all_employees": "Alle Mitarbeiter",
+        "all_ranks": "Alle Ränge",
+        "single_employee_bonus": "Einzelner Mitarbeiter Bonus",
+        "add_employee_bonus": "Mitarbeiter Bonus",
+        "add_rank_bonus": "Rang Bonus",
         "table_name": "Name",
-        "bonus_amount": "Bonus Amount",
-        "all_employees_info": "You are about to give a bonus to all {count} employees.",
-        "all_ranks_title": "Bonus for All Ranks",
-        "all_ranks_info": "You are about to give a bonus to all employees in {count} ranks.",
-        "online_employees_info": "You are about to give a bonus to {count} online employees.",
-        "online_employees": "Online Employees",
-        "no_online_employees": "No employees are currently online.",
-        "affected_ranks": "Affected Ranks",
-        "give_to_all_employees": "Give to All Employees",
-        "give_to_all_ranks": "Give to All Ranks",
-        "give_to_online_employees": "Give to Online Employees"
+        "bonus_amount": "Bonus Betrag",
+        "all_employees_info": "Sie sind dabei, einen Bonus an alle {count} Mitarbeiter zu vergeben.",
+        "all_ranks_title": "Bonus für alle Ränge",
+        "all_ranks_info": "Sie sind dabei, einen Bonus an alle Mitarbeiter in {count} Rängen zu vergeben.",
+        "online_employees_info": "Sie sind dabei, einen Bonus an {count} online Mitarbeiter zu vergeben.",
+        "online_employees": "Online Mitarbeiter",
+        "no_online_employees": "Derzeit sind keine Mitarbeiter online.",
+        "affected_ranks": "Betroffene Ränge",
+        "give_to_all_employees": "An alle Mitarbeiter vergeben",
+        "give_to_all_ranks": "An alle Ränge vergeben",
+        "give_to_online_employees": "An online Mitarbeiter vergeben"
     },
 
     "buttons": {
-        "see_all": "See all",
-        "promote": "Promote",
-        "demote": "Demote",
-        "fire": "Fire",
-        "cancel": "Cancel",
-        "add": "Add",
-        "change": "Change",
-        "deposit": "Deposit",
-        "withdraw": "Withdraw",
-        "give_bonus": "Give Bonus",
-        "select": "Select",
-        "select_all": "Select All",
-        "deselect_all": "Deselect All",
-        "give_to_all_employees": "Give to All Employees",
-        "give_to_all_ranks": "Give to All Ranks",
-        "give_to_online_employees": "Give to Online Employees"
+        "see_all": "Alle anzeigen",
+        "promote": "Befördern",
+        "demote": "Degradieren", 
+        "fire": "Entlassen",
+        "cancel": "Abbrechen",
+        "add": "Hinzufügen",
+        "change": "Ändern",
+        "deposit": "Einzahlen",
+        "withdraw": "Abheben",
+        "give_bonus": "Bonus vergeben",
+        "select": "Auswählen",
+        "select_all": "Alle auswählen",
+        "deselect_all": "Alle abwählen",
+        "give_to_all_employees": "An alle Mitarbeiter vergeben",
+        "give_to_all_ranks": "An alle Ränge vergeben",
+        "give_to_online_employees": "An online Mitarbeiter vergeben"
     },
 
     "notifies": {
@@ -164,14 +164,19 @@
         },
 
         "bonus": {
-            "no_employees_selected": "No employees selected!",
-            "no_ranks_selected": "No ranks selected!",
-            "invalid_amount": "Please enter a valid bonus amount!",
-            "success": "Bonus given to {count} employees successfully!",
-            "rank_success": "Bonus of {amount} given to {count} ranks successfully!",
-            "all_employees_success": "Bonus of {amount} given to all {count} employees successfully!",
-            "all_ranks_success": "Bonus of {amount} given to all employees in {count} ranks successfully!",
-            "online_employees_success": "Bonus of {amount} given to {count} online employees successfully!"
+            "no_employees_selected": "Keine Mitarbeiter ausgewählt!",
+            "no_ranks_selected": "Keine Ränge ausgewählt!",
+            "invalid_amount": "Bitte geben Sie einen gültigen Bonus-Betrag ein!",
+            "success": "Bonus wurde erfolgreich an {count} Mitarbeiter vergeben!",
+            "rank_success": "Bonus von {amount} wurde erfolgreich an {count} Ränge vergeben!",
+            "ranks_success": "Bonus von {amount} wurde erfolgreich an {count} Ränge vergeben!",
+            "all_employees_success": "Bonus von {amount} wurde erfolgreich an alle {count} Mitarbeiter vergeben!",
+            "all_ranks_success": "Bonus von {amount} wurde erfolgreich an alle Mitarbeiter in {count} Rängen vergeben!",
+            "online_employees_success": "Bonus von {amount} wurde erfolgreich an {count} online Mitarbeiter vergeben!",
+            "failed": "Fehler beim Vergeben des Bonus!",
+            "error": "Ein Fehler ist beim Vergeben des Bonus aufgetreten: {error}",
+            "nui_error": "Ein NUI-Fehler ist beim Vergeben des Bonus aufgetreten: {error}",
+            "unknown_error": "Ein unbekannter Fehler ist beim Vergeben des Bonus aufgetreten: {error}"
         }
     }
 }

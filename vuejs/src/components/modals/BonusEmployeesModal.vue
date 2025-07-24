@@ -1,88 +1,88 @@
 <script setup>
-import { ref } from 'vue'
-import { useTranslations } from '../../composables/useTranslations.js'
+    import { ref } from 'vue'
+    import { useTranslations } from '../../composables/useTranslations.js'
 
-const { $t } = useTranslations()
+    const { $t } = useTranslations()
 
-const props = defineProps({
-    notifiesRef: Object,
-    currency: {
-        type: String,
-        default: null
-    },
-    employees: {
-        type: Array,
-        default: () => []
+    const props = defineProps({
+        notifiesRef: Object,
+        currency: {
+            type: String,
+            default: null
+        },
+        employees: {
+            type: Array,
+            default: () => []
+        }
+    })
+
+    const selectedEmployees = ref([])
+
+    function toggleEmployeeSelection(employee) {
+        const index = selectedEmployees.value.findIndex(emp => emp.identifier === employee.identifier)
+        
+        if (index > -1) {
+            selectedEmployees.value.splice(index, 1)
+        } else {
+            selectedEmployees.value.push(employee)
+        }
     }
-})
 
-const selectedEmployees = ref([])
-
-function toggleEmployeeSelection(employee) {
-    const index = selectedEmployees.value.findIndex(emp => emp.identifier === employee.identifier)
-    
-    if (index > -1) {
-        selectedEmployees.value.splice(index, 1)
-    } else {
-        selectedEmployees.value.push(employee)
+    function isEmployeeSelected(employee) {
+        return selectedEmployees.value.some(emp => emp.identifier === employee.identifier)
     }
-}
 
-function isEmployeeSelected(employee) {
-    return selectedEmployees.value.some(emp => emp.identifier === employee.identifier)
-}
-
-function selectAllEmployees() {
-    if (selectedEmployees.value.length === props.employees.length) {
-        selectedEmployees.value = []
-    } else {
-        selectedEmployees.value = [...props.employees]
+    function selectAllEmployees() {
+        if (selectedEmployees.value.length === props.employees.length) {
+            selectedEmployees.value = []
+        } else {
+            selectedEmployees.value = [...props.employees]
+        }
     }
-}
 
-function areAllEmployeesSelected() {
-    return selectedEmployees.value.length === props.employees.length && props.employees.length > 0
-}
-
-async function giveBonusToSelectedEmployees() {
-    if (selectedEmployees.value.length === 0) {
-        props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.no_employees_selected'))
-        return
+    function areAllEmployeesSelected() {
+        return selectedEmployees.value.length === props.employees.length && props.employees.length > 0
     }
-    
-    try {
-        const bonusAmount = parseInt(document.getElementById('bonusAmount').value)
 
-        if (!bonusAmount || bonusAmount <= 0) {
-            props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.invalid_amount'))
+    async function giveBonusToSelectedEmployees() {
+        if (selectedEmployees.value.length === 0) {
+            props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.no_employees_selected'))
             return
         }
+        
+        try {
+            const bonusAmount = parseInt(document.getElementById('bonusAmount').value)
 
-        const response = await fetch(`https://${GetParentResourceName()}/giveBonusToSelectedEmployees`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8'
-            },
-            body: JSON.stringify({
-                employees: selectedEmployees.value,
-                amount: bonusAmount
+            if (!bonusAmount || bonusAmount <= 0) {
+                props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.invalid_amount'))
+                return
+            }
+
+            const response = await fetch(`https://${GetParentResourceName()}/giveBonusToSelectedEmployees`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    employees: selectedEmployees.value,
+                    amount: bonusAmount
+                })
             })
-        })
 
-        const text = await response.text()
+            const text = await response.text()
 
-        if (text === '"ok"') {
-            props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.success', { count: selectedEmployees.value.length }))
-        } else {
-            props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.error', { error: text }))
+            if (text === '"ok"') {
+                props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.success', { count: selectedEmployees.value.length }))
+            } else {
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.error', { error: text }))
+            }
+        } catch (error) {
+            props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.unknown_error', { error: error.message }))
         }
-    } catch (error) {
-        props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.unknown_error', { error: error.message }))
+        
+        document.getElementById('bonusAmount').value = ''
+        selectedEmployees.value = []
     }
-    
-    document.getElementById('bonusAmount').value = ''
-    selectedEmployees.value = []
-}
 </script>
 
 <template>
@@ -165,138 +165,138 @@ async function giveBonusToSelectedEmployees() {
 </template>
 
 <style scoped lang="scss">
-@use 'bootstrap/scss/bootstrap' as *;
+    @use 'bootstrap/scss/bootstrap' as *;
 
-.employee-selection-header {
-    padding: 0.75rem;
-    background: var(--color-750);
-    border-radius: 8px;
-    border: 1px solid var(--color-600);
-}
-
-.employee-avatar {
-    font-size: 1.5rem;
-    color: var(--color-400);
-}
-
-.employee-name {
-    font-weight: 600;
-    color: #fff;
-}
-
-.table-container {
-    border-radius: 8px;
-    border: 1px solid var(--color-600);
-    background: var(--color-800);
-    overflow-x: auto !important;
-    overflow-y: auto !important;
-}
-
-.table-container::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-.table-container::-webkit-scrollbar-track {
-    background: var(--color-800);
-    border-radius: 4px;
-}
-
-.table-container::-webkit-scrollbar-thumb {
-    background: var(--color-600);
-    border-radius: 4px;
-    transition: background 0.2s ease;
-}
-
-.table-container::-webkit-scrollbar-thumb:hover {
-    background: var(--color-500);
-}
-
-.table tr {
-    transition: all 0.2s ease;
-}
-
-.table tr:hover {
-    background: var(--color-700) !important;
-}
-
-.table tr.table-active {
-    border-left: 3px solid var(--color-500);
-}
-
-.table th {
-    background: var(--color-700) !important;
-    color: #fff !important;
-    border-bottom: 2px solid var(--color-600) !important;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.table td {
-    border-bottom: 1px solid var(--color-700) !important;
-    color: #fff !important;
-    vertical-align: middle;
-}
-
-.form-check-input {
-    background-color: var(--color-800) !important;
-    border: 1px solid var(--color-600) !important;
-    border-radius: 4px !important;
-    width: 1.2rem !important;
-    height: 1.2rem !important;
-    cursor: pointer !important;
-}
-
-.form-check-input:checked {
-    background-color: var(--color-500) !important;
-    border-color: var(--color-400) !important;
-}
-
-.btn-outline-primary {
-    border-color: var(--color-600) !important;
-    color: var(--color-300) !important;
-    background: transparent !important;
-}
-
-.btn-outline-primary:hover {
-    background: var(--color-600) !important;
-    border-color: var(--color-500) !important;
-    color: #fff !important;
-}
-
-.badge {
-    font-size: 0.75rem;
-    padding: 0.375rem 0.75rem;
-    border-radius: 6px;
-}
-
-.input-group {
-    margin-bottom: 0;
-}
-
-.input-group-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 45px;
-}
-
-* {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-*:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-@media (max-width: 768px) {
-    .modal-dialog {
-        max-width: 95vw;
-        min-width: unset;
-        margin: 0.5rem;
+    .employee-selection-header {
+        padding: 0.75rem;
+        background: var(--color-750);
+        border-radius: 8px;
+        border: 1px solid var(--color-600);
     }
-}
+
+    .employee-avatar {
+        font-size: 1.5rem;
+        color: var(--color-400);
+    }
+
+    .employee-name {
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .table-container {
+        border-radius: 8px;
+        border: 1px solid var(--color-600);
+        background: var(--color-800);
+        overflow-x: auto !important;
+        overflow-y: auto !important;
+    }
+
+    .table-container::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+        background: var(--color-800);
+        border-radius: 4px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+        background: var(--color-600);
+        border-radius: 4px;
+        transition: background 0.2s ease;
+    }
+
+    .table-container::-webkit-scrollbar-thumb:hover {
+        background: var(--color-500);
+    }
+
+    .table tr {
+        transition: all 0.2s ease;
+    }
+
+    .table tr:hover {
+        background: var(--color-700) !important;
+    }
+
+    .table tr.table-active {
+        border-left: 3px solid var(--color-500);
+    }
+
+    .table th {
+        background: var(--color-700) !important;
+        color: #fff !important;
+        border-bottom: 2px solid var(--color-600) !important;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .table td {
+        border-bottom: 1px solid var(--color-700) !important;
+        color: #fff !important;
+        vertical-align: middle;
+    }
+
+    .form-check-input {
+        background-color: var(--color-800) !important;
+        border: 1px solid var(--color-600) !important;
+        border-radius: 4px !important;
+        width: 1.2rem !important;
+        height: 1.2rem !important;
+        cursor: pointer !important;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--color-500) !important;
+        border-color: var(--color-400) !important;
+    }
+
+    .btn-outline-primary {
+        border-color: var(--color-600) !important;
+        color: var(--color-300) !important;
+        background: transparent !important;
+    }
+
+    .btn-outline-primary:hover {
+        background: var(--color-600) !important;
+        border-color: var(--color-500) !important;
+        color: #fff !important;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+        border-radius: 6px;
+    }
+
+    .input-group {
+        margin-bottom: 0;
+    }
+
+    .input-group-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 45px;
+    }
+
+    * {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    *:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    @media (max-width: 768px) {
+        .modal-dialog {
+            max-width: 95vw;
+            min-width: unset;
+            margin: 0.5rem;
+        }
+    }
 </style>

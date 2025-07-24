@@ -44,23 +44,42 @@ function areAllRanksSelected() {
     return selectedRanks.value.length === props.saleries.length && props.saleries.length > 0
 }
 
-function giveBonusToSelectedRanks() {
+async function giveBonusToSelectedRanks() {
     if (selectedRanks.value.length === 0) {
         props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.no_ranks_selected'))
         return
     }
 
-    const bonusAmount = parseInt(document.getElementById('bonusRankAmount').value)
-    if (!bonusAmount || bonusAmount <= 0) {
-        props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.invalid_amount'))
-        return
+    try {
+        const bonusAmount = parseInt(document.getElementById('bonusRankAmount').value)
+        if (!bonusAmount || bonusAmount <= 0) {
+            props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.invalid_amount'))
+            return
+        }
+
+        const response = await fetch(`https://${GetParentResourceName()}/giveBonusToRanks`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                ranks: selectedRanks.value,
+                amount: bonusAmount
+            })
+        })
+
+        const text = await response.text()
+        if (text === '"ok"') {
+            props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.ranks_success', { count: selectedRanks.value.length, amount: bonusAmount }))
+        } else {
+            props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.failed'))
+        }
+    } catch (error) {
+        props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.nui_error', { error: error.message }))
     }
 
-    console.log('Giving bonus to ranks:', selectedRanks.value, 'Amount:', bonusAmount)
-    props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.rank_success', { count: selectedRanks.value.length, amount: bonusAmount }))
-    
-    selectedRanks.value = []
     document.getElementById('bonusRankAmount').value = ''
+    selectedRanks.value = []
 }
 </script>
 

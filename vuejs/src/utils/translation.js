@@ -1,6 +1,6 @@
 // Translation system that works in both development and production build
 const translations = {};
-let currentLocale = 'de';
+let currentLocale = 'en';
 const availableLocales = ['de', 'en']; // Will be updated dynamically
 const localeCache = {};
 let isInitialized = false;
@@ -53,11 +53,11 @@ async function discoverAvailableLocales() {
 async function initializeTranslations() {
   await discoverAvailableLocales();
   
-  // Priority: de -> en -> first available
-  let localeToLoad = 'de';
-  if (!availableLocales.includes('de') && availableLocales.includes('en')) {
-    localeToLoad = 'en';
-  } else if (!availableLocales.includes('de') && !availableLocales.includes('en') && availableLocales.length > 0) {
+  // Priority: en -> de -> first available
+  let localeToLoad = 'en';
+  if (!availableLocales.includes('en') && availableLocales.includes('de')) {
+    localeToLoad = 'de';
+  } else if (!availableLocales.includes('en') && !availableLocales.includes('de') && availableLocales.length > 0) {
     localeToLoad = availableLocales[0];
   }
 

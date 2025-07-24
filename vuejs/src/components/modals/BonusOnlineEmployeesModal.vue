@@ -15,16 +15,34 @@ const props = defineProps({
     }
 })
 
-function giveBonusToOnlineEmployees() {
+async function giveBonusToOnlineEmployees() {
     const bonusAmount = parseInt(document.getElementById('bonusOnlineEmployeesAmount').value)
     if (!bonusAmount || bonusAmount <= 0) {
         props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.invalid_amount'))
         return
     }
 
-    console.log('Giving bonus to online employees:', bonusAmount)
-    props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.online_employees_success', { count: props.onlineEmployees.length, amount: bonusAmount }))
-    
+    try {
+        const response = await fetch(`https://${GetParentResourceName()}/giveBonusToOnlineEmployees`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                amount: bonusAmount
+            })
+        });
+        const text = await response.text();
+
+        if (text === '"ok"') {
+            props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.online_employees_success', { count: props.onlineEmployees.length, amount: bonusAmount }))
+        } else {
+            props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.failed'))
+        }
+    } catch (error) {
+        props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.error', { error: error.message }))
+    }
+
     document.getElementById('bonusOnlineEmployeesAmount').value = ''
 }
 </script>

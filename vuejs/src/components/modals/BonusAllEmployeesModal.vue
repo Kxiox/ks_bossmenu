@@ -1,32 +1,50 @@
 <script setup>
-import { useTranslations } from '../../composables/useTranslations.js'
+    import { useTranslations } from '../../composables/useTranslations.js'
 
-const { $t } = useTranslations()
+    const { $t } = useTranslations()
 
-const props = defineProps({
-    notifiesRef: Object,
-    currency: {
-        type: String,
-        default: null
-    },
-    employees: {
-        type: Array,
-        default: () => []
+    const props = defineProps({
+        notifiesRef: Object,
+        currency: {
+            type: String,
+            default: null
+        },
+        employees: {
+            type: Array,
+            default: () => []
+        }
+    })
+
+    async function giveBonusToAllEmployees() {
+        const bonusAmount = parseInt(document.getElementById('bonusAllEmployeesAmount').value)
+        if (!bonusAmount || bonusAmount <= 0) {
+            props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.invalid_amount'))
+            return
+        }
+
+        try {
+            const response = await fetch(`https://${GetParentResourceName()}/giveBonusToAllEmployees`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    amount: bonusAmount
+                })
+            });
+            const text = await response.text();
+
+            if (text === '"ok"') {
+                props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.all_employees_success', { count: props.employees.length, amount: bonusAmount }))
+            } else {
+                props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.failed'))
+            }
+        } catch (error) {
+            props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.error', { error: error.message }))
+        }
+
+        document.getElementById('bonusAllEmployeesAmount').value = ''
     }
-})
-
-function giveBonusToAllEmployees() {
-    const bonusAmount = parseInt(document.getElementById('bonusAllEmployeesAmount').value)
-    if (!bonusAmount || bonusAmount <= 0) {
-        props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.invalid_amount'))
-        return
-    }
-
-    console.log('Giving bonus to all employees:', bonusAmount)
-    props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.all_employees_success', { count: props.employees.length, amount: bonusAmount }))
-    
-    document.getElementById('bonusAllEmployeesAmount').value = ''
-}
 </script>
 
 <template>
@@ -69,47 +87,47 @@ function giveBonusToAllEmployees() {
 </template>
 
 <style scoped lang="scss">
-@use 'bootstrap/scss/bootstrap' as *;
+    @use 'bootstrap/scss/bootstrap' as *;
 
-.alert {
-    border-radius: 8px;
-    border: 1px solid var(--color-600);
-    background: var(--color-750);
-    color: #fff;
-}
-
-.alert-warning {
-    border-color: #ffc107;
-    background: rgba(255, 193, 7, 0.1);
-    color: #ffc107;
-}
-
-.input-group {
-    margin-bottom: 0;
-}
-
-.input-group-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 45px;
-}
-
-* {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-*:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-@media (max-width: 768px) {
-    .modal-dialog {
-        max-width: 95vw;
-        min-width: unset;
-        margin: 0.5rem;
+    .alert {
+        border-radius: 8px;
+        border: 1px solid var(--color-600);
+        background: var(--color-750);
+        color: #fff;
     }
-}
+
+    .alert-warning {
+        border-color: #ffc107;
+        background: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+    }
+
+    .input-group {
+        margin-bottom: 0;
+    }
+
+    .input-group-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 45px;
+    }
+
+    * {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    *:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    @media (max-width: 768px) {
+        .modal-dialog {
+            max-width: 95vw;
+            min-width: unset;
+            margin: 0.5rem;
+        }
+    }
 </style>

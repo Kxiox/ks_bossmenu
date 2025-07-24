@@ -15,16 +15,34 @@ const props = defineProps({
     }
 })
 
-function giveBonusToAllRanks() {
+async function giveBonusToAllRanks() {
     const bonusAmount = parseInt(document.getElementById('bonusAllRanksAmount').value)
     if (!bonusAmount || bonusAmount <= 0) {
         props.notifiesRef?.triggerAlert('warning', $t('notifies.bonus.invalid_amount'))
         return
     }
 
-    console.log('Giving bonus to all ranks:', bonusAmount)
-    props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.all_ranks_success', { count: props.saleries.length, amount: bonusAmount }))
-    
+    try {
+        const response = await fetch(`https://${GetParentResourceName()}/giveBonusToAllRanks`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                amount: bonusAmount
+            })
+        });
+        const text = await response.text();
+
+        if (text === '"ok"') {
+            props.notifiesRef?.triggerAlert('success', $t('notifies.bonus.all_ranks_success', { count: props.saleries.length, amount: bonusAmount }))
+        } else {
+            props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.failed'))
+        }
+    } catch (error) {
+        props.notifiesRef?.triggerAlert('danger', $t('notifies.bonus.error', { error: error.message }))
+    }
+
     document.getElementById('bonusAllRanksAmount').value = ''
 }
 </script>
