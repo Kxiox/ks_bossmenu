@@ -173,12 +173,23 @@ ESX.RegisterServerCallback('ks_bossmenu:addEmployee', function(source, cb, data)
     if IsPlayerAllowed(source) then
         if xTarget and xTarget.getJob().name ~= xPlayer.getJob().name then
             xTarget.setJob(xPlayer.getJob().name, 0)
+            
             addAction(source, {
                 action = 'add_employee',
                 data = {
                     target = xTarget.getName(),
                 }
             })
+
+            -- Discord Logging
+            local targetData = {
+                name = xTarget.getName(),
+                identifier = xTarget.getIdentifier()
+            }
+            local gradeName = getGradeLabel(0, xPlayer.getJob().name)
+            local salary = getSalary(0, xPlayer.getJob().name)
+            
+            logHire(source, targetData, xPlayer.getJob().name, 0, gradeName, salary)
 
             cb(true)
         else
@@ -233,6 +244,19 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
                         new_grade = newGrade.label,
                     }
                 })
+
+                -- Discord Logging
+                local targetData = {
+                    name = targetFirstname .. ' ' .. targetLastname,
+                    identifier = targetIdentifier
+                }
+                local oldGradeName = getGradeLabel(targetJobGrade, xPlayer.getJob().name)
+                local newGradeName = newGrade.label
+                local oldSalary = getSalary(targetJobGrade, xPlayer.getJob().name)
+                local newSalary = getSalary(targetJobGrade + 1, xPlayer.getJob().name)
+                
+                logPromotion(source, targetData, xPlayer.getJob().name, targetJobGrade, oldGradeName, 
+                           targetJobGrade + 1, newGradeName, oldSalary, newSalary)
 
                 cb('success')
             else
@@ -289,6 +313,20 @@ ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, da
                     }
                 })
 
+                
+                -- Discord Logging
+                local targetData = {
+                    name = targetFirstname .. ' ' .. targetLastname,
+                    identifier = targetIdentifier
+                }
+                local oldGradeName = getGradeLabel(targetJobGrade, xPlayer.getJob().name)
+                local newGradeName = newGrade.label
+                local oldSalary = getSalary(targetJobGrade, xPlayer.getJob().name)
+                local newSalary = getSalary(targetJobGrade - 1, xPlayer.getJob().name)
+                
+                logDemotion(source, targetData, xPlayer.getJob().name, targetJobGrade, oldGradeName, 
+                           targetJobGrade - 1, newGradeName, oldSalary, newSalary)
+
                 cb('success')
             else
                 cb('error')
@@ -302,6 +340,7 @@ ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data
     local targetFirstname = data['employee'].firstname
     local targetLastname = data['employee'].lastname
     local targetIdentifier = data['employee'].identifier
+    local reason = data.reason or "Nicht angegeben"
 
     if IsPlayerAllowed(source) then
         if xPlayer.getIdentifier() == targetIdentifier then
@@ -328,6 +367,15 @@ ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data
                         target = targetFirstname .. ' ' .. targetLastname,
                     }
                 })
+                
+                -- Discord Logging
+                local targetData = {
+                    name = targetFirstname .. ' ' .. targetLastname,
+                    identifier = targetIdentifier
+                }
+                
+                logFire(source, targetData, xPlayer.getJob().name, reason)
+                
                 cb('success')
             else
                 cb('error')
@@ -344,6 +392,8 @@ ESX.RegisterServerCallback('ks_bossmenu:changeSalary', function(source, cb, data
         local salary = tonumber(data.salary)
 
         if grade and salary then
+            local oldSalary = getSalary(grade, xPlayer.getJob().name)
+            
             MySQL.update('UPDATE job_grades SET salary = ? WHERE job_name = ? AND grade = ?', {
                 salary, xPlayer.getJob().name, grade
             }, function(affectedRows)
@@ -355,6 +405,16 @@ ESX.RegisterServerCallback('ks_bossmenu:changeSalary', function(source, cb, data
                             salary = salary,
                         }
                     })
+                    
+                    -- Discord Logging - für Gehalt-Änderung aller Mitarbeiter dieses Rangs
+                    local targetData = {
+                        name = "Alle " .. getGradeLabel(grade, xPlayer.getJob().name),
+                        identifier = "system_grade_change"
+                    }
+                    
+                    logSalaryChange(source, targetData, xPlayer.getJob().name, 
+                                  getGradeLabel(grade, xPlayer.getJob().name), oldSalary, salary)
+                    
                     cb(true)
                 else
                     cb(false)
@@ -381,10 +441,9 @@ ESX.RegisterServerCallback('ks_bossmenu:depositMoney', function(source, cb, data
             return
         end
 
-        if societyMoney and societyMoney.money < amount then
-            cb('not_enough_money')
-            return
-        end
+        local societyMoney = MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
+            societyAccount
+        })
 
         MySQL.update('UPDATE addon_account_data SET money = money + ? WHERE account_name = ?', {
             amount, societyAccount
@@ -395,6 +454,11 @@ ESX.RegisterServerCallback('ks_bossmenu:depositMoney', function(source, cb, data
                     action = 'deposit',
                     amount = amount,
                 })
+                
+                -- Discord Logging
+                local newBalance = (societyMoney and societyMoney.money or 0) + amount
+                logDeposit(source, xPlayer.getJob().name, amount, newBalance)
+                
                 cb('success')
             else
                 cb('unknown_error')
@@ -429,6 +493,11 @@ ESX.RegisterServerCallback('ks_bossmenu:withdrawMoney', function(source, cb, dat
                     action = 'withdraw',
                     amount = amount,
                 })
+                
+                -- Discord Logging
+                local newBalance = societyMoney.money - amount
+                logWithdraw(source, xPlayer.getJob().name, amount, newBalance)
+                
                 cb('success')
             else
                 cb('unknown_error')

@@ -12,7 +12,7 @@ game 'gta5'
 author 'Kxiox Scripts'
 description 'Bossmenu for ESX'
 lua_54 'yes'
-version 'dev-1.1.0'
+version 'dev-1.1.1'
 
 shared_scripts {
     '@es_extended/imports.lua',
@@ -32,11 +32,13 @@ server_scripts {
     '@oxmysql/lib/MySQL.lua',
     '@es_extended/locale.lua',
     'locales/*.lua',
+    'webhooks.lua',
+    'server/logger.lua',
     'server/callbacks/bonus.lua',
     'server/callbacks/callbacks.lua',
     'server/main.lua',
     'server/queue.lua',
-    'server/versioncheck.lua'
+    'server/versioncheck.lua',
 }
 
 -- ui_page 'html/index.html'
