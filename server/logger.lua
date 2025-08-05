@@ -88,7 +88,7 @@ function createEmbed(type, data)
                 {name = TranslateCap('webhook_hire_employee'), value = (data.target and (data.target.name .. "\n`" .. data.target.identifier .. "`")) or TranslateCap('webhook_unknown'), inline = true},
                 {name = TranslateCap('webhook_hire_by'), value = (data.executor and (data.executor.name .. "\n" .. data.executor.discord)) or TranslateCap('webhook_unknown'), inline = true},
                 {name = TranslateCap('webhook_hire_position'), value = (data.job or TranslateCap('webhook_unknown')) .. " - " .. (data.grade_name or TranslateCap('webhook_unknown')), inline = false},
-                {name = TranslateCap('webhook_hire_salary'), value = "$" .. ESX.Math.GroupDigits(data.salary or 0), inline = true}
+                {name = TranslateCap('webhook_hire_salary'), value = ESX.Math.GroupDigits(data.salary or 0) .. Config.Currency, inline = true}
             }
         },
         
@@ -111,7 +111,7 @@ function createEmbed(type, data)
                 {name = TranslateCap('webhook_promote_company'), value = data.job or TranslateCap('webhook_unknown'), inline = false},
                 {name = TranslateCap('webhook_promote_old_rank'), value = TranslateCap('webhook_level') .. " " .. (data.old_grade or "?") .. " - " .. (data.old_grade_name or TranslateCap('webhook_unknown')), inline = true},
                 {name = TranslateCap('webhook_promote_new_rank'), value = TranslateCap('webhook_level') .. " " .. (data.new_grade or "?") .. " - " .. (data.new_grade_name or TranslateCap('webhook_unknown')), inline = true},
-                {name = TranslateCap('webhook_promote_new_salary'), value = "$" .. ESX.Math.GroupDigits(data.new_salary or 0), inline = false}
+                {name = TranslateCap('webhook_promote_new_salary'), value = ESX.Math.GroupDigits(data.new_salary or 0) .. Config.Currency, inline = false}
             }
         },
 
@@ -124,7 +124,7 @@ function createEmbed(type, data)
                 {name = TranslateCap('webhook_demote_company'), value = data.job or TranslateCap('webhook_unknown'), inline = false},
                 {name = TranslateCap('webhook_demote_old_rank'), value = TranslateCap('webhook_level') .. " " .. (data.old_grade or "?") .. " - " .. (data.old_grade_name or TranslateCap('webhook_unknown')), inline = true},
                 {name = TranslateCap('webhook_demote_new_rank'), value = TranslateCap('webhook_level') .. " " .. (data.new_grade or "?") .. " - " .. (data.new_grade_name or TranslateCap('webhook_unknown')), inline = true},
-                {name = TranslateCap('webhook_demote_new_salary'), value = "$" .. ESX.Math.GroupDigits(data.new_salary or 0), inline = false}
+                {name = TranslateCap('webhook_demote_new_salary'), value = ESX.Math.GroupDigits(data.new_salary or 0) .. Config.Currency, inline = false}
             }
         },
         
@@ -134,8 +134,8 @@ function createEmbed(type, data)
             fields = {
                 {name = TranslateCap('webhook_deposit_by'), value = (data.executor and (data.executor.name .. "\n" .. data.executor.discord)) or TranslateCap('webhook_unknown'), inline = true},
                 {name = TranslateCap('webhook_deposit_company'), value = data.job or TranslateCap('webhook_unknown'), inline = true},
-                {name = TranslateCap('webhook_deposit_amount'), value = "$" .. ESX.Math.GroupDigits(data.amount or 0), inline = false},
-                {name = TranslateCap('webhook_deposit_balance'), value = "$" .. ESX.Math.GroupDigits(data.new_balance or 0), inline = false}
+                {name = TranslateCap('webhook_deposit_amount'), value = ESX.Math.GroupDigits(data.amount or 0) .. Config.Currency, inline = false},
+                {name = TranslateCap('webhook_deposit_balance'), value = ESX.Math.GroupDigits(data.new_balance or 0) .. Config.Currency, inline = false}
             }
         },
         
@@ -145,8 +145,8 @@ function createEmbed(type, data)
             fields = {
                 {name = TranslateCap('webhook_withdraw_by'), value = (data.executor and (data.executor.name .. "\n" .. data.executor.discord)) or TranslateCap('webhook_unknown'), inline = true},
                 {name = TranslateCap('webhook_withdraw_company'), value = data.job or TranslateCap('webhook_unknown'), inline = true},
-                {name = TranslateCap('webhook_withdraw_amount'), value = "$" .. ESX.Math.GroupDigits(data.amount or 0), inline = false},
-                {name = TranslateCap('webhook_withdraw_balance'), value = "$" .. ESX.Math.GroupDigits(data.new_balance or 0), inline = false}
+                {name = TranslateCap('webhook_withdraw_amount'), value = ESX.Math.GroupDigits(data.amount or 0) .. Config.Currency, inline = false},
+                {name = TranslateCap('webhook_withdraw_balance'), value = ESX.Math.GroupDigits(data.new_balance or 0) .. Config.Currency, inline = false}
             }
         },
         
@@ -156,9 +156,9 @@ function createEmbed(type, data)
             fields = {
                 {name = TranslateCap('webhook_changed_by'), value = (data.executor and (data.executor.name .. "\n" .. data.executor.discord)) or TranslateCap('webhook_unknown'), inline = true},
                 {name = TranslateCap('webhook_position'), value = (data.job or TranslateCap('webhook_unknown')) .. " - " .. (data.grade_name or TranslateCap('webhook_unknown')), inline = false},
-                {name = TranslateCap('webhook_salary_previous'), value = "$" .. ESX.Math.GroupDigits(data.old_salary or 0), inline = true},
-                {name = TranslateCap('webhook_salary_new'), value = "$" .. ESX.Math.GroupDigits(data.new_salary or 0), inline = true},
-                {name = TranslateCap('webhook_salary_difference'), value = ((data.new_salary or 0) > (data.old_salary or 0) and "+" or "") .. "$" .. ESX.Math.GroupDigits((data.new_salary or 0) - (data.old_salary or 0)), inline = false}
+                {name = TranslateCap('webhook_salary_previous'), value = ESX.Math.GroupDigits(data.old_salary or 0) .. Config.Currency, inline = true},
+                {name = TranslateCap('webhook_salary_new'), value = ESX.Math.GroupDigits(data.new_salary or 0) .. Config.Currency, inline = true},
+                {name = TranslateCap('webhook_salary_difference'), value = ((data.new_salary or 0) > (data.old_salary or 0) and "+" or "") .. ESX.Math.GroupDigits((data.new_salary or 0) - (data.old_salary or 0)) .. Config.Currency, inline = false}
             }
         },
         
@@ -169,10 +169,10 @@ function createEmbed(type, data)
                 {name = TranslateCap('webhook_paid_by'), value = (data.executor and (data.executor.name .. "\n" .. data.executor.discord)) or TranslateCap('webhook_unknown'), inline = true},
                 {name = TranslateCap('webhook_company'), value = data.job or TranslateCap('webhook_unknown'), inline = true},
                 {name = TranslateCap('webhook_bonus_type'), value = data.bonus_type or TranslateCap('webhook_unknown'), inline = false},
-                {name = TranslateCap('webhook_bonus_per_person'), value = "$" .. ESX.Math.GroupDigits(data.amount or 0), inline = true},
+                {name = TranslateCap('webhook_bonus_per_person'), value = ESX.Math.GroupDigits(data.amount or 0) .. Config.Currency, inline = true},
                 {name = TranslateCap('webhook_recipients_count'), value = (data.recipients_count or 0) .. " " .. TranslateCap('webhook_employees'), inline = true},
-                {name = TranslateCap('webhook_total_cost'), value = "$" .. ESX.Math.GroupDigits((data.amount or 0) * (data.recipients_count or 0)), inline = false},
-                {name = TranslateCap('webhook_new_balance'), value = "$" .. ESX.Math.GroupDigits(data.new_balance or 0), inline = false},
+                {name = TranslateCap('webhook_total_cost'), value = ESX.Math.GroupDigits((data.amount or 0) * (data.recipients_count or 0)) .. Config.Currency, inline = false},
+                {name = TranslateCap('webhook_new_balance'), value = ESX.Math.GroupDigits(data.new_balance or 0) .. Config.Currency, inline = false},
             }
         }
     }

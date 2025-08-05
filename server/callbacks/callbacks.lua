@@ -204,6 +204,7 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
     local targetLastname = data['employee'].lastname
     local targetJobGrade = data['employee'].jobgradenr
     local targetIdentifier = data['employee'].identifier
+    local xTarget = ESX.GetPlayerFromIdentifier(targetIdentifier)
 
     if IsPlayerAllowed(source) then
         if xPlayer.getIdentifier() == targetIdentifier then
@@ -229,6 +230,10 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
             return
         end
 
+        if xTarget then
+            xTarget.setJob(xPlayer.getJob().name, targetJobGrade + 1)
+        end
+
         MySQL.update('UPDATE users SET job_grade = job_grade + 1 WHERE identifier = ?', {
             targetIdentifier
         }, function(affectedRows)
@@ -236,7 +241,7 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
                 local newGrade = MySQL.single.await('SELECT label FROM job_grades WHERE job_name = ? AND grade = ?', {
                     xPlayer.getJob().name, targetJobGrade + 1
                 })
-
+                
                 addAction(source, {
                     action = 'promote_employee',
                     data = {
@@ -256,7 +261,7 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
                 local newSalary = getSalary(targetJobGrade + 1, xPlayer.getJob().name)
                 
                 logPromotion(source, targetData, xPlayer.getJob().name, targetJobGrade, oldGradeName, 
-                           targetJobGrade + 1, newGradeName, oldSalary, newSalary)
+                        targetJobGrade + 1, newGradeName, oldSalary, newSalary)
 
                 cb('success')
             else
@@ -272,6 +277,7 @@ ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, da
     local targetLastname = data['employee'].lastname
     local targetJobGrade = data['employee'].jobgradenr
     local targetIdentifier = data['employee'].identifier
+    local xTarget = ESX.GetPlayerFromIdentifier(targetIdentifier)
 
     if IsPlayerAllowed(source) then
         if xPlayer.getIdentifier() == targetIdentifier then
@@ -295,6 +301,10 @@ ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, da
         if targetJob.job ~= xPlayer.getJob().name then
             cb('not_same_job')
             return
+        end
+
+        if xTarget then
+            xTarget.setJob(xPlayer.getJob().name, targetJobGrade - 1)
         end
 
         MySQL.update('UPDATE users SET job_grade = job_grade - 1 WHERE identifier = ?', {
@@ -340,7 +350,7 @@ ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data
     local targetFirstname = data['employee'].firstname
     local targetLastname = data['employee'].lastname
     local targetIdentifier = data['employee'].identifier
-    local reason = data.reason or "Nicht angegeben"
+    local xTarget = ESX.GetPlayerFromIdentifier(targetIdentifier)
 
     if IsPlayerAllowed(source) then
         if xPlayer.getIdentifier() == targetIdentifier then
@@ -355,6 +365,10 @@ ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data
         if targetJob.job ~= xPlayer.getJob().name then
             cb('not_same_job')
             return
+        end
+
+        if xTarget then
+            xTarget.setJob(Config.UnemployedJobName, 0)
         end
 
         MySQL.update('UPDATE users SET job = ?, job_grade = ? WHERE identifier = ?', {
@@ -374,7 +388,7 @@ ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data
                     identifier = targetIdentifier
                 }
                 
-                logFire(source, targetData, xPlayer.getJob().name, reason)
+                logFire(source, targetData, xPlayer.getJob().name)
                 
                 cb('success')
             else

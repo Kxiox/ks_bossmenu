@@ -8,19 +8,19 @@
 
 Config = {}
 
-Config.Locale = 'en' -- en, de or create your own locale file in locales and html/locales
+Config.Locale = 'en'
 
-Config.Currency = '$' -- currency symbol, e.g. $, €, £ etc.
+Config.Currency = '$'
 
-Config.Timestamp = 'us' -- us, de, iso, uk or fr
+Config.Timestamp = 'us'
 
-Config.UnemployedJobName = 'unemployed' -- job name of the unemployed job, used for employees wich get fired
+Config.UnemployedJobName = 'unemployed'
 
 Config.Jobs = {
     ['police'] = {
-        society = nil, -- nil for society_yourjobname, or set a custom society name
-        logo = 'police.png', -- url or file in html/img/
-        color = 'blue', -- light, dark, blue, indigo, purple, pink, red, orange, yellow, green, teal, cyan
+        society = nil,
+        logo = 'police.png',
+        color = 'blue',
         grades = { 4 },
         marker = {
             type = 1,
