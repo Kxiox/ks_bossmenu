@@ -16,6 +16,8 @@ Config.Timestamp = 'us'
 
 Config.UnemployedJobName = 'unemployed'
 
+Config.UseJobsCreator = false -- only for jaksam's jobcreator (resouerce name: jobs_creator)
+
 Config.Jobs = {
     ['police'] = {
         society = nil,

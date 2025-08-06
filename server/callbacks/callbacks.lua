@@ -459,6 +459,22 @@ ESX.RegisterServerCallback('ks_bossmenu:depositMoney', function(source, cb, data
             societyAccount
         })
 
+        if Config.UseJobsCreator then
+            exports["jobs_creator"]:addSocietyMoney(xPlayer.getJob().name, amount)
+            xPlayer.removeAccountMoney('money', amount)
+            addTransaction(source, {
+                action = 'deposit',
+                amount = amount,
+            })
+            
+            -- Discord Logging
+            local newBalance = (societyMoney and societyMoney.money or 0) + amount
+            logDeposit(source, xPlayer.getJob().name, amount, newBalance)
+            
+            cb('success')
+            return
+        end
+
         MySQL.update('UPDATE addon_account_data SET money = money + ? WHERE account_name = ?', {
             amount, societyAccount
         }, function(affectedRows)
@@ -495,6 +511,22 @@ ESX.RegisterServerCallback('ks_bossmenu:withdrawMoney', function(source, cb, dat
 
         if societyMoney and societyMoney.money < amount then
             cb('not_enough_money')
+            return
+        end
+
+        if Config.UseJobsCreator then
+            exports["jobs_creator"]:removeSocietyMoney(xPlayer.getJob().name, amount)
+            xPlayer.addAccountMoney('money', amount)
+            addTransaction(source, {
+                action = 'withdraw',
+                amount = amount,
+            })
+            
+            -- Discord Logging
+            local newBalance = (societyMoney and societyMoney.money or 0) - amount
+            logWithdraw(source, xPlayer.getJob().name, amount, newBalance)
+            
+            cb('success')
             return
         end
 

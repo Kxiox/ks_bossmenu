@@ -37,6 +37,11 @@ function addTransaction(source, data)
 end
 
 function removeMoney(source, jobname, amount)
+    if Config.UseJobsCreator then
+        exports["jobs_creator"]:removeSocietyMoney(jobname, amount)
+        return
+    end
+
     MySQL.update('UPDATE addon_account_data SET money = money - ? WHERE account_name = ?', {
         amount,
         Config.Jobs[jobname] and Config.Jobs[jobname].society or 'society_' .. jobname
