@@ -170,43 +170,46 @@ ESX.RegisterServerCallback('ks_bossmenu:addEmployee', function(source, cb, data)
     local xPlayer = ESX.GetPlayerFromId(source)
     local xTarget = ESX.GetPlayerFromId(data.message)
 
-    if IsPlayerAllowed(source) then
-        if xPlayer.getIdentifier() == xTarget.getIdentifier() then
-            cb(false)
-            return
-        end
-
-        if xTarget then
-            xTarget.setJob(xPlayer.getJob().name, 0)
-        end
-
-        MySQL.update('UPDATE users SET job = ?, job_grade = ? WHERE identifier = ?', {
-            xPlayer.getJob().name, 0, xTarget.getIdentifier()
-        }, function(affectedRows)
-            if affectedRows > 0 then
-                AddAction(source, {
-                    action = 'add_employee',
-                    data = {
-                        target = xTarget.getName(),
-                    }
-                })
-
-                -- Discord Logging
-                local targetData = {
-                    name = xTarget.getName(),
-                    identifier = xTarget.getIdentifier()
-                }
-                local gradeName = getGradeLabel(0, xPlayer.getJob().name)
-                local salary = getSalary(0, xPlayer.getJob().name)
-                
-                LogHire(source, targetData, xPlayer.getJob().name, 0, gradeName, salary)
-
-                cb(true)
-            else
-                cb(false)
-            end
-        end)
+    if not Config.JobCreator and not IsPlayerAllowed(source) then
+        cb('error')
+        return
     end
+
+    if xPlayer.getIdentifier() == xTarget.getIdentifier() then
+        cb(false)
+        return
+    end
+
+    if xTarget then
+        xTarget.setJob(xPlayer.getJob().name, 0)
+    end
+
+    MySQL.update('UPDATE users SET job = ?, job_grade = ? WHERE identifier = ?', {
+        xPlayer.getJob().name, 0, xTarget.getIdentifier()
+    }, function(affectedRows)
+        if affectedRows > 0 then
+            AddAction(source, {
+                action = 'add_employee',
+                data = {
+                    target = xTarget.getName(),
+                }
+            })
+
+            -- Discord Logging
+            local targetData = {
+                name = xTarget.getName(),
+                identifier = xTarget.getIdentifier()
+            }
+            local gradeName = getGradeLabel(0, xPlayer.getJob().name)
+            local salary = getSalary(0, xPlayer.getJob().name)
+            
+            LogHire(source, targetData, xPlayer.getJob().name, 0, gradeName, salary)
+            
+            cb(true)
+        else
+            cb(false)
+        end
+    end)
 end)
 
 ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, data)
@@ -217,69 +220,72 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
     local targetIdentifier = data['employee'].identifier
     local xTarget = ESX.GetPlayerFromIdentifier(targetIdentifier)
 
-    if IsPlayerAllowed(source) then
-        if xPlayer.getIdentifier() == targetIdentifier then
-            cb('self_promote')
-            return
-        end
-
-        local highestGrade = MySQL.single.await('SELECT MAX(grade) as max_grade FROM job_grades WHERE job_name = ?', {
-            xPlayer.getJob().name
-        })
-
-        if targetJobGrade == highestGrade.max_grade then
-            cb('highest_grade')
-            return
-        end
-
-        local targetJob = MySQL.single.await('SELECT job FROM users WHERE identifier = ?', {
-            targetIdentifier
-        })
-
-        if targetJob.job ~= xPlayer.getJob().name then
-            cb('not_same_job')
-            return
-        end
-
-        if xTarget then
-            xTarget.setJob(xPlayer.getJob().name, targetJobGrade + 1)
-        end
-
-        MySQL.update('UPDATE users SET job_grade = job_grade + 1 WHERE identifier = ?', {
-            targetIdentifier
-        }, function(affectedRows)
-            if affectedRows > 0 then
-                local newGrade = MySQL.single.await('SELECT label FROM job_grades WHERE job_name = ? AND grade = ?', {
-                    xPlayer.getJob().name, targetJobGrade + 1
-                })
-                
-                AddAction(source, {
-                    action = 'promote_employee',
-                    data = {
-                        target = targetFirstname .. ' ' .. targetLastname,
-                        new_grade = newGrade.label,
-                    }
-                })
-
-                -- Discord Logging
-                local targetData = {
-                    name = targetFirstname .. ' ' .. targetLastname,
-                    identifier = targetIdentifier
-                }
-                local oldGradeName = getGradeLabel(targetJobGrade, xPlayer.getJob().name)
-                local newGradeName = newGrade.label
-                local oldSalary = getSalary(targetJobGrade, xPlayer.getJob().name)
-                local newSalary = getSalary(targetJobGrade + 1, xPlayer.getJob().name)
-                
-                LogPromotion(source, targetData, xPlayer.getJob().name, targetJobGrade, oldGradeName, 
-                        targetJobGrade + 1, newGradeName, oldSalary, newSalary)
-
-                cb('success')
-            else
-                cb('error')
-            end
-        end)
+    if not Config.JobCreator and not IsPlayerAllowed(source) then
+        cb('error')
+        return
     end
+
+    if xPlayer.getIdentifier() == targetIdentifier then
+        cb('self_promote')
+        return
+    end
+
+    local highestGrade = MySQL.single.await('SELECT MAX(grade) as max_grade FROM job_grades WHERE job_name = ?', {
+        xPlayer.getJob().name
+    })
+
+    if targetJobGrade == highestGrade.max_grade then
+        cb('highest_grade')
+        return
+    end
+
+    local targetJob = MySQL.single.await('SELECT job FROM users WHERE identifier = ?', {
+        targetIdentifier
+    })
+
+    if targetJob.job ~= xPlayer.getJob().name then
+        cb('not_same_job')
+        return
+    end
+
+    if xTarget then
+        xTarget.setJob(xPlayer.getJob().name, targetJobGrade + 1)
+    end
+
+    MySQL.update('UPDATE users SET job_grade = job_grade + 1 WHERE identifier = ?', {
+        targetIdentifier
+    }, function(affectedRows)
+        if affectedRows > 0 then
+            local newGrade = MySQL.single.await('SELECT label FROM job_grades WHERE job_name = ? AND grade = ?', {
+                xPlayer.getJob().name, targetJobGrade + 1
+            })
+                
+            AddAction(source, {
+                action = 'promote_employee',
+                data = {
+                    target = targetFirstname .. ' ' .. targetLastname,
+                    new_grade = newGrade.label,
+                }
+            })
+
+            -- Discord Logging
+            local targetData = {
+                name = targetFirstname .. ' ' .. targetLastname,
+                identifier = targetIdentifier
+            }
+            local oldGradeName = getGradeLabel(targetJobGrade, xPlayer.getJob().name)
+            local newGradeName = newGrade.label
+            local oldSalary = getSalary(targetJobGrade, xPlayer.getJob().name)
+            local newSalary = getSalary(targetJobGrade + 1, xPlayer.getJob().name)
+                
+            LogPromotion(source, targetData, xPlayer.getJob().name, targetJobGrade, oldGradeName, 
+                    targetJobGrade + 1, newGradeName, oldSalary, newSalary)
+
+            cb('success')
+        else
+            cb('error')
+        end
+    end)
 end)
 
 ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, data)
@@ -290,7 +296,11 @@ ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, da
     local targetIdentifier = data['employee'].identifier
     local xTarget = ESX.GetPlayerFromIdentifier(targetIdentifier)
 
-    if IsPlayerAllowed(source) then
+        if not Config.JobCreator and not IsPlayerAllowed(source) then
+            cb('error')
+            return
+        end
+
         if xPlayer.getIdentifier() == targetIdentifier then
             cb('self_demote')
             return
@@ -318,42 +328,41 @@ ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, da
             xTarget.setJob(xPlayer.getJob().name, targetJobGrade - 1)
         end
 
-        MySQL.update('UPDATE users SET job_grade = job_grade - 1 WHERE identifier = ?', {
-            targetIdentifier
-        }, function(affectedRows)
-            if affectedRows > 0 then
-                local newGrade = MySQL.single.await('SELECT label FROM job_grades WHERE job_name = ? AND grade = ?', {
-                    xPlayer.getJob().name, targetJobGrade - 1
-                })
-
-                AddAction(source, {
-                    action = 'demote_employee',
-                    data = {
-                        target = targetFirstname .. ' ' .. targetLastname,
-                        new_grade = newGrade.label,
-                    }
-                })
-
-                
-                -- Discord Logging
-                local targetData = {
-                    name = targetFirstname .. ' ' .. targetLastname,
-                    identifier = targetIdentifier
+    MySQL.update('UPDATE users SET job_grade = job_grade - 1 WHERE identifier = ?', {
+        targetIdentifier
+    }, function(affectedRows)
+        if affectedRows > 0 then
+            local newGrade = MySQL.single.await('SELECT label FROM job_grades WHERE job_name = ? AND grade = ?', {
+                xPlayer.getJob().name, targetJobGrade - 1
+            })
+            
+            AddAction(source, {
+                action = 'demote_employee',
+                data = {
+                    target = targetFirstname .. ' ' .. targetLastname,
+                    new_grade = newGrade.label,
                 }
-                local oldGradeName = getGradeLabel(targetJobGrade, xPlayer.getJob().name)
-                local newGradeName = newGrade.label
-                local oldSalary = getSalary(targetJobGrade, xPlayer.getJob().name)
-                local newSalary = getSalary(targetJobGrade - 1, xPlayer.getJob().name)
-                
-                LogDemotion(source, targetData, xPlayer.getJob().name, targetJobGrade, oldGradeName, 
-                           targetJobGrade - 1, newGradeName, oldSalary, newSalary)
+            })
 
-                cb('success')
-            else
-                cb('error')
-            end
-        end)
-    end
+                
+            -- Discord Logging
+            local targetData = {
+                name = targetFirstname .. ' ' .. targetLastname,
+                identifier = targetIdentifier
+            }
+            local oldGradeName = getGradeLabel(targetJobGrade, xPlayer.getJob().name)
+            local newGradeName = newGrade.label
+            local oldSalary = getSalary(targetJobGrade, xPlayer.getJob().name)
+            local newSalary = getSalary(targetJobGrade - 1, xPlayer.getJob().name)
+            
+            LogDemotion(source, targetData, xPlayer.getJob().name, targetJobGrade, oldGradeName, 
+                       targetJobGrade - 1, newGradeName, oldSalary, newSalary)
+            
+            cb('success')
+        else
+            cb('error')
+        end
+    end)
 end)
 
 ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data)
@@ -363,96 +372,101 @@ ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data
     local targetIdentifier = data['employee'].identifier
     local xTarget = ESX.GetPlayerFromIdentifier(targetIdentifier)
 
-    if IsPlayerAllowed(source) then
-        if xPlayer.getIdentifier() == targetIdentifier then
-            cb('self_fire')
-            return
-        end
-
-        local targetJob = MySQL.single.await('SELECT job FROM users WHERE identifier = ?', {
-            targetIdentifier
-        })
-
-        if targetJob.job ~= xPlayer.getJob().name then
-            cb('not_same_job')
-            return
-        end
-
-        if xTarget then
-            xTarget.setJob(Config.UnemployedJobName, 0)
-        end
-
-        MySQL.update('UPDATE users SET job = ?, job_grade = ? WHERE identifier = ?', {
-            Config.UnemployedJobName, 0, targetIdentifier
-        }, function(affectedRows)
-            if affectedRows > 0 then
-                AddAction(source, {
-                    action = 'fire_employee',
-                    data = {
-                        target = targetFirstname .. ' ' .. targetLastname,
-                    }
-                })
-                
-                -- Discord Logging
-                local targetData = {
-                    name = targetFirstname .. ' ' .. targetLastname,
-                    identifier = targetIdentifier
-                }
-                
-                LogFire(source, targetData, xPlayer.getJob().name)
-                
-                cb('success')
-            else
-                cb('error')
-            end
-        end)
+    if not Config.JobCreator and not IsPlayerAllowed(source) then
+        cb('error')
+        return
     end
+
+    if xPlayer.getIdentifier() == targetIdentifier then
+        cb('self_fire')
+        return
+    end
+
+    local targetJob = MySQL.single.await('SELECT job FROM users WHERE identifier = ?', {
+        targetIdentifier
+    })
+
+    if targetJob.job ~= xPlayer.getJob().name then
+        cb('not_same_job')
+        return
+    end
+
+    if xTarget then
+        xTarget.setJob(Config.UnemployedJobName, 0)
+    end
+
+    MySQL.update('UPDATE users SET job = ?, job_grade = ? WHERE identifier = ?', {
+        Config.UnemployedJobName, 0, targetIdentifier
+    }, function(affectedRows)
+        if affectedRows > 0 then
+            AddAction(source, {
+                action = 'fire_employee',
+                data = {
+                    target = targetFirstname .. ' ' .. targetLastname,
+                }
+            })
+            
+            -- Discord Logging
+            local targetData = {
+                name = targetFirstname .. ' ' .. targetLastname,
+                identifier = targetIdentifier
+            }
+            
+            LogFire(source, targetData, xPlayer.getJob().name)
+            
+            cb('success')
+        else
+            cb('error')
+        end
+    end)
 end)
 
 ESX.RegisterServerCallback('ks_bossmenu:changeSalary', function(source, cb, data)
     local xPlayer = ESX.GetPlayerFromId(source)
 
-    if IsPlayerAllowed(source) then
-        local grade = tonumber(data.grade)
-        local salary = tonumber(data.salary)
-
-        if Config.Menus.salaries.maximum and salary > Config.Menus.salaries.maximum then
-            cb('exceeds_maximum')
+    if not Config.JobCreator and not IsPlayerAllowed(source) then
+        cb('error')
+        return
+    end
+    
+    local grade = tonumber(data.grade)
+    local salary = tonumber(data.salary)
+    if Config.Menus.salaries.maximum and salary > Config.Menus.salaries.maximum then
+        cb('exceeds_maximum')
+        return
+    end
+    if grade and salary then
+        local oldSalary = getSalary(grade, xPlayer.getJob().name)
+        
+        if Config.JobCreator == 'lunar' then
+            exports['lunar_jobscreator']:setJobGradeSalary(xPlayer.getJob().name, grade, salary)
+            cb('success')
             return
         end
-
-        if grade and salary then
-            local oldSalary = getSalary(grade, xPlayer.getJob().name)
-            
-            MySQL.update('UPDATE job_grades SET salary = ? WHERE job_name = ? AND grade = ?', {
-                salary, xPlayer.getJob().name, grade
-            }, function(affectedRows)
-                if affectedRows > 0 then
-                    AddAction(source, {
-                        action = 'change_salary',
-                        data = {
-                            grade = getGradeLabel(grade, xPlayer.getJob().name),
-                            salary = salary,
-                        }
-                    })
-                    
-                    -- Discord Logging - für Gehalt-Änderung aller Mitarbeiter dieses Rangs
-                    local targetData = {
-                        name = "Alle " .. getGradeLabel(grade, xPlayer.getJob().name),
-                        identifier = "system_grade_change"
+        MySQL.update('UPDATE job_grades SET salary = ? WHERE job_name = ? AND grade = ?', {
+            salary, xPlayer.getJob().name, grade
+        }, function(affectedRows)
+            if affectedRows > 0 then
+                AddAction(source, {
+                    action = 'change_salary',
+                    data = {
+                        grade = getGradeLabel(grade, xPlayer.getJob().name),
+                        salary = salary,
                     }
-                    
-                    LogSalaryChange(source, targetData, xPlayer.getJob().name, 
-                                  getGradeLabel(grade, xPlayer.getJob().name), oldSalary, salary)
-                    
-                    cb('success')
-                else
-                    cb(false)
-                end
-            end)
-        else
-            cb(false)
-        end
+                })
+                
+                local targetData = {
+                    name = "Alle " .. getGradeLabel(grade, xPlayer.getJob().name),
+                    identifier = "system_grade_change"
+                }
+                
+                LogSalaryChange(source, targetData, xPlayer.getJob().name, getGradeLabel(grade, xPlayer.getJob().name), oldSalary, salary)
+                
+                cb('success')
+            else
+                cb(false)
+            end
+        end)
     else
         cb(false)
     end
@@ -461,7 +475,12 @@ end)
 ESX.RegisterServerCallback('ks_bossmenu:depositMoney', function(source, cb, data)
     local amount = tonumber(data.amount)
 
-    if IsPlayerAllowed(source) and amount and amount > 0 then
+    if amount and amount > 0 then
+        if not Config.JobCreator and not IsPlayerAllowed(source) then
+            cb('error')
+            return
+        end
+
         local xPlayer = ESX.GetPlayerFromId(source)
         local societyAccount = 'society_' .. xPlayer.getJob().name
         local playerMoney = xPlayer.getAccount('money').money
@@ -475,7 +494,7 @@ ESX.RegisterServerCallback('ks_bossmenu:depositMoney', function(source, cb, data
             societyAccount
         })
 
-        if Config.UseJobsCreator then
+        if Config.JobCreator == 'jaksam' then
             exports["jobs_creator"]:addSocietyMoney(xPlayer.getJob().name, amount)
             xPlayer.removeAccountMoney('money', amount)
             AddTransaction(source, {
@@ -483,7 +502,6 @@ ESX.RegisterServerCallback('ks_bossmenu:depositMoney', function(source, cb, data
                 amount = amount,
             })
             
-            -- Discord Logging
             local newBalance = (societyMoney and societyMoney.money or 0) + amount
             LogDeposit(source, xPlayer.getJob().name, amount, newBalance)
             
@@ -491,24 +509,20 @@ ESX.RegisterServerCallback('ks_bossmenu:depositMoney', function(source, cb, data
             return
         end
 
-        MySQL.update('UPDATE addon_account_data SET money = money + ? WHERE account_name = ?', {
-            amount, societyAccount
-        }, function(affectedRows)
-            if affectedRows > 0 then
-                xPlayer.removeAccountMoney('money', amount)
-                AddTransaction(source, {
-                    action = 'deposit',
-                    amount = amount,
-                })
+        TriggerEvent('esx_addonaccount:getSharedAccount', societyAccount, function(account)
+            account.addMoney(amount)
+
+            xPlayer.removeAccountMoney('money', amount)
+            
+            AddTransaction(source, {
+                action = 'deposit',
+                amount = amount,
+            })
                 
-                -- Discord Logging
-                local newBalance = (societyMoney and societyMoney.money or 0) + amount
-                LogDeposit(source, xPlayer.getJob().name, amount, newBalance)
+            local newBalance = (societyMoney and societyMoney.money or 0) + amount
+            LogDeposit(source, xPlayer.getJob().name, amount, newBalance)
                 
-                cb('success')
-            else
-                cb('unknown_error')
-            end
+            cb('success')
         end)
     else
         cb('error')
@@ -518,7 +532,12 @@ end)
 ESX.RegisterServerCallback('ks_bossmenu:withdrawMoney', function(source, cb, data)
     local amount = tonumber(data.amount)
 
-    if IsPlayerAllowed(source) and amount and amount > 0 then
+    if amount and amount > 0 then
+        if not Config.JobCreator and not IsPlayerAllowed(source) then
+            cb('error')
+            return
+        end
+
         local xPlayer = ESX.GetPlayerFromId(source)
         local societyAccount = 'society_' .. xPlayer.getJob().name
         local societyMoney = MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
@@ -530,7 +549,7 @@ ESX.RegisterServerCallback('ks_bossmenu:withdrawMoney', function(source, cb, dat
             return
         end
 
-        if Config.UseJobsCreator then
+        if Config.JobCreator == 'jaksam' then
             exports["jobs_creator"]:removeSocietyMoney(xPlayer.getJob().name, amount)
             xPlayer.addAccountMoney('money', amount)
             AddTransaction(source, {
@@ -546,24 +565,20 @@ ESX.RegisterServerCallback('ks_bossmenu:withdrawMoney', function(source, cb, dat
             return
         end
 
-        MySQL.update('UPDATE addon_account_data SET money = money - ? WHERE account_name = ?', {
-            amount, societyAccount
-        }, function(affectedRows)
-            if affectedRows > 0 then
-                xPlayer.addAccountMoney('money', amount)
-                AddTransaction(source, {
-                    action = 'withdraw',
-                    amount = amount,
-                })
+        TriggerEvent('esx_addonaccount:getSharedAccount', societyAccount, function(account)
+            account.removeMoney(amount)
+
+            xPlayer.addAccountMoney('money', amount)
+            
+            AddTransaction(source, {
+                action = 'withdraw',
+                amount = amount,
+            })
                 
-                -- Discord Logging
-                local newBalance = societyMoney.money - amount
-                LogWithdraw(source, xPlayer.getJob().name, amount, newBalance)
+            local newBalance = societyMoney.money - amount
+            LogWithdraw(source, xPlayer.getJob().name, amount, newBalance)
                 
-                cb('success')
-            else
-                cb('unknown_error')
-            end
+            cb('success')
         end)
     else
         cb('error')

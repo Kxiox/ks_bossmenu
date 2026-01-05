@@ -41,11 +41,48 @@ CreateThread(function()
     Wait(1000)
 
     for k, v in pairs(Config.Jobs) do
-        local result = MySQL.query.await('SELECT * FROM addon_account_data WHERE account_name = ?', {v.society or 'society_' .. k})
+        local societyName = v.society or ('society_' .. k)
+        local result = MySQL.query.await('SELECT * FROM addon_account_data WHERE account_name = ?', { societyName })
         
         if #result == 0 then
-            MySQL.insert('INSERT INTO addon_account_data (account_name, money) VALUES (?, ?)', {v.society or 'society_' .. k, 0})
-            print(('[ks_bossmenu] Society account for %s created.'):format(v.society or 'society_' .. k))
+            local success, err = pcall(function()
+                MySQL.insert.await('INSERT INTO addon_account_data (account_name, money, owner) VALUES (?, ?, ?)', { societyName, 0, NULL })
+            end)
+            
+            if not success then
+                -- Try without owner column if it doesn't exist
+                MySQL.insert.await('INSERT INTO addon_account_data (account_name, money) VALUES (?, ?)', { societyName, 0 })
+            end
+            
+            print(('[ks_bossmenu] Society account for %s created.'):format(societyName))
         end
     end
 end)
+
+RegisterNetEvent('ks_bossmenu:lunar:checkSociety')
+AddEventHandler('ks_bossmenu:lunar:checkSociety', function(jobName)
+    local _source = source
+    CreateThread(function()
+        local societyName = Config.Jobs[jobName] and (Config.Jobs[jobName].society or 'society_' .. jobName) or 'society_' .. jobName
+        local result = MySQL.query.await('SELECT * FROM addon_account_data WHERE account_name = ?', {societyName})
+        
+        if #result == 0 then
+            AddSociety(societyName)
+        end
+        
+        TriggerClientEvent('ks_bossmenu:lunar:societyChecked', _source, true)
+    end)
+end)
+
+function AddSociety(societyName)
+    local success, err = pcall(function()
+        MySQL.insert.await('INSERT INTO addon_account_data (account_name, money, owner) VALUES (?, ?, ?)', { societyName, 0, NULL })
+    end)
+    
+    if not success then
+        -- Try without owner column if it doesn't exist
+        MySQL.insert.await('INSERT INTO addon_account_data (account_name, money) VALUES (?, ?)', { societyName, 0 })
+    end
+    
+    print(('[ks_bossmenu] Society account for %s created.'):format(societyName))
+end

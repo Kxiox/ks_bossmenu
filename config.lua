@@ -16,12 +16,14 @@ Config.Timestamp = 'us'
 
 Config.UnemployedJobName = 'unemployed'
 
-Config.UseTarget = false -- Use ox_target for the boss menu (resource name: ox_target)
+Config.UseTarget = false -- only ox_target
 
-Config.UseJobsCreator = false -- only for jaksam's jobcreator (resouerce name: jobs_creator)
+Config.JobCreator = false -- 'jaksam', 'lunar', false | NEW -- Only Lunar supports marker by job creator. For the others, you need to set them in the Config.Jobs file.
+Config.DefaultColor = 'green' -- Default color if you use jobcreator and not this config | NEW
+Config.DefaultLogo = nil -- Default logo if you use jobcreator and not this config | NEW
 
-Config.EnableCommand = false -- Enable the command to open the boss menu | NEW
-Config.CommandName = 'bossmenu' -- The name of the command | NEW
+Config.EnableCommand = false
+Config.CommandName = 'bossmenu'
 
 Config.Jobs = {
     ['police'] = {
@@ -38,14 +40,14 @@ Config.Jobs = {
     }
 }
 
-Config.Menus = { -- NEW (de-/activate menu features)
+Config.Menus = {
     employees = {
         enabled = true
     },
 
     salaries = {
         enabled = true,
-        maximum = nil, -- NEW maximum salary change (nil = no limit; integer value)
+        maximum = nil,
     },
 
     account = {
@@ -54,6 +56,6 @@ Config.Menus = { -- NEW (de-/activate menu features)
 
     bonus = {
         enabled = true,
-        maximum = nil, -- NEW maximum bonus amount (nil = no limit; integer value)
+        maximum = nil,
     }
 }
