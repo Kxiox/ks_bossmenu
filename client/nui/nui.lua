@@ -19,6 +19,7 @@ function openNUI(data)
     getTransactions()
     getCurrency()
     getOnlineEmployeesList()
+    getTimeTracking()
 
     SetNuiFocus(true, true)
     SendNUIMessage({
@@ -258,6 +259,16 @@ function getCurrency()
         action = 'getCurrency',
         currency = Config.Currency,
     })
+end
+
+function getTimeTracking()
+    ESX.TriggerServerCallback('ks_bossmenu:getTimeTrackingList', function(entries, summary)
+        SendNUIMessage({
+            action = 'getTimeTrackingList',
+            timeTracking = entries or {},
+            timeTrackingSummary = summary or {},
+        })
+    end, ESX.PlayerData.job.name)
 end
 
 function setLocale()

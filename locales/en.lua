@@ -21,6 +21,10 @@ Locales['en'] = {
 
     ['receive_bonus'] = 'You have received a bonus of %s.',
 
+    ['time_tracking_started'] = 'Time tracking started.',
+    ['time_tracking_ended'] = 'Time tracking ended.',
+    ['time_tracking_failed'] = 'Time tracking could not be updated.',
+
     -- Discord Webhook Texts
     ['webhook_hire_title'] = 'EMPLOYEE HIRED',
     ['webhook_hire_employee'] = 'Hired Employee',

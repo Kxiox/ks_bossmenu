@@ -21,6 +21,10 @@ Locales['fr'] = {
 
     ['receive_bonus'] = 'Vous avez reçu une prime de %s.',
 
+    ['time_tracking_started'] = 'Suivi du temps démarré.',
+    ['time_tracking_ended'] = 'Suivi du temps terminé.',
+    ['time_tracking_failed'] = 'Le suivi du temps n\'a pas pu être mis à jour.',
+
     -- Discord Webhook Textes
     ['webhook_hire_title'] = 'EMPLOYÉ EMBAUCHÉ',
     ['webhook_hire_employee'] = 'Employé Embauché',

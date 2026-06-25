@@ -101,3 +101,13 @@ if Config.EnableCommand then
         end
     end, false)
 end
+
+function TableContains(tbl, val)
+    for _, v in ipairs(tbl) do
+        if v == val then
+            return true
+        end
+    end
+
+    return false
+end

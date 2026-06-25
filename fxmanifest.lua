@@ -12,7 +12,7 @@ game 'gta5'
 author 'Kxiox Scripts'
 description 'Bossmenu for ESX'
 lua_54 'yes'
-version 'dev-1.4.0'
+version 'dev-1.5.0'
 
 shared_scripts {
     '@es_extended/imports.lua',
@@ -26,6 +26,7 @@ client_scripts {
     'client/nui/notify.lua',
     'client/nui/nui.lua',
     'client/main.lua',
+    'client/time_tracking.lua',
 
     'client/custom/lunar_jobcreator.lua',
 }
@@ -41,6 +42,7 @@ server_scripts {
     'server/callbacks/callbacks.lua',
     'server/main.lua',
     'server/queue.lua',
+    'server/callbacks/time_tracking.lua',
     'server/versioncheck.lua',
 }
 
@@ -52,6 +54,8 @@ files {
     'html/index.html',
     'html/assets/*.css',
     'html/assets/*.js',
+    'html/assets/*.woff',
+    'html/assets/*.woff2',
     'html/assets/*.png',
     'html/img/*.png',
 }
