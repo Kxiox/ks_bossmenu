@@ -37,7 +37,7 @@ ESX.RegisterServerCallback('ks_bossmenu:getEmployees', function(source, cb, jobN
     cb(employees, onduty, factionmoney)
 end)
 
-ESX.RegisterServerCallback('ks_bossmenu:getOnlineEmployeesList', function( source, cb, jobName)
+ESX.RegisterServerCallback('ks_bossmenu:getOnlineEmployeesList', function(source, cb, jobName)
     local xPlayers = ESX.GetExtendedPlayers('job', jobName)
     local onlineEmployees = {}
 

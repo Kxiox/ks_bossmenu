@@ -32,11 +32,58 @@ CreateThread(function()
             `time` varchar(10) DEFAULT NULL,
             `job` text DEFAULT NULL,
             PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;]],
+        [[CREATE TABLE IF NOT EXISTS `ks_bossmenu_time_tracking` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `identifier` varchar(46) NOT NULL,
+            `job` varchar(50) NOT NULL,
+            `time_start` int(11) NOT NULL,
+            `time_end` int(11) NOT NULL DEFAULT 0,
+            PRIMARY KEY (`id`),
+            KEY `idx_identifier_job_open` (`identifier`, `job`, `time_end`),
+            KEY `idx_job_time_start` (`job`, `time_start`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;]]
     }
     for _, query in ipairs(queries) do
         MySQL.insert.await(query)
     end
+
+    local columns = MySQL.query.await('SHOW COLUMNS FROM `ks_bossmenu_time_tracking`')
+    local hasColumn = {}
+
+    for _, column in ipairs(columns or {}) do
+        hasColumn[column.Field] = true
+    end
+
+    if not hasColumn.id then
+        pcall(function()
+            MySQL.query.await('ALTER TABLE `ks_bossmenu_time_tracking` ADD COLUMN `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST')
+        end)
+    end
+
+    if not hasColumn.identifier then
+        MySQL.query.await('ALTER TABLE `ks_bossmenu_time_tracking` ADD COLUMN `identifier` varchar(46) NOT NULL')
+    end
+
+    if not hasColumn.job then
+        MySQL.query.await('ALTER TABLE `ks_bossmenu_time_tracking` ADD COLUMN `job` varchar(50) NOT NULL')
+    end
+
+    if not hasColumn.time_start then
+        MySQL.query.await('ALTER TABLE `ks_bossmenu_time_tracking` ADD COLUMN `time_start` int(11) NOT NULL')
+    end
+
+    if not hasColumn.time_end then
+        MySQL.query.await('ALTER TABLE `ks_bossmenu_time_tracking` ADD COLUMN `time_end` int(11) NOT NULL DEFAULT 0')
+    end
+
+    pcall(function()
+        MySQL.query.await('ALTER TABLE `ks_bossmenu_time_tracking` ADD INDEX `idx_identifier_job_open` (`identifier`, `job`, `time_end`)')
+    end)
+
+    pcall(function()
+        MySQL.query.await('ALTER TABLE `ks_bossmenu_time_tracking` ADD INDEX `idx_job_time_start` (`job`, `time_start`)')
+    end)
 
     Wait(1000)
 

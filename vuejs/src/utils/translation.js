@@ -1,6 +1,6 @@
 const translations = {};
 let currentLocale = 'en';
-const availableLocales = ['de', 'en', 'fr']; // Will be updated dynamically
+const availableLocales = ['de', 'en', 'fr'];
 const localeCache = {};
 let isInitialized = false;
 
@@ -26,130 +26,7 @@ async function loadLocale(locale) {
 }
 
 async function discoverAvailableLocales() {
-  const commonLocales = [
-    'de', // German
-    'en', // English
-    'fr', // French
-    'es', // Spanish
-    'it', // Italian
-    'nl', // Dutch
-    'pl', // Polish
-    'pt', // Portuguese
-    'ru', // Russian
-    'tr', // Turkish
-    'cs', // Czech
-    'sk', // Slovak
-    'hu', // Hungarian
-    'ro', // Romanian
-    'bg', // Bulgarian
-    'hr', // Croatian
-    'sl', // Slovenian
-    'lv', // Latvian
-    'lt', // Lithuanian
-    'et', // Estonian
-    'fi', // Finnish
-    'sv', // Swedish
-    'da', // Danish
-    'no', // Norwegian
-    'is', // Icelandic
-    'el', // Greek
-    'he', // Hebrew
-    'ar', // Arabic
-    'zh', // Chinese (Simplified)
-    'zh-TW', // Chinese (Traditional)
-    'ja', // Japanese
-    'ko', // Korean
-    'th', // Thai
-    'vi', // Vietnamese
-    'id', // Indonesian
-    'ms', // Malay
-    'hi', // Hindi
-    'bn', // Bengali
-    'fa', // Persian
-    'uk', // Ukrainian
-    'sr', // Serbian
-    'sq', // Albanian
-    'mk', // Macedonian
-    'ka', // Georgian
-    'hy', // Armenian
-    'az', // Azerbaijani
-    'bs', // Bosnian
-    'mt', // Maltese
-    'ga', // Irish
-    'cy', // Welsh
-    'eu', // Basque
-    'gl', // Galician
-    'ca', // Catalan
-    'af', // Afrikaans
-    'sw', // Swahili
-    'zu', // Zulu
-    'xh', // Xhosa
-    'st', // Southern Sotho
-    'tn', // Tswana
-    'ts', // Tsonga
-    've', // Venda
-    'ss', // Swati
-    'nr', // South Ndebele
-    'nd', // North Ndebele
-    'rw', // Kinyarwanda
-    'so', // Somali
-    'am', // Amharic
-    'yo', // Yoruba
-    'ig', // Igbo
-    'ha', // Hausa
-    'fil', // Filipino
-    'ta', // Tamil
-    'te', // Telugu
-    'ml', // Malayalam
-    'kn', // Kannada
-    'mr', // Marathi
-    'gu', // Gujarati
-    'pa', // Punjabi
-    'ur', // Urdu
-    'si', // Sinhala
-    'my', // Burmese
-    'km', // Khmer
-    'lo', // Lao
-    'mn', // Mongolian
-    'ne', // Nepali
-    'ps', // Pashto
-    'uz', // Uzbek
-    'tk', // Turkmen
-    'ky', // Kyrgyz
-    'tg', // Tajik
-    'kk', // Kazakh
-    'be', // Belarusian
-    'mo', // Moldovan
-    'lb', // Luxembourgish
-    'fo', // Faroese
-    'sm', // Samoan
-    'to', // Tongan
-    'fj', // Fijian
-    'mg', // Malagasy
-    'qu', // Quechua
-    'ay', // Aymara
-    'gn', // Guarani
-    'guw', // Gun
-    'se', // Northern Sami (Sweden)
-    'sma', // Southern Sami
-    'smj', // Lule Sami
-    'sms', // Skolt Sami
-    'smn', // Inari Sami
-  ];
-  const discovered = [];
-
-  for (const locale of commonLocales) {
-    try {
-      const response = await fetch(`./locales/${locale}.json`);
-      if (response.ok) {
-        discovered.push(locale);
-      }
-    } catch (error) {
-    }
-  }
-
-  availableLocales.splice(0, availableLocales.length, ...discovered);
-  return discovered;
+  return [...availableLocales];
 }
 
 async function initializeTranslations() {
@@ -184,8 +61,8 @@ window.addEventListener('message', (event) => {
 
 async function setLocale(locale) {
   if (!availableLocales.includes(locale)) {
-    console.error('Locale not available:', locale, 'Available locales:', availableLocales);
-    return false;
+    console.warn('Locale not available, falling back to en:', locale);
+    locale = 'en';
   }
 
   const localeData = await loadLocale(locale);

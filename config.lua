@@ -57,5 +57,9 @@ Config.Menus = {
     bonus = {
         enabled = true,
         maximum = nil,
+    },
+
+    time_tracking = {
+        enabled = true,
     }
 }

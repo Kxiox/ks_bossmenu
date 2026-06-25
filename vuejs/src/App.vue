@@ -9,6 +9,7 @@
   import SalariesComponent from './components/SalariesComponent.vue'
   import AccountComponent from './components/AccountComponent.vue'
   import BonusComponent from './components/BonusComponent.vue'
+  import TimeTrackingComponent from './components/TimeTrackingComponent.vue'
   import TransactionsComponent from './components/TransactionsComponent.vue'
   import ModalsComponent from './components/ModalsComponent.vue'
   import NotifiesComponent from './components/NotifiesComponent.vue'
@@ -20,7 +21,8 @@
     employees: { enabled: true },
     salaries: { enabled: true },
     account: { enabled: true },
-    bonus: { enabled: true }
+    bonus: { enabled: true },
+    time_tracking: { enabled: true }
   })
 
   const employeesAmount = ref(0)
@@ -34,6 +36,8 @@
   const bonusMaximum = ref(-1)
   const actionsList = ref([])
   const transactionsList = ref([])
+  const timeTrackingList = ref([])
+  const timeTrackingSummary = ref({})
   const selectedSalary = ref(null)
 
   const showAllActions = ref(false)
@@ -171,6 +175,10 @@
 
       } else if (event.data.action === 'getTransactions') {
         transactionsList.value = event.data.transactions
+
+      } else if (event.data.action === 'getTimeTrackingList') {
+        timeTrackingList.value = event.data.timeTracking || []
+        timeTrackingSummary.value = event.data.timeTrackingSummary || {}
       
       } else if (event.data.action === 'getCurrency') {
         currency.value = event.data.currency
@@ -269,7 +277,12 @@
         <button v-if="menus.bonus?.enabled !== false" class="nav-link text-start" id="v-pills-bonus-tab" data-bs-toggle="pill"
           data-bs-target="#v-pills-bonus" type="button" role="tab" aria-controls="v-pills-bonus"
           aria-selected="false">
-          <i class="bi bi-gift me-2"></i> {{ $t('pages.bonus') }} <span class="badge">New</span>
+          <i class="bi bi-gift me-2"></i> {{ $t('pages.bonus') }}
+        </button>
+        <button v-if="menus.time_tracking?.enabled !== false" class="nav-link text-start" id="v-pills-time-tracking-tab" data-bs-toggle="pill"
+          data-bs-target="#v-pills-time-tracking" type="button" role="tab" aria-controls="v-pills-time-tracking"
+          aria-selected="false">
+          <i class="bi bi-clock-history me-2"></i> {{ $t('pages.time_tracking') }} <span class="badge">New</span>
         </button>
       </div>
 
@@ -312,6 +325,10 @@
         <div class="tab-pane fade" id="v-pills-bonus" role="tabpanel" aria-labelledby="v-pills-bonus-tab"
           tabindex="0">
           <BonusComponent :notifiesRef="notifiesRef" />
+        </div>
+        <div class="tab-pane fade" id="v-pills-time-tracking" role="tabpanel" aria-labelledby="v-pills-time-tracking-tab"
+          tabindex="0">
+          <TimeTrackingComponent :employees="timeTrackingList" :summary="timeTrackingSummary" />
         </div>
       </div>
     </div>

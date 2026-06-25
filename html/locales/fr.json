@@ -4,7 +4,8 @@
         "employees": "Employés",
         "salaries": "Salaires",
         "account": "Compte",
-        "bonus": "Prime"
+        "bonus": "Prime",
+        "time_tracking": "Suivi du temps"
     },
 
     "home": {
@@ -71,6 +72,35 @@
         "give_to_all_employees": "Donner à tous les employés",
         "give_to_all_ranks": "Donner à tous les grades",
         "give_to_online_employees": "Donner aux employés en ligne"
+    },
+
+    "time_tracking": {
+        "total_time": "Temps total",
+        "average_day": "Moyenne par jour",
+        "average_shift": "Service moyen",
+        "active_employees": "Employés actifs",
+        "tracked_employees": "Employés suivis",
+        "employee_activity": "Activité des employés",
+        "search_placeholder": "Rechercher un employé...",
+        "no_search_results": "Aucun employé trouvé.",
+        "short_shifts": "services",
+        "active_days": "Jours actifs",
+        "days_title": "Jours",
+        "sessions_title": "Services",
+        "table_employee": "Employé",
+        "table_rank": "Grade",
+        "table_total": "Temps total",
+        "table_sessions": "Services",
+        "table_last_activity": "Dernière activité",
+        "table_day": "Jour",
+        "table_start": "Début",
+        "table_end": "Fin",
+        "table_duration": "Durée",
+        "table_status": "Statut",
+        "table_actions": "Actions",
+        "status_active": "En service",
+        "status_inactive": "Inactif",
+        "no_entries": "Aucun employé trouvé pour ce rapport d'activité."
     },
 
     "buttons": {
