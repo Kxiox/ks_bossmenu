@@ -4,7 +4,8 @@
         "employees": "Employees",
         "salaries": "Salaries",
         "account": "Account",
-        "bonus": "Bonus"
+        "bonus": "Bonus",
+        "time_tracking": "Time Tracking"
     },
 
     "home": {
@@ -71,6 +72,35 @@
         "ranks": "Ranks",
         "single_employee_bonus": "Single Employee Bonus",
         "table_name": "Name"
+    },
+
+    "time_tracking": {
+        "total_time": "Total time",
+        "average_day": "Average per day",
+        "average_shift": "Average shift",
+        "active_employees": "Active employees",
+        "tracked_employees": "Tracked employees",
+        "employee_activity": "Employee activity",
+        "search_placeholder": "Search employee...",
+        "no_search_results": "No employees found.",
+        "short_shifts": "shifts",
+        "active_days": "Active days",
+        "days_title": "Days",
+        "sessions_title": "Shifts",
+        "table_employee": "Employee",
+        "table_rank": "Rank",
+        "table_total": "Total time",
+        "table_sessions": "Shifts",
+        "table_last_activity": "Last activity",
+        "table_day": "Day",
+        "table_start": "Start",
+        "table_end": "End",
+        "table_duration": "Duration",
+        "table_status": "Status",
+        "table_actions": "Actions",
+        "status_active": "On duty",
+        "status_inactive": "Inactive",
+        "no_entries": "No employees found for this activity report."
     },
 
     "buttons": {

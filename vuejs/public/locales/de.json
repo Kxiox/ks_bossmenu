@@ -4,7 +4,8 @@
         "employees": "Mitarbeiter",
         "salaries": "Gehälter",
         "account": "Konto",
-        "bonus": "Bonus"
+        "bonus": "Bonus",
+        "time_tracking": "Zeiterfassung"
     },
 
     "home": {
@@ -71,6 +72,35 @@
         "give_to_all_employees": "An alle Mitarbeiter vergeben",
         "give_to_all_ranks": "An alle Ränge vergeben",
         "give_to_online_employees": "An online Mitarbeiter vergeben"
+    },
+
+    "time_tracking": {
+        "total_time": "Gesamtzeit",
+        "average_day": "Schnitt pro Tag",
+        "average_shift": "Schnitt pro Dienst",
+        "active_employees": "Aktive Mitarbeiter",
+        "tracked_employees": "Erfasste Mitarbeiter",
+        "employee_activity": "Mitarbeiteraktivität",
+        "search_placeholder": "Mitarbeiter suchen...",
+        "no_search_results": "Keine Mitarbeiter gefunden.",
+        "short_shifts": "Dienste",
+        "active_days": "Aktive Tage",
+        "days_title": "Tage",
+        "sessions_title": "Dienste",
+        "table_employee": "Mitarbeiter",
+        "table_rank": "Rang",
+        "table_total": "Gesamtzeit",
+        "table_sessions": "Dienste",
+        "table_last_activity": "Letzte Aktivität",
+        "table_day": "Tag",
+        "table_start": "Start",
+        "table_end": "Ende",
+        "table_duration": "Dauer",
+        "table_status": "Status",
+        "table_actions": "Aktionen",
+        "status_active": "Im Dienst",
+        "status_inactive": "Inaktiv",
+        "no_entries": "Keine Mitarbeiter für diese Auswertung gefunden."
     },
 
     "buttons": {
