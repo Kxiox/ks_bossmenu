@@ -282,7 +282,7 @@
         <button v-if="menus.time_tracking?.enabled !== false" class="nav-link text-start" id="v-pills-time-tracking-tab" data-bs-toggle="pill"
           data-bs-target="#v-pills-time-tracking" type="button" role="tab" aria-controls="v-pills-time-tracking"
           aria-selected="false">
-          <i class="bi bi-clock-history me-2"></i> {{ $t('pages.time_tracking') }} <span class="badge">New</span>
+          <i class="bi bi-clock-history me-2"></i> {{ $t('pages.time_tracking') }}
         </button>
       </div>
 
