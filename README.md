@@ -15,6 +15,7 @@ Manage your job, employees, salaries, bonus and society account with a clean and
 - **Employee Management:** Add, promote, demote, or fire employees directly from the menu.
 - **Salary Management:** View and change job grade salaries.
 - **Bonus Management:** Give your employees bonus
+- **Time Tracking:** Track time of your employees
 - **Society Account:** Deposit and withdraw money, view all transactions.
 - **Action Log:** See the latest actions performed by bosses.
 - **Permissions:** Only configured grades can access the boss menu.
