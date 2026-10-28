@@ -31,9 +31,10 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToSelectedEmployees', function(
         
         -- Prüfe Firmenkontostand
         local societyAccount = 'society_' .. job.name
-        local societyMoney = MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
-            societyAccount
-        })
+        local societyMoney = GetMoney(job.name)
+        -- MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
+        --     societyAccount
+        -- })
         
         if not societyMoney or societyMoney.money < totalCost then
             cb(false, 'not_enough_money')
@@ -64,7 +65,7 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToSelectedEmployees', function(
         end
         
         -- Discord Logging
-        local newBalance = societyMoney.money - totalCost
+        local newBalance = societyMoney - totalCost
         LogBonusSpecificEmployees(source, job.name, amount, targetsList, newBalance, reason)
         
         cb(true, 'bonus_given')
@@ -120,9 +121,10 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToRanks', function(source, cb, 
                 
                 -- Prüfe Firmenkontostand
                 local societyAccount = 'society_' .. job.name
-                local societyMoney = MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
-                    societyAccount
-                })
+                local societyMoney = GetMoney(job.name)
+                -- local societyMoney = MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
+                --     societyAccount
+                -- })
                 
                 if not societyMoney or societyMoney.money < totalCost then
                     cb(false, 'not_enough_money')
@@ -149,7 +151,7 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToRanks', function(source, cb, 
                 end
                 
                 -- Discord Logging
-                local newBalance = societyMoney.money - totalCost
+                local newBalance = societyMoney - totalCost
                 LogBonusSpecificGrades(source, job.name, amount, gradesList, processedCount, newBalance, reason)
                 
                 cb(true, 'bonus_given')
@@ -189,9 +191,10 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllEmployees', function(sourc
                 
                 -- Prüfe Firmenkontostand
                 local societyAccount = 'society_' .. job.name
-                local societyMoney = MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
-                    societyAccount
-                })
+                local societyMoney = GetMoney(job.name)
+                -- MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
+                --     societyAccount
+                -- })
                 
                 if not societyMoney or societyMoney.money < totalCost then
                     cb(false, 'not_enough_money')
@@ -216,7 +219,7 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllEmployees', function(sourc
                 end
                 
                 -- Discord Logging
-                local newBalance = societyMoney.money - totalCost
+                local newBalance = societyMoney - totalCost
                 LogBonusAllEmployees(source, job.name, amount, processedCount, newBalance, reason)
                 
                 cb(true, 'bonus_given')
@@ -256,9 +259,10 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllRanks', function(source, c
                 
                 -- Prüfe Firmenkontostand
                 local societyAccount = 'society_' .. job.name
-                local societyMoney = MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
-                    societyAccount
-                })
+                local societyMoney = GetMoney(job.name)
+                -- MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
+                --     societyAccount
+                -- })
                 
                 if not societyMoney or societyMoney.money < totalCost then
                     cb(false, 'not_enough_money')
@@ -283,7 +287,7 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllRanks', function(source, c
                 end
                 
                 -- Discord Logging
-                local newBalance = societyMoney.money - totalCost
+                local newBalance = societyMoney - totalCost
                 LogBonusAllGrades(source, job.name, amount, processedCount, newBalance, reason)
                 
                 cb(true, 'bonus_given')
@@ -332,9 +336,10 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToOnlineEmployees', function(so
         
         -- Prüfe Firmenkontostand
         local societyAccount = 'society_' .. job.name
-        local societyMoney = MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
-            societyAccount
-        })
+        local societyMoney = GetMoney(job.name)
+        -- MySQL.single.await('SELECT money FROM addon_account_data WHERE account_name = ?', {
+        --     societyAccount
+        -- })
         
         if not societyMoney or societyMoney.money < totalCost then
             cb(false, 'not_enough_money')
@@ -351,7 +356,7 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToOnlineEmployees', function(so
         end
         
         -- Discord Logging
-        local newBalance = societyMoney.money - totalCost
+        local newBalance = societyMoney - totalCost
         LogBonusOnlineEmployees(source, job.name, amount, processedCount, newBalance, reason)
         
         cb(true, 'bonus_given')

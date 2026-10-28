@@ -36,14 +36,26 @@ function AddTransaction(source, data)
     })
 end
 
+function GetMoney(jobname)
+    if Config.JobCreator == 'jaksam' then
+        exports["jobs_creator"]:getSocietyMoney(jobname, amount)
+        return
+    end
+
+    return exports['esx_addonaccount']:GetSharedAccount('society_' .. jobname).getMoney()
+end
+
 function RemoveMoney(source, jobname, amount)
     if Config.UseJobsCreator then
         exports["jobs_creator"]:removeSocietyMoney(jobname, amount)
         return
     end
 
-    MySQL.update('UPDATE addon_account_data SET money = money - ? WHERE account_name = ?', {
-        amount,
-        Config.Jobs[jobname] and Config.Jobs[jobname].society or 'society_' .. jobname
-    })
+    -- MySQL.update('UPDATE addon_account_data SET money = money - ? WHERE account_name = ?', {
+    --     amount,
+    --     Config.Jobs[jobname] and Config.Jobs[jobname].society or 'society_' .. jobname
+    -- })
+
+    local account = exports['esx_addonaccount']:GetSharedAccount('society_' .. jobname)
+    account.removeMoney(amount)
 end
