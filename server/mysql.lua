@@ -97,7 +97,6 @@ CreateThread(function()
             end)
             
             if not success then
-                -- Try without owner column if it doesn't exist
                 MySQL.insert.await('INSERT INTO addon_account_data (account_name, money) VALUES (?, ?)', { societyName, 0 })
             end
             
@@ -127,7 +126,6 @@ function AddSociety(societyName)
     end)
     
     if not success then
-        -- Try without owner column if it doesn't exist
         MySQL.insert.await('INSERT INTO addon_account_data (account_name, money) VALUES (?, ?)', { societyName, 0 })
     end
     

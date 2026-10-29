@@ -42,7 +42,7 @@ function GetMoney(jobname)
         return
     end
 
-    return exports['esx_addonaccount']:GetSharedAccount('society_' .. jobname).getMoney()
+    return exports['esx_addonaccount']:GetSharedAccount('society_' .. jobname).money
 end
 
 function RemoveMoney(source, jobname, amount)
@@ -50,11 +50,6 @@ function RemoveMoney(source, jobname, amount)
         exports["jobs_creator"]:removeSocietyMoney(jobname, amount)
         return
     end
-
-    -- MySQL.update('UPDATE addon_account_data SET money = money - ? WHERE account_name = ?', {
-    --     amount,
-    --     Config.Jobs[jobname] and Config.Jobs[jobname].society or 'society_' .. jobname
-    -- })
 
     local account = exports['esx_addonaccount']:GetSharedAccount('society_' .. jobname)
     account.removeMoney(amount)
