@@ -5,7 +5,7 @@
 A modern, feature-rich FiveM boss menu for ESX-based servers.  
 Manage your job, employees, salaries, bonus and society account with a clean and responsive Vue 3 interface.
 
-# [⬇️ Download](https://github.com/Kxiox/ks_bossmenu/releases)
+[![Download](https://img.shields.io/badge/Download-RELEASE-brightgreen?style=for-the-badge&logo=github)](https://github.com/Kxiox/ks_bossmenu/releases)
 
 ## Features
 
