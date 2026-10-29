@@ -42,7 +42,7 @@ Manage your job, employees, salaries, bonus and society account with a clean and
 - **Add more translations** by following this [Guide](https://kxiox.gitbook.io/kxiox-scripts/add-your-own-language).
 
 ## Support
-[☎️ Discord](https://discord.gg/ZcAtT6ShAk)
-[📄 Documentation](https://kxiox.gitbook.io/kxiox-scripts/ks-bossmenu/)
+[![Discord](https://img.shields.io/badge/Discord-JOIN-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/ZcAtT6ShAk)
+[![Documentation](https://img.shields.io/badge/Documentation-READ-3880FF?style=for-the-badge&logo=gitbook&logoColor=white)](https://kxiox.gitbook.io/kxiox-scripts/ks-bossmenu/)
 
 > This project is licensed under the GNU General Public License v3.0.
