@@ -1,4 +1,5 @@
-![cover_bossmenu|690x388](https://forum-cfx-re.akamaized.net/original/5X/0/5/d/7/05d7bffbc18a0419f53b0078ad6696e8e29a0d3e.jpeg)
+<img width="1920" height="1080" alt="cover_bossmenu" src="https://github.com/user-attachments/assets/5f3e7253-a77c-41da-a78a-3d3baae379b7" />
+
 
 # KS Bossmenu for ESX | FiveM Bossmenu
 
