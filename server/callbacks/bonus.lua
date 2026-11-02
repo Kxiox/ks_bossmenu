@@ -32,7 +32,7 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToSelectedEmployees', function(
         local societyAccount = 'society_' .. job.name
         local societyMoney = GetMoney(job.name)
         
-        if societyMoney.money < totalCost then
+        if societyMoney < totalCost then
             cb(false, 'not_enough_money')
             return
         end
@@ -116,7 +116,7 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToRanks', function(source, cb, 
                 local societyAccount = 'society_' .. job.name
                 local societyMoney = GetMoney(job.name)
                 
-                if societyMoney.money < totalCost then
+                if societyMoney < totalCost then
                     cb(false, 'not_enough_money')
                     return
                 end
@@ -180,7 +180,7 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllEmployees', function(sourc
                 local societyAccount = 'society_' .. job.name
                 local societyMoney = GetMoney(job.name)
                 
-                if societyMoney.money < totalCost then
+                if societyMoney < totalCost then
                     cb(false, 'not_enough_money')
                     return
                 end
@@ -243,7 +243,7 @@ ESX.RegisterServerCallback('ks_bossmenu:giveBonusToAllRanks', function(source, c
                 local societyAccount = 'society_' .. job.name
                 local societyMoney = GetMoney(job.name)
                 
-                if societyMoney.money < totalCost then
+                if societyMoney < totalCost then
                     cb(false, 'not_enough_money')
                     return
                 end
