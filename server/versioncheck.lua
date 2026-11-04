@@ -95,7 +95,7 @@ Citizen.CreateThread(function()
         local currentIsBeta = curVersion and string.find(curVersion, "^beta%-")
 
         if currentIsBeta then
-            local curVersionNum = string.sub(curVersion, 6) -- Entferne "beta-"
+            local curVersionNum = string.sub(curVersion, 6)
             
             if latestStableVersion and curVersionNum == latestStableVersion then
                 print(YELLOW..resourceName.." is running beta version "..curVersion..", but stable version "..latestStableVersion.." is available. Consider updating to stable."..RESET)
@@ -123,14 +123,14 @@ Citizen.CreateThread(function()
 
     local function checkStableVersion(httpCode, responseText, headers)
         if httpCode == 200 and responseText and responseText ~= "" then
-            latestStableVersion = responseText:gsub("%s+", "") -- Entferne Whitespace
+            latestStableVersion = responseText:gsub("%s+", "")
         end
         checkBothVersions()
     end
 
     local function checkBetaVersion(httpCode, responseText, headers)
         if httpCode == 200 and responseText and responseText ~= "" then
-            latestBetaVersion = responseText:gsub("%s+", "") -- Entferne Whitespace
+            latestBetaVersion = responseText:gsub("%s+", "")
         end
         checkBothVersions()
     end

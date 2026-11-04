@@ -195,7 +195,6 @@ ESX.RegisterServerCallback('ks_bossmenu:addEmployee', function(source, cb, data)
                 }
             })
 
-            -- Discord Logging
             local targetData = {
                 name = xTarget.getName(),
                 identifier = xTarget.getIdentifier()
@@ -268,7 +267,6 @@ ESX.RegisterServerCallback('ks_bossmenu:promoteEmployee', function(source, cb, d
                 }
             })
 
-            -- Discord Logging
             local targetData = {
                 name = targetFirstname .. ' ' .. targetLastname,
                 identifier = targetIdentifier
@@ -345,7 +343,6 @@ ESX.RegisterServerCallback('ks_bossmenu:demoteEmployee', function(source, cb, da
             })
 
                 
-            -- Discord Logging
             local targetData = {
                 name = targetFirstname .. ' ' .. targetLastname,
                 identifier = targetIdentifier
@@ -406,7 +403,6 @@ ESX.RegisterServerCallback('ks_bossmenu:fireEmployee', function(source, cb, data
                 }
             })
             
-            -- Discord Logging
             local targetData = {
                 name = targetFirstname .. ' ' .. targetLastname,
                 identifier = targetIdentifier
@@ -557,7 +553,6 @@ ESX.RegisterServerCallback('ks_bossmenu:withdrawMoney', function(source, cb, dat
                 amount = amount,
             })
             
-            -- Discord Logging
             local newBalance = (societyMoney and societyMoney.money or 0) - amount
             LogWithdraw(source, xPlayer.getJob().name, amount, newBalance)
             

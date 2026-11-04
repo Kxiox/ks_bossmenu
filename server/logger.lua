@@ -1,13 +1,10 @@
 ESX = exports['es_extended']:getSharedObject()
 
--- Job-spezifische Discord Webhook URLs
 local function getJobWebhook(job, webhookType)
-    -- Prüfe zuerst job-spezifische Webhooks
     if Config.JobWebhooks and Config.JobWebhooks[job] and Config.JobWebhooks[job][webhookType] then
         return Config.JobWebhooks[job][webhookType]
     end
     
-    -- Fallback auf allgemeine Webhooks
     if Config.Webhooks and Config.Webhooks[webhookType] then
         return Config.Webhooks[webhookType]
     end
@@ -48,7 +45,6 @@ local function getLogo(jobname)
 end
 
 
--- Embed Creator
 local function createEmbed(type, data)
     local embeds = {
         hire = {
@@ -160,7 +156,6 @@ local function createEmbed(type, data)
     return embed
 end
 
--- Haupt Discord Log Funktion
 local function sendDiscordLog(webhookType, data)
     local webhook = getJobWebhook(data.job, webhookType)
     if not webhook or webhook == "" then return end
@@ -175,7 +170,6 @@ local function sendDiscordLog(webhookType, data)
     }), {['Content-Type'] = 'application/json'})
 end
 
--- Einfache Verwendungs-Funktionen
 function LogHire(executorId, targetData, job, grade, gradeName, salary)
     local executor = getPlayerInfo(executorId)
     if not executor then return end
@@ -274,7 +268,6 @@ function LogSalaryChange(executorId, targetData, job, gradeName, oldSalary, newS
     })
 end
 
--- Bonus Logging Funktionen
 function LogBonus(executorId, job, bonusType, amount, recipientsCount, newBalance, details, specificTargets)
     local executor = getPlayerInfo(executorId)
     if not executor then return end
@@ -297,7 +290,6 @@ function LogBonus(executorId, job, bonusType, amount, recipientsCount, newBalanc
         details = details
     }
     
-    -- Wenn spezifische Ziele vorhanden sind, füge sie zu den Details hinzu
     if specificTargets and #specificTargets > 0 then
         local targetNames = {}
         for _, target in ipairs(specificTargets) do
@@ -309,7 +301,6 @@ function LogBonus(executorId, job, bonusType, amount, recipientsCount, newBalanc
     sendDiscordLog("bonus", bonusData)
 end
 
--- Spezifische Bonus Funktionen für jeden Typ
 function LogBonusAllEmployees(executorId, job, amount, recipientsCount, newBalance, reason)
     LogBonus(executorId, job, "all_employees", amount, recipientsCount, newBalance, 
              reason or TranslateCap('webhook_bonus_default_all'))

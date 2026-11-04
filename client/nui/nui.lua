@@ -284,3 +284,8 @@ function setTimestampFormat()
         format = Config.Timestamp,
     })
 end
+
+function GetNewStats()
+    getStats(stats)
+    getTransactions()
+end
