@@ -33,6 +33,7 @@ Manage your job, employees, salaries, bonus and society account with a clean and
 ## Requirements
 
 - ESX (1.9 or higher)
+- esx_addonaccount
 - oxmysql
 
 ## Customization
