@@ -62,5 +62,6 @@ files {
 
 dependencies {
     'es_extended',
+    'esx_addonaccount',
     'oxmysql',
 }
